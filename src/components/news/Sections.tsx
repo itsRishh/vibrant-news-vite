@@ -55,12 +55,16 @@ function SectionHead({
           <p className="mt-0.5 truncate text-[11px] text-muted-foreground">{subtitle}</p>
         )}
       </div>
-      <a
-        href="#"
-        className="flex shrink-0 items-center gap-1 text-[11px] font-bold text-primary uppercase"
-      >
-        {action} <ChevronRight className="h-3 w-3" />
-      </a>
+      {action ? (
+        <a
+          href="#"
+          className="flex shrink-0 items-center gap-1 text-[11px] font-bold text-primary uppercase"
+        >
+          {action} <ChevronRight className="h-3 w-3" />
+        </a>
+      ) : (
+        <span />
+      )}
     </div>
   );
 }
