@@ -149,3 +149,47 @@
     color: var(--color-foreground);
   }
 }
+
+@theme inline {
+  --color-tint: var(--tint);
+  --color-tint-strong: var(--tint-strong);
+  --color-primary-dark: var(--primary-dark);
+  --color-ink: var(--ink);
+  --color-success: var(--success);
+  --font-sans: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-display: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+  }
+  body {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+@utility section-rule {
+  border-left: 4px solid var(--primary);
+  padding-left: 0.75rem;
+}
+
+@utility ticker-track {
+  display: inline-flex;
+  white-space: nowrap;
+  animation: ticker 40s linear infinite;
+}
+
+@keyframes ticker {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@utility img-placeholder {
+  background-image: linear-gradient(135deg, var(--tint), var(--tint-strong));
+}
