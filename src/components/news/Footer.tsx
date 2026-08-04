@@ -1,0 +1,131 @@
+const COLUMNS = [
+  {
+    title: "News",
+    links: ["Politics", "National", "International", "Trends", "Education"],
+  },
+  { title: "Sports", links: ["Cricket", "Football", "Tennis", "Hockey", "Badminton"] },
+  {
+    title: "Entertainment",
+    links: ["Bollywood", "Hollywood", "Web Series", "Music", "Reviews"],
+  },
+  { title: "Business", links: ["Markets", "Economy", "Startups", "Personal Finance", "Industry"] },
+  { title: "Lifestyle", links: ["Health", "Travel", "Food", "Technology", "Auto"] },
+];
+
+const SOCIALS = ["FB", "X", "IG", "YT", "IN"];
+
+export function Newsletter() {
+  return (
+    <section className="mx-auto max-w-[1200px] px-4 py-10">
+      <div className="relative overflow-hidden bg-primary px-6 py-10 text-primary-foreground sm:px-10">
+        <div
+          className="pointer-events-none absolute inset-y-0 right-0 w-1/2 opacity-20"
+          style={{
+            backgroundImage:
+              "repeating-linear-gradient(45deg, currentColor 0 2px, transparent 2px 12px)",
+          }}
+        />
+        <div className="relative grid gap-6 md:grid-cols-[minmax(0,1fr)_auto] md:items-center">
+          <div className="min-w-0">
+            <h2 className="text-2xl font-black tracking-tight sm:text-3xl">
+              Never Miss a Breaking Story
+            </h2>
+            <p className="mt-2 max-w-xl text-sm opacity-90">
+              Join 5 million+ readers who start their day with Zero Tolerance India. Most
+              important news, delivered to your inbox every morning.
+            </p>
+          </div>
+          <form
+            onSubmit={(e) => e.preventDefault()}
+            className="flex w-full gap-2 md:w-auto"
+          >
+            <input
+              type="email"
+              required
+              placeholder="you@email.com"
+              className="min-w-0 flex-1 bg-background px-4 py-3 text-sm text-foreground outline-none md:w-64"
+            />
+            <button className="shrink-0 bg-ink px-5 py-3 text-sm font-bold text-background transition-opacity hover:opacity-90">
+              Subscribe
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export function Footer() {
+  return (
+    <footer className="border-t border-border bg-secondary">
+      <div className="mx-auto grid max-w-[1200px] gap-8 px-4 py-12 md:grid-cols-[1.4fr_repeat(5,1fr)]">
+        <div>
+          <div className="flex items-center gap-2">
+            <span className="grid h-9 w-9 place-items-center bg-primary text-sm font-black text-primary-foreground">
+              ZT
+            </span>
+            <span className="text-sm leading-tight font-black">
+              ZERO TOLERANCE
+              <br />
+              <span className="text-primary">INDIA</span>
+            </span>
+          </div>
+          <p className="mt-4 max-w-xs text-xs text-muted-foreground">
+            India's fastest news network, covering politics, business, sports and culture
+            across 22 states with zero tolerance for misinformation.
+          </p>
+          <div className="mt-4 flex gap-2">
+            {SOCIALS.map((s) => (
+              <a
+                key={s}
+                href="#"
+                className="grid h-7 w-7 place-items-center bg-primary text-[10px] font-bold text-primary-foreground transition-colors hover:bg-primary-dark"
+              >
+                {s}
+              </a>
+            ))}
+          </div>
+        </div>
+
+        {COLUMNS.map((col) => (
+          <div key={col.title}>
+            <h3 className="text-[11px] font-bold tracking-wider text-primary uppercase">
+              {col.title}
+            </h3>
+            <ul className="mt-3 space-y-2">
+              {col.links.map((l) => (
+                <li key={l}>
+                  <a
+                    href="#"
+                    className="text-xs text-muted-foreground transition-colors hover:text-primary"
+                  >
+                    {l}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+
+      <div className="border-t border-border">
+        <div className="mx-auto grid max-w-[1200px] gap-2 px-4 py-4 text-[11px] text-muted-foreground sm:grid-cols-2">
+          <p>© 2026 Zero Tolerance India. All rights reserved.</p>
+          <p className="sm:text-right">
+            <a href="#" className="hover:text-primary">
+              Privacy Policy
+            </a>
+            <span className="px-2">·</span>
+            <a href="#" className="hover:text-primary">
+              Terms of Use
+            </a>
+            <span className="px-2">·</span>
+            <a href="#" className="hover:text-primary">
+              Contact Us
+            </a>
+          </p>
+        </div>
+      </div>
+    </footer>
+  );
+}
