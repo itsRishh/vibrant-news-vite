@@ -71,7 +71,7 @@ export function Footer() {
             </span>
           </div>
           <p className="mt-4 max-w-xs text-xs text-muted-foreground">
-            India's fastest news網 network, covering politics, business, sports and culture
+            India's fastest news network, covering politics, business, sports and culture
             across 22 states with zero tolerance for misinformation.
           </p>
           <div className="mt-4 flex gap-2">
