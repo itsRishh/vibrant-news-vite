@@ -3,7 +3,7 @@ import { Clock, MapPin, MessageSquare, Share2, Bookmark, ChevronRight } from "lu
 import { Header } from "@/components/news/Header";
 import { Newsletter, Footer } from "@/components/news/Footer";
 import { Badge } from "@/components/news/Sections";
-import { getArticle } from "@/data/news";
+import { getArticle, type Article } from "@/data/news";
 
 export const Route = createFileRoute("/news/$slug")({
   loader: ({ params }) => getArticle(params.slug),
@@ -47,7 +47,7 @@ function AdSlot({ label = "Advertisement" }: { label?: string }) {
 }
 
 function NewsArticle() {
-  const a = Route.useLoaderData();
+  const a = Route.useLoaderData() as Article;
 
   return (
     <div className="min-h-screen bg-background text-foreground">
