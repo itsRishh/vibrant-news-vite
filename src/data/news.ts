@@ -37,12 +37,15 @@ export function slugify(title: string) {
     .slice(0, 90);
 }
 
+const LOWER = new Set(["a", "an", "and", "as", "at", "for", "in", "of", "on", "or", "the", "to", "vs", "with"]);
+
 function titleFromSlug(slug: string) {
   return slug
     .split("-")
-    .map((w) => (w.length > 3 ? w.charAt(0).toUpperCase() + w.slice(1) : w))
-    .join(" ")
-    .replace(/^./, (c) => c.toUpperCase());
+    .map((w, i) =>
+      i > 0 && LOWER.has(w) ? w : w.charAt(0).toUpperCase() + w.slice(1),
+    )
+    .join(" ");
 }
 
 const IMAGES = [parliament, cricket, redcarpet, tech];
