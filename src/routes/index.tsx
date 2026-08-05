@@ -10,6 +10,7 @@ import {
   MoreNews,
 } from "@/components/news/Sections";
 import { Newsletter, Footer } from "@/components/news/Footer";
+import { NewsClickArea } from "@/components/news/NewsClickArea";
 
 const title = "Zero Tolerance India — Breaking News, Politics, Sports & Entertainment";
 const description =
