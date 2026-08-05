@@ -40,7 +40,7 @@ export function slugify(title: string) {
 function titleFromSlug(slug: string) {
   return slug
     .split("-")
-    .map((w) => (w.length > 3 ? w[0].toUpperCase() + w.slice(1) : w))
+    .map((w) => (w.length > 3 ? w.charAt(0).toUpperCase() + w.slice(1) : w))
     .join(" ")
     .replace(/^./, (c) => c.toUpperCase());
 }
@@ -158,10 +158,10 @@ export function getArticle(slug: string): Article {
   const idx = Math.abs(
     [...slug].reduce((a, c) => (a * 31 + c.charCodeAt(0)) | 0, 7),
   );
-  const image = seed.image ?? IMAGES[idx % IMAGES.length];
+  const image = seed.image ?? IMAGES[idx % IMAGES.length]!;
   const category = seed.category ?? "India";
 
-  const nextSlug = ORDER[(ORDER.indexOf(slug) + 1 + ORDER.length) % ORDER.length];
+  const nextSlug = ORDER[(ORDER.indexOf(slug) + 1 + ORDER.length) % ORDER.length]!;
   const nextSeed = CURATED[nextSlug]!;
 
   return {
