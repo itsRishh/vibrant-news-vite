@@ -34,13 +34,15 @@ function Index() {
     <div className="min-h-screen bg-background text-foreground">
       <Header />
       <main>
-        <HotRightNow />
-        <Regional />
-        <Sports />
-        <Bollywood />
-        <VideoNews />
-        <QuickReads />
-        <MoreNews />
+        <NewsClickArea>
+          <HotRightNow />
+          <Regional />
+          <Sports />
+          <Bollywood />
+          <VideoNews />
+          <QuickReads />
+          <MoreNews />
+        </NewsClickArea>
         <Newsletter />
       </main>
       <Footer />
