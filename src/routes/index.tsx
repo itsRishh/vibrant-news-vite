@@ -11,6 +11,7 @@ import {
 } from "@/components/news/Sections";
 import { Newsletter, Footer } from "@/components/news/Footer";
 import { NewsClickArea } from "@/components/news/NewsClickArea";
+import { QuickNewsRail } from "@/components/news/QuickNewsRail";
 
 const title = "Zero Tolerance India — Breaking News, Politics, Sports & Entertainment";
 const description =
