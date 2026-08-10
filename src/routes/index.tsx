@@ -11,6 +11,7 @@ import {
 } from "@/components/news/Sections";
 import { Newsletter, Footer } from "@/components/news/Footer";
 import { NewsClickArea } from "@/components/news/NewsClickArea";
+import { QuickNewsRail } from "@/components/news/QuickNewsRail";
 
 const title = "Zero Tolerance India — Breaking News, Politics, Sports & Entertainment";
 const description =
@@ -35,15 +36,18 @@ function Index() {
     <div className="min-h-screen bg-background text-foreground">
       <Header />
       <main>
-        <NewsClickArea>
-          <HotRightNow />
-          <Regional />
-          <Sports />
-          <Bollywood />
-          <VideoNews />
-          <QuickReads />
-          <MoreNews />
-        </NewsClickArea>
+        <div className="mx-auto grid max-w-[1280px] gap-2 lg:grid-cols-[minmax(0,1fr)_340px]">
+          <NewsClickArea>
+            <HotRightNow />
+            <Regional />
+            <Sports />
+            <Bollywood />
+            <VideoNews />
+            <QuickReads />
+            <MoreNews />
+          </NewsClickArea>
+          <QuickNewsRail />
+        </div>
         <Newsletter />
       </main>
       <Footer />
