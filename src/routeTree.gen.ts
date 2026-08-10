@@ -10,11 +10,17 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CategoryCategoryRouteImport } from './routes/category.$category'
 import { Route as NewsSlugRouteImport } from './routes/news.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CategoryCategoryRoute = CategoryCategoryRouteImport.update({
+  id: '/category/$category',
+  path: '/category/$category',
   getParentRoute: () => rootRouteImport,
 } as any)
 const NewsSlugRoute = NewsSlugRouteImport.update({
@@ -25,27 +31,31 @@ const NewsSlugRoute = NewsSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/category/$category': typeof CategoryCategoryRoute
   '/news/$slug': typeof NewsSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/category/$category': typeof CategoryCategoryRoute
   '/news/$slug': typeof NewsSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/category/$category': typeof CategoryCategoryRoute
   '/news/$slug': typeof NewsSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/news/$slug'
+  fullPaths: '/' | '/category/$category' | '/news/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/news/$slug'
-  id: '__root__' | '/' | '/news/$slug'
+  to: '/' | '/category/$category' | '/news/$slug'
+  id: '__root__' | '/' | '/category/$category' | '/news/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CategoryCategoryRoute: typeof CategoryCategoryRoute
   NewsSlugRoute: typeof NewsSlugRoute
 }
 
@@ -56,6 +66,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/category/$category': {
+      id: '/category/$category'
+      path: '/category/$category'
+      fullPath: '/category/$category'
+      preLoaderRoute: typeof CategoryCategoryRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/news/$slug': {
@@ -70,18 +87,9 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CategoryCategoryRoute: CategoryCategoryRoute,
   NewsSlugRoute: NewsSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

@@ -156,8 +156,14 @@ const CURATED: Record<string, Partial<Article>> = {
 const ORDER = Object.keys(CURATED);
 
 export function getArticle(slug: string): Article {
-  const seed = CURATED[slug] ?? {};
-  const title = (seed as { title?: string }).title ?? titleFromSlug(slug);
+  const found = findFeedItem(slug);
+  const seed: Partial<Article> = {
+    ...(found
+      ? { category: found.feed.name, dek: found.item.dek, image: found.item.image }
+      : {}),
+    ...(CURATED[slug] ?? {}),
+  };
+  const title = found?.item.title ?? (seed as { title?: string }).title ?? titleFromSlug(slug);
   const idx = Math.abs(
     [...slug].reduce((a, c) => (a * 31 + c.charCodeAt(0)) | 0, 7),
   );
