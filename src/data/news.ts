@@ -3,6 +3,7 @@ import redcarpet from "@/assets/redcarpet.jpg";
 import parliament from "@/assets/parliament.jpg";
 import tech from "@/assets/tech.jpg";
 import i18n from "@/i18n";
+import { findFeedItem } from "./feeds";
 
 export type Comment = {
   name: string;
@@ -73,57 +74,44 @@ type ArticleSeed = {
   keyPoints: string[];
 };
 
-type CommentSeed = { name: string; time: string; text: string };
-
-export function getArticle(slug: string, lang = i18n.language): Article {
-  const t = i18n.getFixedT(lang);
-
-  const seedVal = t(`articles.${slug}`, { returnObjects: true });
-  const seed =
-    seedVal && typeof seedVal === "object" && "title" in seedVal
-      ? (seedVal as ArticleSeed)
-      : null;
-
-  const title = seed?.title ?? titleFromSlug(slug);
+export function getArticle(slug: string): Article {
+  const found = findFeedItem(slug);
+  const seed: Partial<Article> = {
+    ...(found
+      ? { category: found.feed.name, dek: found.item.dek, image: found.item.image }
+      : {}),
+    ...(CURATED[slug] ?? {}),
+  };
+  const title = found?.item.title ?? (seed as { title?: string }).title ?? titleFromSlug(slug);
   const idx = Math.abs(
     [...slug].reduce((a, c) => (a * 31 + c.charCodeAt(0)) | 0, 7),
   );
   const image = CURATED_IMAGES[slug] ?? IMAGES[idx % IMAGES.length]!;
   const category = seed?.category ?? t("categories.India", { defaultValue: "India" });
 
-  const nextSlug = CURATED_SLUGS[(CURATED_SLUGS.indexOf(slug) + 1 + CURATED_SLUGS.length) % CURATED_SLUGS.length]!;
-  const nextSeedVal = t(`articles.${nextSlug}`, { returnObjects: true });
-  const nextSeed =
-    nextSeedVal && typeof nextSeedVal === "object" && "title" in nextSeedVal
-      ? (nextSeedVal as ArticleSeed)
-      : null;
-
-  const defaultBodyRaw = t("article.defaultBody", { returnObjects: true });
-  const defaultBody = (Array.isArray(defaultBodyRaw) ? defaultBodyRaw : []).map((p: string) =>
-    p.replace(/\{\{title\}\}/g, title).replace(/\{\{category\}\}/g, category.toLowerCase()),
-  );
-
-  const defaultKeyPointsRaw = t("article.defaultKeyPoints", { returnObjects: true });
-  const defaultKeyPoints = Array.isArray(defaultKeyPointsRaw) ? defaultKeyPointsRaw : [];
-
-  const tagsRaw = t("article.tags", { returnObjects: true });
-  const tags = Array.isArray(tagsRaw) ? tagsRaw : [];
-
-  const commentsRaw = t("article.comments", { returnObjects: true }) as CommentSeed[];
-  const comments: Comment[] = Array.isArray(commentsRaw)
-    ? commentsRaw.map((c, i) => ({
-        name: c.name,
-        initials: c.name
-          .split(" ")
-          .map((p) => p[0])
-          .join("")
-          .slice(0, 2)
-          .toUpperCase(),
-        time: c.time,
-        text: c.text,
-        likes: [128, 64, 41, 27][i] ?? 10,
-      }))
-    : [];
+  let next: Article["next"];
+  if (found) {
+    const items = found.feed.items;
+    const i = items.findIndex((it) => it.slug === slug);
+    const n = items[(i + 1) % items.length]!;
+    next = {
+      slug: n.slug,
+      category: found.feed.name,
+      title: n.title,
+      summary: n.dek,
+      image: n.image,
+    };
+  } else {
+    const nextSlug = ORDER[(ORDER.indexOf(slug) + 1 + ORDER.length) % ORDER.length]!;
+    const nextSeed = CURATED[nextSlug]!;
+    next = {
+      slug: nextSlug,
+      category: nextSeed.category!,
+      title: titleFromSlug(nextSlug),
+      summary: nextSeed.dek!,
+      image: nextSeed.image!,
+    };
+  }
 
   return {
     slug,
@@ -135,17 +123,24 @@ export function getArticle(slug: string, lang = i18n.language): Article {
     published: t("article.published"),
     readTime: t("article.readTime"),
     image,
-    imageCaption: `${title} — ${t("article.imageCaptionSuffix")}`,
-    body: seed?.body ?? defaultBody,
-    keyPoints: seed?.keyPoints ?? defaultKeyPoints,
-    tags: [category, ...tags],
-    comments,
-    next: {
-      slug: nextSlug,
-      category: nextSeed?.category ?? t("categories.India"),
-      title: nextSeed?.title ?? titleFromSlug(nextSlug),
-      summary: nextSeed?.dek ?? t("article.defaultDek", { category: category.toLowerCase() }),
-      image: CURATED_IMAGES[nextSlug] ?? parliament,
-    },
+    imageCaption: `${title} — file photo. (Zero Tolerance India)`,
+    body:
+      seed.body ?? [
+        `${title}. The development came late on Tuesday and was confirmed by two officials with direct knowledge of the matter, both of whom asked not to be named because they were not authorised to speak publicly.`,
+        "Early assessments suggest the immediate impact will be concentrated in a handful of states, though officials cautioned that a fuller picture will only emerge once the formal notification is issued later this week.",
+        "Stakeholders reacted cautiously. Industry bodies welcomed the clarity but flagged the compressed timeline for compliance, while opposition representatives said the process had skipped consultation.",
+        "A detailed review has been ordered and the findings are expected to be placed in the public domain within the month. Zero Tolerance India will continue to track the story as it develops.",
+      ],
+    keyPoints:
+      seed.keyPoints ?? [
+        "Development confirmed by two officials with direct knowledge",
+        "Immediate impact concentrated in a handful of states",
+        "Industry welcomes clarity but flags compliance timeline",
+        "Formal notification expected later this week",
+      ],
+    tags: [category, "India", "Zero Tolerance", "Explained"],
+    comments: BASE_COMMENTS,
+    next,
+
   };
 }

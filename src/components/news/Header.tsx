@@ -2,6 +2,17 @@ import { Search, Bell, Menu } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 import { FaFacebook, FaInstagram } from "react-icons/fa";
+import { Link } from "@tanstack/react-router";
+
+const NAV: { label: string; to: string; params?: { category: string } }[] = [
+  { label: "Home", to: "/" },
+  { label: "Politics", to: "/category/$category", params: { category: "politics" } },
+  { label: "Sports", to: "/category/$category", params: { category: "sports" } },
+  { label: "Entertainment", to: "/category/$category", params: { category: "entertainment" } },
+  { label: "Business", to: "/category/$category", params: { category: "business" } },
+  { label: "Tech", to: "/category/$category", params: { category: "tech" } },
+  { label: "World", to: "/category/$category", params: { category: "world" } },
+];
 
 import { LanguageSwitcher } from "@/components/language/LanguageSwitcher";
 
@@ -32,7 +43,7 @@ export function Header() {
 
       <div className="border-b border-border">
         <div className="mx-auto grid max-w-[1200px] grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-4 py-3 lg:flex lg:justify-between">
-          <a href="/" className="flex min-w-0 items-center gap-2">
+          <Link to="/" className="flex min-w-0 items-center gap-2">
             <span className="grid h-9 w-9 shrink-0 place-items-center bg-primary text-sm font-black text-primary-foreground">
               ZT
             </span>
@@ -44,17 +55,21 @@ export function Header() {
                 {t("meta.brandTagline")}
               </span>
             </span>
-          </a>
+          </Link>
 
           <nav className="hidden items-center gap-6 text-[13px] font-semibold lg:flex">
-            {NAV_KEYS.map((key, i) => (
-              <a
-                key={key}
-                href="#"
-                className={`transition-colors hover:text-primary ${i === 1 ? "text-primary" : "text-foreground"}`}
+            {NAV.map((item) => (
+              <Link
+                key={item.label}
+                to={item.to}
+                params={item.params as never}
+                activeOptions={{ exact: item.to === "/" }}
+                activeProps={{ className: "text-primary" }}
+                inactiveProps={{ className: "text-foreground" }}
+                className="transition-colors hover:text-primary"
               >
-                {t(`header.nav.${key}`)}
-              </a>
+                {item.label}
+              </Link>
             ))}
           </nav>
 
