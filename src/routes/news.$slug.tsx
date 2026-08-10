@@ -1,25 +1,28 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Clock, MapPin, MessageSquare, Share2, Bookmark, ChevronRight } from "lucide-react";
+import { useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { Header } from "@/components/news/Header";
 import { Newsletter, Footer } from "@/components/news/Footer";
 import { Badge } from "@/components/news/Sections";
-import { getArticle, type Article } from "@/data/news";
+import { getArticle } from "@/data/news";
 
 export const Route = createFileRoute("/news/$slug")({
-  loader: ({ params }) => getArticle(params.slug),
+  loader: ({ params }) => ({ slug: params.slug }),
   head: ({ loaderData }) => {
     if (!loaderData) {
       return {
         meta: [{ title: "Story unavailable — Zero Tolerance India" }, { name: "robots", content: "noindex" }],
       };
     }
-    const title = `${loaderData.title} — Zero Tolerance India`;
+    const article = getArticle(loaderData.slug);
+    const title = `${article.title} — Zero Tolerance India`;
     return {
       meta: [
         { title },
-        { name: "description", content: loaderData.dek },
+        { name: "description", content: article.dek },
         { property: "og:title", content: title },
-        { property: "og:description", content: loaderData.dek },
+        { property: "og:description", content: article.dek },
         { property: "og:type", content: "article" },
         { name: "twitter:card", content: "summary_large_image" },
       ],
@@ -31,23 +34,32 @@ export const Route = createFileRoute("/news/$slug")({
       {error.message}
     </div>
   ),
-  notFoundComponent: () => (
-    <div className="mx-auto max-w-[1200px] px-4 py-20 text-sm">Story not found.</div>
-  ),
+  notFoundComponent: NotFoundArticle,
 });
 
-function AdSlot({ label = "Advertisement" }: { label?: string }) {
+function NotFoundArticle() {
+  const { t } = useTranslation();
+  return (
+    <div className="mx-auto max-w-[1200px] px-4 py-20 text-sm">{t("meta.storyNotFound")}</div>
+  );
+}
+
+function AdSlot({ labelKey = "article.advertisement" }: { labelKey?: string }) {
+  const { t } = useTranslation();
   return (
     <div className="my-8 grid h-24 place-items-center border border-dashed border-border bg-tint sm:h-28">
       <span className="text-[10px] font-bold tracking-[0.3em] text-muted-foreground uppercase">
-        {label}
+        {t(labelKey)}
       </span>
     </div>
   );
 }
 
 function NewsArticle() {
-  const a = Route.useLoaderData() as Article;
+  const { slug } = Route.useLoaderData();
+  const { t, i18n } = useTranslation();
+  const a = useMemo(() => getArticle(slug, i18n.language), [slug, i18n.language]);
+  const mostRead = t("article.mostReadItems", { returnObjects: true }) as string[];
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -56,14 +68,13 @@ function NewsArticle() {
       <main className="mx-auto max-w-[1200px] px-4 py-6">
         <nav className="flex items-center gap-1.5 text-[11px] text-muted-foreground">
           <Link to="/" className="hover:text-primary">
-            Home
+            {t("article.home")}
           </Link>
           <ChevronRight className="h-3 w-3" />
           <span className="text-primary uppercase">{a.category}</span>
         </nav>
 
         <div className="mt-4 grid gap-8 lg:grid-cols-[minmax(0,1fr)_300px]">
-          {/* ---------- main story ---------- */}
           <article className="min-w-0">
             <Badge>{a.category}</Badge>
             <h1 className="mt-3 text-2xl leading-tight font-black tracking-tight sm:text-4xl">
@@ -82,20 +93,16 @@ function NewsArticle() {
               <span>{a.readTime}</span>
               <span className="ml-auto flex items-center gap-2">
                 <button className="flex items-center gap-1 border border-border px-2 py-1 transition-colors hover:border-primary hover:text-primary">
-                  <Share2 className="h-3 w-3" /> Share
+                  <Share2 className="h-3 w-3" /> {t("article.share")}
                 </button>
                 <button className="flex items-center gap-1 border border-border px-2 py-1 transition-colors hover:border-primary hover:text-primary">
-                  <Bookmark className="h-3 w-3" /> Save
+                  <Bookmark className="h-3 w-3" /> {t("article.save")}
                 </button>
               </span>
             </div>
 
             <figure className="mt-5">
-              <img
-                src={a.image}
-                alt={a.title}
-                className="h-56 w-full object-cover sm:h-96"
-              />
+              <img src={a.image} alt={a.title} className="h-56 w-full object-cover sm:h-96" />
               <figcaption className="mt-2 text-[11px] text-muted-foreground">
                 {a.imageCaption}
               </figcaption>
@@ -109,10 +116,9 @@ function NewsArticle() {
               ))}
             </div>
 
-            {/* insight / key points */}
             <section className="my-8 border-l-4 border-primary bg-tint p-5">
               <h2 className="text-xs font-black tracking-wider text-primary uppercase">
-                The Insight — Why It Matters
+                {t("article.insightTitle")}
               </h2>
               <ul className="mt-3 space-y-2">
                 {a.keyPoints.map((k) => (
@@ -131,24 +137,23 @@ function NewsArticle() {
             </div>
 
             <div className="mt-6 flex flex-wrap gap-2">
-              {a.tags.map((t) => (
+              {a.tags.map((tag) => (
                 <span
-                  key={t}
+                  key={tag}
                   className="border border-border px-2 py-1 text-[10px] font-bold tracking-wide uppercase transition-colors hover:border-primary hover:text-primary"
                 >
-                  #{t}
+                  #{tag}
                 </span>
               ))}
             </div>
 
-            <AdSlot label="Sponsored" />
+            <AdSlot labelKey="article.sponsored" />
 
-            {/* ---------- comments ---------- */}
             <section id="comments">
               <div className="section-rule mb-4">
                 <h2 className="flex items-center gap-2 text-lg font-black tracking-tight uppercase">
                   <MessageSquare className="h-4 w-4 text-primary" />
-                  Reader Comments
+                  {t("article.commentsTitle")}
                   <span className="text-xs font-bold text-muted-foreground">
                     ({a.comments.length})
                   </span>
@@ -161,11 +166,11 @@ function NewsArticle() {
               >
                 <input
                   required
-                  placeholder="Share your view on this story…"
+                  placeholder={t("article.commentPlaceholder")}
                   className="min-w-0 border border-border bg-background px-3 py-2 text-sm outline-none focus:border-primary"
                 />
                 <button className="shrink-0 bg-primary px-5 py-2 text-xs font-bold text-primary-foreground transition-opacity hover:opacity-90">
-                  Post Comment
+                  {t("article.postComment")}
                 </button>
               </form>
 
@@ -183,8 +188,8 @@ function NewsArticle() {
                       <p className="mt-1 text-sm text-foreground/90">{c.text}</p>
                       <p className="mt-2 flex gap-4 text-[11px] text-muted-foreground">
                         <button className="hover:text-primary">▲ {c.likes}</button>
-                        <button className="hover:text-primary">Reply</button>
-                        <button className="hover:text-primary">Report</button>
+                        <button className="hover:text-primary">{t("article.reply")}</button>
+                        <button className="hover:text-primary">{t("article.report")}</button>
                       </p>
                     </div>
                   </li>
@@ -194,10 +199,11 @@ function NewsArticle() {
 
             <AdSlot />
 
-            {/* ---------- next story ---------- */}
             <section>
               <div className="section-rule mb-4">
-                <h2 className="text-lg font-black tracking-tight uppercase">Next Story</h2>
+                <h2 className="text-lg font-black tracking-tight uppercase">
+                  {t("article.nextStory")}
+                </h2>
               </div>
               <Link
                 to="/news/$slug"
@@ -218,38 +224,31 @@ function NewsArticle() {
                     {a.next.summary}
                   </p>
                   <span className="mt-3 inline-flex items-center gap-1 text-[11px] font-bold text-primary uppercase">
-                    Read Full Story <ChevronRight className="h-3 w-3" />
+                    {t("article.readFullStory")} <ChevronRight className="h-3 w-3" />
                   </span>
                 </div>
               </Link>
             </section>
           </article>
 
-          {/* ---------- sidebar ---------- */}
           <aside className="min-w-0 space-y-6">
-            <AdSlot label="Advertisement" />
+            <AdSlot />
             <div className="border border-border">
               <h2 className="bg-primary px-3 py-2 text-[11px] font-bold tracking-wider text-primary-foreground uppercase">
-                Most Read Today
+                {t("article.mostRead")}
               </h2>
               <ol className="divide-y divide-border">
-                {[
-                  "Sensex Hits Record High: Nifty Crosses 25,000",
-                  "Delhi AQI Drops to Best Level in 5 Years After Rain",
-                  "IPL 2026 Auction: Record ₹25 Crore Bid for Young Pacer",
-                  "Tata Motors Launches Cheapest EV at ₹7.99 Lakh",
-                  "Kerala Wins Best Tourism State Award for 5th Year",
-                ].map((t, i) => (
-                  <li key={t} className="grid grid-cols-[auto_minmax(0,1fr)] gap-3 p-3">
+                {mostRead.map((item, i) => (
+                  <li key={item} className="grid grid-cols-[auto_minmax(0,1fr)] gap-3 p-3">
                     <span className="text-base font-black text-primary">{i + 1}</span>
-                    <span className="text-xs font-semibold">{t}</span>
+                    <span className="text-xs font-semibold">{item}</span>
                   </li>
                 ))}
               </ol>
             </div>
-            <div className="h-64 grid place-items-center border border-dashed border-border bg-tint">
+            <div className="grid h-64 place-items-center border border-dashed border-border bg-tint">
               <span className="text-[10px] font-bold tracking-[0.3em] text-muted-foreground uppercase">
-                Advertisement
+                {t("article.advertisement")}
               </span>
             </div>
           </aside>

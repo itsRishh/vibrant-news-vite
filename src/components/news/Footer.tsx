@@ -1,20 +1,12 @@
-const COLUMNS = [
-  {
-    title: "News",
-    links: ["Politics", "National", "International", "Trends", "Education"],
-  },
-  { title: "Sports", links: ["Cricket", "Football", "Tennis", "Hockey", "Badminton"] },
-  {
-    title: "Entertainment",
-    links: ["Bollywood", "Hollywood", "Web Series", "Music", "Reviews"],
-  },
-  { title: "Business", links: ["Markets", "Economy", "Startups", "Personal Finance", "Industry"] },
-  { title: "Lifestyle", links: ["Health", "Travel", "Food", "Technology", "Auto"] },
-];
+import { useTranslation } from "react-i18next";
 
 const SOCIALS = ["FB", "X", "IG", "YT", "IN"];
 
+const COLUMN_KEYS = ["news", "sports", "entertainment", "business", "lifestyle"] as const;
+
 export function Newsletter() {
+  const { t } = useTranslation();
+
   return (
     <section className="mx-auto max-w-[1200px] px-4 py-10">
       <div className="relative overflow-hidden bg-primary px-6 py-10 text-primary-foreground sm:px-10">
@@ -28,12 +20,9 @@ export function Newsletter() {
         <div className="relative grid gap-6 md:grid-cols-[minmax(0,1fr)_auto] md:items-center">
           <div className="min-w-0">
             <h2 className="text-2xl font-black tracking-tight sm:text-3xl">
-              Never Miss a Breaking Story
+              {t("footer.newsletterTitle")}
             </h2>
-            <p className="mt-2 max-w-xl text-sm opacity-90">
-              Join 5 million+ readers who start their day with Zero Tolerance India. Most
-              important news, delivered to your inbox every morning.
-            </p>
+            <p className="mt-2 max-w-xl text-sm opacity-90">{t("footer.newsletterDesc")}</p>
           </div>
           <form
             onSubmit={(e) => e.preventDefault()}
@@ -42,11 +31,11 @@ export function Newsletter() {
             <input
               type="email"
               required
-              placeholder="you@email.com"
+              placeholder={t("footer.emailPlaceholder")}
               className="min-w-0 flex-1 bg-background px-4 py-3 text-sm text-foreground outline-none md:w-64"
             />
             <button className="shrink-0 bg-ink px-5 py-3 text-sm font-bold text-background transition-opacity hover:opacity-90">
-              Subscribe
+              {t("footer.subscribe")}
             </button>
           </form>
         </div>
@@ -56,6 +45,8 @@ export function Newsletter() {
 }
 
 export function Footer() {
+  const { t } = useTranslation();
+
   return (
     <footer className="border-t border-border bg-secondary">
       <div className="mx-auto grid max-w-[1200px] gap-8 px-4 py-12 md:grid-cols-[1.4fr_repeat(5,1fr)]">
@@ -70,10 +61,7 @@ export function Footer() {
               <span className="text-primary">INDIA</span>
             </span>
           </div>
-          <p className="mt-4 max-w-xs text-xs text-muted-foreground">
-            India's fastest news network, covering politics, business, sports and culture
-            across 22 states with zero tolerance for misinformation.
-          </p>
+          <p className="mt-4 max-w-xs text-xs text-muted-foreground">{t("footer.description")}</p>
           <div className="mt-4 flex gap-2">
             {SOCIALS.map((s) => (
               <a
@@ -87,41 +75,47 @@ export function Footer() {
           </div>
         </div>
 
-        {COLUMNS.map((col) => (
-          <div key={col.title}>
-            <h3 className="text-[11px] font-bold tracking-wider text-primary uppercase">
-              {col.title}
-            </h3>
-            <ul className="mt-3 space-y-2">
-              {col.links.map((l) => (
-                <li key={l}>
-                  <a
-                    href="#"
-                    className="text-xs text-muted-foreground transition-colors hover:text-primary"
-                  >
-                    {l}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
+        {COLUMN_KEYS.map((key) => {
+          const col = t(`footer.columns.${key}`, { returnObjects: true }) as {
+            title: string;
+            links: string[];
+          };
+          return (
+            <div key={key}>
+              <h3 className="text-[11px] font-bold tracking-wider text-primary uppercase">
+                {col.title}
+              </h3>
+              <ul className="mt-3 space-y-2">
+                {col.links.map((l) => (
+                  <li key={l}>
+                    <a
+                      href="#"
+                      className="text-xs text-muted-foreground transition-colors hover:text-primary"
+                    >
+                      {l}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          );
+        })}
       </div>
 
       <div className="border-t border-border">
         <div className="mx-auto grid max-w-[1200px] gap-2 px-4 py-4 text-[11px] text-muted-foreground sm:grid-cols-2">
-          <p>© 2026 Zero Tolerance India. All rights reserved.</p>
+          <p>{t("footer.copyright")}</p>
           <p className="sm:text-right">
             <a href="#" className="hover:text-primary">
-              Privacy Policy
+              {t("footer.privacy")}
             </a>
             <span className="px-2">·</span>
             <a href="#" className="hover:text-primary">
-              Terms of Use
+              {t("footer.terms")}
             </a>
             <span className="px-2">·</span>
             <a href="#" className="hover:text-primary">
-              Contact Us
+              {t("footer.contact")}
             </a>
           </p>
         </div>

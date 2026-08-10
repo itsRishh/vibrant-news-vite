@@ -1,0 +1,407 @@
+{
+  "meta": {
+    "siteTitle": "Zero Tolerance India — Breaking News, Politics, Sports & Entertainment",
+    "siteDescription": "Live breaking news from India: politics, business, cricket, Bollywood, tech and regional headlines updated every minute by Zero Tolerance India.",
+    "brandTagline": "News that never blinks",
+    "articleSuffix": "Zero Tolerance India",
+    "storyUnavailable": "Story unavailable — Zero Tolerance India",
+    "storyNotFound": "Story not found."
+  },
+  "errors": {
+    "notFoundTitle": "Page not found",
+    "notFoundBody": "The page you're looking for doesn't exist or has been moved.",
+    "errorTitle": "This page didn't load",
+    "errorBody": "Something went wrong on our end. You can try refreshing or head back home.",
+    "goHome": "Go home",
+    "tryAgain": "Try again"
+  },
+  "language": {
+    "promptTitle": "Choose your language",
+    "promptSubtitle": "Select your preferred language to read Zero Tolerance India",
+    "continue": "Continue",
+    "changeLanguage": "Change language",
+    "currentLanguage": "Language",
+    "promptHint": "You can change this anytime from the globe icon in the navbar"
+  },
+  "header": {
+    "breaking": "Breaking",
+    "breakingUpdate": "UPDATE: Mumbai rainfall breaks 50-year record, NDRF teams deployed",
+    "search": "Search",
+    "trending": "Trending",
+    "nav": {
+      "home": "Home",
+      "politics": "Politics",
+      "sports": "Sports",
+      "entertainment": "Entertainment",
+      "business": "Business",
+      "tech": "Tech",
+      "world": "World"
+    },
+    "ticker": [
+      "SENSEX up 450 pts to 82,470",
+      "Rupee strengthens to 83.15 against USD",
+      "Gold prices rise ₹500 to ₹72,300/10g",
+      "Petrol prices remain unchanged",
+      "India's GDP growth forecast raised to 7.2%"
+    ],
+    "markets": {
+      "nifty": "NIFTY 50",
+      "reliance": "RELIANCE",
+      "tcs": "TCS",
+      "hdfc": "HDFC BANK",
+      "infy": "INFY"
+    }
+  },
+  "sections": {
+    "seeAll": "See All",
+    "live": "Live",
+    "hotRightNow": {
+      "title": "Hot Right Now",
+      "promoBadge": "Presented by Flipk",
+      "promoTitle": "Titan Smart Ultra — India's Premium Smartwatch",
+      "promoDesc": "Launch Price ₹4,999 · Free Delivery on Pre-Order",
+      "shopNow": "Shop Now",
+      "hero": {
+        "category": "Politics",
+        "badge": "Exclusive",
+        "title": "Monsoon Session: Key Bills to Watch This Week",
+        "summary": "Seven crucial bills including the Digital India Act, Data Protection Amendment and Infrastructure Bill are scheduled for debate in Parliament this session.",
+        "time": "2 hours ago"
+      },
+      "cards": [
+        {
+          "category": "Sports",
+          "badge": "LIVE",
+          "title": "India vs Australia: T20 Series Kicks Off Tonight",
+          "summary": "Jasprit Bumrah leads the pace attack as India looks to dominate the 5-match series at Wankhede Stadium.",
+          "time": "1 hour ago"
+        },
+        {
+          "category": "Tech",
+          "title": "Jio AirFiber 2.0 Launches in 500 Cities",
+          "summary": "Reliance Jio rolls out next-gen wireless broadband with speeds up to 1Gbps across tier-2 towns.",
+          "time": "3 hours ago"
+        },
+        {
+          "category": "Business",
+          "title": "Sensex Hits Record High: Nifty Crosses 25,000",
+          "summary": "Bull run continues as foreign investors pour in record ₹1.4 lakh crore this quarter, driven by IT and banking stocks.",
+          "time": "45 min ago"
+        },
+        {
+          "category": "Bollywood",
+          "title": "Shah Rukh Khan Announces New Production House",
+          "summary": "SRK launches Red Chillies International with a 10-film slate focusing on Hollywood collaborations.",
+          "time": "5 hours ago"
+        }
+      ],
+      "smallCards": [
+        {
+          "tag": "Environment",
+          "title": "Delhi AQI Drops to Best Level in 5 Years After Rain",
+          "time": "5 hours ago"
+        },
+        {
+          "tag": "Health",
+          "title": "New Study Links Sleep Quality to Heart Disease Prevention",
+          "time": "5 hours ago"
+        },
+        {
+          "tag": "Education",
+          "title": "IIT Bombay Unveils AI-Powered Campus for Rural Students",
+          "time": "5 hours ago"
+        },
+        {
+          "tag": "Auto",
+          "title": "Tata Motors Launches Cheapest EV at ₹7.99 Lakh",
+          "time": "5 hours ago"
+        },
+        {
+          "tag": "Technology",
+          "title": "ISRO Successfully Launches Next-Gen Weather Satellite Into Orbit",
+          "time": "5 hours ago"
+        },
+        {
+          "tag": "Business",
+          "title": "RBI Keeps Repo Rate Unchanged at 6.5% Amid Stable Inflation",
+          "time": "5 hours ago"
+        },
+        {
+          "tag": "Sports",
+          "title": "India Claims Gold in World Archery Championship Final",
+          "time": "5 hours ago"
+        },
+        {
+          "tag": "Science",
+          "title": "NASA Detects Evidence of Water Vapor on Nearby Exoplanet",
+          "time": "5 hours ago"
+        }
+      ]
+    },
+    "regional": {
+      "title": "Regional News",
+      "subtitle": "Stories from every corner of India",
+      "items": [
+        { "city": "Maharashtra", "title": "Mumbai Metro Line 3 Opens: 10 Lakh Daily Riders Expected", "time": "2h ago" },
+        { "city": "Tamil Nadu", "title": "Chennai Water Crisis: New Desalination Plant Operational", "time": "3h ago" },
+        { "city": "Delhi", "title": "Yamuna River Cleanup Project Enters Phase 3", "time": "4h ago" },
+        { "city": "Kerala", "title": "Kerala Wins Best Tourism State Award for 5th Year Running", "time": "6h ago" },
+        { "city": "Gujarat", "title": "Ahmedabad Smart City Project Receives Global Recognition", "time": "11h ago" },
+        { "city": "West Bengal", "title": "Kolkata Underground Metro Extension Complete", "time": "1d ago" }
+      ]
+    },
+    "sports": {
+      "title": "Sports",
+      "subtitle": "Cricket, football, tennis & more",
+      "featured": "Featured",
+      "heroTitle": "India vs Australia T20 Series: Complete Schedule & Where to Watch",
+      "heroDesc": "Live on Star Sports & JioCinema · Starting 7:30 PM IST",
+      "adBadge": "Nike India",
+      "adTitle": "Just Do It — New Air Max Collection",
+      "shopSports": "Shop Sports",
+      "items": [
+        { "tag": "Cricket", "title": "IPL 2026 Auction: Record ₹25 Crore Bid for Young Pacer", "time": "2h ago" },
+        { "tag": "Football", "title": "ISL Final: Mohun Bagan vs Mumbai City — Who Will Lift the Trophy?", "time": "5h ago" },
+        { "tag": "Tennis", "title": "Sumit Nagal Reaches Australian Open Quarterfinals", "time": "7h ago" },
+        { "tag": "Hockey", "title": "India Women's Hockey Team Qualifies for Para Olympics", "time": "9h ago" },
+        { "tag": "Badminton", "title": "PV Sindhu Announces Comeback After Injury Break", "time": "12h ago" }
+      ]
+    },
+    "bollywood": {
+      "title": "Bollywood & Entertainment",
+      "subtitle": "Movies, celebrities & OTT",
+      "exclusive": "Exclusive",
+      "heroTitle": "Pushpa 3 Officially Announced — Allu Arjun Returns",
+      "heroDesc": "Sukumar confirms third instalment with bigger budget and a pan-India release",
+      "adBadge": "BookMyShow",
+      "adTitle": "Book Movie Tickets — Flat 50% Off This Weekend",
+      "bookNow": "Book Now",
+      "list": [
+        { "title": "Pushpa 3: Allu Arjun Confirms Sequel with Sukumar", "tag": "Trending", "time": "1h ago" },
+        { "title": "Deepika Padukone Signs Hollywood Blockbuster with Christopher Nolan", "tag": "Breaking", "time": "3h ago" },
+        { "title": "Animal 2: Ranbir Kapoor's Action Sequel Goes on Floors", "time": "6h ago" },
+        { "title": "Alia Bhatt's New Film Breaks Opening Day Records", "time": "8h ago" },
+        { "title": "Salman Khan's Eid Release Postponed to Diwali", "time": "10h ago" }
+      ]
+    },
+    "video": {
+      "title": "Video News",
+      "subtitle": "Watch the story unfold",
+      "fullStories": "Full Stories",
+      "shorts": "Shorts",
+      "views": "views",
+      "full": [
+        { "title": "Inside the Parliament: How the Digital India Bill Was Passed", "views": "2.4M views" },
+        { "title": "IPL Auction Highlights: Top 10 Bids That Shocked Everyone", "views": "1.8M views" },
+        { "title": "Mumbai Floods: Ground Report from Worst-Hit Areas", "views": "946K views" }
+      ],
+      "shortItems": [
+        { "title": "60-Second News: Today's Top Stories", "views": "512K" },
+        { "title": "Quick Take: Sensex Hits Record High", "views": "318K" },
+        { "title": "60-Second Update: IND vs AUS", "views": "274K" }
+      ]
+    },
+    "quickReads": {
+      "title": "Quick Reads",
+      "subtitle": "Binge through today's top stories",
+      "topics": ["Budget 2026", "IPL Mega Auction", "Bollywood Buzz", "Tech Daily", "World Headlines", "Health Tips", "Auto & EV", "Education"],
+      "featuredTitle": "Budget 2026: Complete Breakdown of New Tax Slabs & Benefits",
+      "featuredDesc": "Finance Minister announces major relief for middle class — New regime now mandatory with higher standard deduction and revised capital gains rules.",
+      "readFullStory": "Read Full Story →"
+    },
+    "moreNews": {
+      "title": "More News",
+      "subtitle": "Weather, transport, education & beyond",
+      "adBadge": "Flipkart",
+      "adTitle": "Big Billion Days — Electronics Starting ₹499",
+      "exploreDeals": "Explore Deals",
+      "items": [
+        { "tag": "Weather", "title": "Weather Alert: Heavy Rainfall Expected in 12 States" },
+        { "tag": "Transport", "title": "New Train Routes: Vande Bharat Expands to 100 Routes" },
+        { "tag": "Education", "title": "UPSC Results 2026: Top Rankers Share Their Strategy" },
+        { "tag": "Culture", "title": "Festival Season: Dates and Celebrations Across India" },
+        { "tag": "Markets", "title": "Stock Market Weekly: Best and Worst Performers" },
+        { "tag": "Health", "title": "New COVID Variant: What We Know So Far" }
+      ]
+    }
+  },
+  "footer": {
+    "description": "India's fastest news network, covering politics, business, sports and culture across 22 states with zero tolerance for misinformation.",
+    "newsletterTitle": "Never Miss a Breaking Story",
+    "newsletterDesc": "Join 5 million+ readers who start their day with Zero Tolerance India. Most important news, delivered to your inbox every morning.",
+    "emailPlaceholder": "you@email.com",
+    "subscribe": "Subscribe",
+    "copyright": "© 2026 Zero Tolerance India. All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Use",
+    "contact": "Contact Us",
+    "columns": {
+      "news": { "title": "News", "links": ["Politics", "National", "International", "Trends", "Education"] },
+      "sports": { "title": "Sports", "links": ["Cricket", "Football", "Tennis", "Hockey", "Badminton"] },
+      "entertainment": { "title": "Entertainment", "links": ["Bollywood", "Hollywood", "Web Series", "Music", "Reviews"] },
+      "business": { "title": "Business", "links": ["Markets", "Economy", "Startups", "Personal Finance", "Industry"] },
+      "lifestyle": { "title": "Lifestyle", "links": ["Health", "Travel", "Food", "Technology", "Auto"] }
+    }
+  },
+
+  "article": {
+    "home": "Home",
+    "share": "Share",
+    "save": "Save",
+    "insightTitle": "The Insight — Why It Matters",
+    "advertisement": "Advertisement",
+    "sponsored": "Sponsored",
+    "commentsTitle": "Reader Comments",
+    "commentPlaceholder": "Share your view on this story…",
+    "postComment": "Post Comment",
+    "reply": "Reply",
+    "report": "Report",
+    "nextStory": "Next Story",
+    "readFullStory": "Read Full Story",
+    "mostRead": "Most Read Today",
+    "author": "Zero Tolerance Desk",
+    "location": "New Delhi",
+    "published": "Aug 5, 2026, 11:42 IST",
+    "readTime": "4 min read",
+    "imageCaptionSuffix": "file photo. (Zero Tolerance India)",
+    "defaultDek": "Our reporters break down what happened, who it affects and what to expect next in this developing {{category}} story.",
+    "defaultBody": [
+      "{{title}}. The development came late on Tuesday and was confirmed by two officials with direct knowledge of the matter, both of whom asked not to be named because they were not authorised to speak publicly.",
+      "Early assessments suggest the immediate impact will be concentrated in a handful of states, though officials cautioned that a fuller picture will only emerge once the formal notification is issued later this week.",
+      "Stakeholders reacted cautiously. Industry bodies welcomed the clarity but flagged the compressed timeline for compliance, while opposition representatives said the process had skipped consultation.",
+      "A detailed review has been ordered and the findings are expected to be placed in the public domain within the month. Zero Tolerance India will continue to track the story as it develops."
+    ],
+    "defaultKeyPoints": [
+      "Development confirmed by two officials with direct knowledge",
+      "Immediate impact concentrated in a handful of states",
+      "Industry welcomes clarity but flags compliance timeline",
+      "Formal notification expected later this week"
+    ],
+    "tags": ["India", "Zero Tolerance", "Explained"],
+    "mostReadItems": [
+      "Sensex Hits Record High: Nifty Crosses 25,000",
+      "Delhi AQI Drops to Best Level in 5 Years After Rain",
+      "IPL 2026 Auction: Record ₹25 Crore Bid for Young Pacer",
+      "Tata Motors Launches Cheapest EV at ₹7.99 Lakh",
+      "Kerala Wins Best Tourism State Award for 5th Year"
+    ],
+    "comments": [
+      {
+        "name": "Ananya Sharma",
+        "time": "22 min ago",
+        "text": "Finally some reporting that explains the context instead of just the headline. Would love a follow-up on how this plays out over the next quarter."
+      },
+      {
+        "name": "Rohit Verma",
+        "time": "1 hour ago",
+        "text": "Good coverage, but the numbers quoted here differ slightly from the official release. Can the desk clarify the source?"
+      },
+      {
+        "name": "Meera Nair",
+        "time": "2 hours ago",
+        "text": "This will directly affect small businesses in tier-2 cities. Hope the ground impact is tracked properly."
+      },
+      {
+        "name": "Imran Qureshi",
+        "time": "3 hours ago",
+        "text": "Sharing this with my team. Balanced piece with actual data — rare these days."
+      }
+    ]
+  },
+  "articles": {
+    "monsoon-session-key-bills-to-watch-this-week": {
+      "title": "Monsoon Session: Key Bills to Watch This Week",
+      "category": "Politics",
+      "dek": "Seven crucial bills, including the Digital India Act and the Data Protection Amendment, head to the floor as the government pushes for a compressed legislative calendar.",
+      "body": [
+        "Parliament's monsoon session opened on Monday with the government listing seven bills for consideration and passage, setting up what floor managers on both sides expect to be the most contested three weeks of the year.",
+        "At the centre of the agenda is the Digital India Act, a long-pending replacement for the two-decade-old IT framework. Officials familiar with the draft say it introduces a tiered compliance regime for platforms based on user base, along with a statutory grievance appellate body.",
+        "The Data Protection Amendment Bill, tabled alongside it, narrows several government exemptions that industry bodies had flagged during consultations. A senior official said the changes were made after \"extensive feedback from both civil society and industry\", though the exemption for national security purposes remains intact.",
+        "Opposition floor leaders have demanded a full day of debate on inflation before any legislative business is taken up, and have signalled they will push for the digital bills to be referred to a select committee rather than passed in the current session.",
+        "The infrastructure bill, which restructures how central funds flow to state road and rail projects, is the least contested of the seven and is expected to clear both houses without division."
+      ],
+      "keyPoints": [
+        "Seven bills listed for consideration and passage this session",
+        "Digital India Act introduces tiered compliance based on platform size",
+        "Data Protection Amendment narrows several government exemptions",
+        "Opposition wants digital bills sent to a select committee"
+      ]
+    },
+    "india-vs-australia-t20-series-kicks-off-tonight": {
+      "title": "India vs Australia: T20 Series Kicks Off Tonight",
+      "category": "Sports",
+      "dek": "Jasprit Bumrah leads a full-strength pace attack as India open a five-match series at the Wankhede Stadium under lights.",
+      "body": [
+        "India begin their five-match T20 series against Australia at the Wankhede Stadium tonight, with the hosts naming an unchanged pace battery led by Jasprit Bumrah.",
+        "The team management has signalled a clear plan: attack with the new ball in the first six overs and hold back a spinner for the middle phase, a template that worked in the last home series.",
+        "Australia arrive without two frontline batters, both rested ahead of a longer red-ball tour, and will hand a debut to their 21-year-old left-arm quick in the opening fixture.",
+        "Conditions are expected to favour the chasing side, with dew forecast after the 15th over. Both captains have said they would bowl first if they win the toss."
+      ],
+      "keyPoints": [
+        "Five-match series opens at Wankhede Stadium, 7:30 PM IST",
+        "Bumrah leads an unchanged Indian pace attack",
+        "Australia rest two frontline batters, hand out one debut",
+        "Dew expected to favour the side chasing"
+      ]
+    },
+    "shah-rukh-khan-announces-new-production-house": {
+      "title": "Shah Rukh Khan Announces New Production House",
+      "category": "Bollywood",
+      "dek": "Red Chillies International launches with a ten-film slate built around international co-productions and streaming-first releases.",
+      "body": [
+        "Shah Rukh Khan announced a new production banner on Tuesday, positioning it as an international arm of his existing studio with a slate of ten films over four years.",
+        "Three of the ten titles are co-productions with overseas studios, and at least two are planned as streaming-first releases, a shift from the banner's theatrical-only history.",
+        "Industry executives read the move as a response to the widening gap between theatrical footfalls and streaming spend, which has pushed several large Indian studios toward hybrid release calendars.",
+        "The first film under the banner goes on floors early next year, with casting announcements expected within the month."
+      ],
+      "keyPoints": [
+        "Ten-film slate planned across four years",
+        "Three titles are international co-productions",
+        "Two films planned as streaming-first releases",
+        "First production begins shooting early next year"
+      ]
+    },
+    "jio-airfiber-2-0-launches-in-500-cities": {
+      "title": "Jio AirFiber 2.0 Launches in 500 Cities",
+      "category": "Tech",
+      "dek": "Reliance Jio expands next-generation fixed wireless broadband to tier-2 towns with plans starting under ₹600 a month.",
+      "body": [
+        "Reliance Jio has extended its AirFiber service to 500 cities, taking fixed wireless broadband to a set of tier-2 and tier-3 towns where laying fibre has been slow and expensive.",
+        "The company says peak speeds reach 1Gbps on the highest tier, though typical delivered speeds in early rollout markets have been in the 200-300Mbps range.",
+        "Entry plans start below ₹600 a month bundled with streaming subscriptions, undercutting incumbent wired providers in most of the new markets.",
+        "Analysts expect the expansion to add meaningful subscriber numbers over the next two quarters, with the bigger question being how quickly rivals respond on price."
+      ],
+      "keyPoints": [
+        "Service live in 500 cities, mostly tier-2 and tier-3",
+        "Peak speeds up to 1Gbps on the top tier",
+        "Entry plans start under ₹600 a month",
+        "Pressure builds on incumbent wired broadband pricing"
+      ]
+    }
+  },
+  "categories": {
+    "Politics": "Politics",
+    "Sports": "Sports",
+    "Bollywood": "Bollywood",
+    "Tech": "Tech",
+    "Business": "Business",
+    "Environment": "Environment",
+    "Health": "Health",
+    "Education": "Education",
+    "Auto": "Auto",
+    "India": "India",
+    "Featured": "Featured",
+    "Exclusive": "Exclusive",
+    "Trending": "Trending",
+    "Breaking": "Breaking",
+    "Cricket": "Cricket",
+    "Football": "Football",
+    "Tennis": "Tennis",
+    "Hockey": "Hockey",
+    "Badminton": "Badminton",
+    "Weather": "Weather",
+    "Transport": "Transport",
+    "Culture": "Culture",
+    "Markets": "Markets"
+  }
+}

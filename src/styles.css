@@ -193,3 +193,34 @@
 @utility img-placeholder {
   background-image: linear-gradient(135deg, var(--tint), var(--tint-strong));
 }
+
+/* Language prompt & navbar highlight */
+.lang-prompt-backdrop {
+  transition: opacity 0.55s ease;
+}
+
+.lang-prompt-card {
+  transition:
+    transform 0.65s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.45s ease 0.35s,
+    border-radius 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center center;
+}
+
+.lang-prompt-card-flying {
+  pointer-events: none;
+}
+
+@keyframes lang-navbar-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 color-mix(in oklch, var(--primary) 45%, transparent);
+  }
+  50% {
+    box-shadow: 0 0 0 6px color-mix(in oklch, var(--primary) 0%, transparent);
+  }
+}
+
+.lang-navbar-highlight {
+  animation: lang-navbar-pulse 0.9s ease-in-out 2;
+}
