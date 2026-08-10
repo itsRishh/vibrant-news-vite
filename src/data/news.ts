@@ -2,6 +2,7 @@ import cricket from "@/assets/cricket.jpg";
 import redcarpet from "@/assets/redcarpet.jpg";
 import parliament from "@/assets/parliament.jpg";
 import tech from "@/assets/tech.jpg";
+import { findFeedItem } from "./feeds";
 
 export type Comment = {
   name: string;
