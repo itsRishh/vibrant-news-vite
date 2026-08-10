@@ -224,12 +224,7 @@ export function getArticle(slug: string): Article {
       ],
     tags: [category, "India", "Zero Tolerance", "Explained"],
     comments: BASE_COMMENTS,
-    next: {
-      slug: nextSlug,
-      category: nextSeed.category!,
-      title: titleFromSlug(nextSlug),
-      summary: nextSeed.dek!,
-      image: nextSeed.image!,
-    },
+    next,
+
   };
 }
