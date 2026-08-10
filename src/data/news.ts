@@ -2,6 +2,7 @@ import cricket from "@/assets/cricket.jpg";
 import redcarpet from "@/assets/redcarpet.jpg";
 import parliament from "@/assets/parliament.jpg";
 import tech from "@/assets/tech.jpg";
+import { findFeedItem } from "./feeds";
 
 export type Comment = {
   name: string;
@@ -156,16 +157,43 @@ const CURATED: Record<string, Partial<Article>> = {
 const ORDER = Object.keys(CURATED);
 
 export function getArticle(slug: string): Article {
-  const seed = CURATED[slug] ?? {};
-  const title = (seed as { title?: string }).title ?? titleFromSlug(slug);
+  const found = findFeedItem(slug);
+  const seed: Partial<Article> = {
+    ...(found
+      ? { category: found.feed.name, dek: found.item.dek, image: found.item.image }
+      : {}),
+    ...(CURATED[slug] ?? {}),
+  };
+  const title = found?.item.title ?? (seed as { title?: string }).title ?? titleFromSlug(slug);
   const idx = Math.abs(
     [...slug].reduce((a, c) => (a * 31 + c.charCodeAt(0)) | 0, 7),
   );
   const image = seed.image ?? IMAGES[idx % IMAGES.length]!;
   const category = seed.category ?? "India";
 
-  const nextSlug = ORDER[(ORDER.indexOf(slug) + 1 + ORDER.length) % ORDER.length]!;
-  const nextSeed = CURATED[nextSlug]!;
+  let next: Article["next"];
+  if (found) {
+    const items = found.feed.items;
+    const i = items.findIndex((it) => it.slug === slug);
+    const n = items[(i + 1) % items.length]!;
+    next = {
+      slug: n.slug,
+      category: found.feed.name,
+      title: n.title,
+      summary: n.dek,
+      image: n.image,
+    };
+  } else {
+    const nextSlug = ORDER[(ORDER.indexOf(slug) + 1 + ORDER.length) % ORDER.length]!;
+    const nextSeed = CURATED[nextSlug]!;
+    next = {
+      slug: nextSlug,
+      category: nextSeed.category!,
+      title: titleFromSlug(nextSlug),
+      summary: nextSeed.dek!,
+      image: nextSeed.image!,
+    };
+  }
 
   return {
     slug,
@@ -196,12 +224,7 @@ export function getArticle(slug: string): Article {
       ],
     tags: [category, "India", "Zero Tolerance", "Explained"],
     comments: BASE_COMMENTS,
-    next: {
-      slug: nextSlug,
-      category: nextSeed.category!,
-      title: titleFromSlug(nextSlug),
-      summary: nextSeed.dek!,
-      image: nextSeed.image!,
-    },
+    next,
+
   };
 }
