@@ -171,8 +171,29 @@ export function getArticle(slug: string): Article {
   const image = seed.image ?? IMAGES[idx % IMAGES.length]!;
   const category = seed.category ?? "India";
 
-  const nextSlug = ORDER[(ORDER.indexOf(slug) + 1 + ORDER.length) % ORDER.length]!;
-  const nextSeed = CURATED[nextSlug]!;
+  let next: Article["next"];
+  if (found) {
+    const items = found.feed.items;
+    const i = items.findIndex((it) => it.slug === slug);
+    const n = items[(i + 1) % items.length]!;
+    next = {
+      slug: n.slug,
+      category: found.feed.name,
+      title: n.title,
+      summary: n.dek,
+      image: n.image,
+    };
+  } else {
+    const nextSlug = ORDER[(ORDER.indexOf(slug) + 1 + ORDER.length) % ORDER.length]!;
+    const nextSeed = CURATED[nextSlug]!;
+    next = {
+      slug: nextSlug,
+      category: nextSeed.category!,
+      title: titleFromSlug(nextSlug),
+      summary: nextSeed.dek!,
+      image: nextSeed.image!,
+    };
+  }
 
   return {
     slug,
