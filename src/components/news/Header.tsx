@@ -22,6 +22,11 @@ const MARKET_VALUES = [
   { key: "tcs", value: "₹3,860.90", change: "-0.34%", up: false },
   { key: "hdfc", value: "₹1,634.80", change: "+0.44%", up: true },
   { key: "infy", value: "₹1,466.10", change: "-0.12%", up: false },
+  { key: "nifty", value: "25,102.40", change: "+0.62%", up: true },
+  { key: "reliance", value: "₹2,912.05", change: "+1.18%", up: true },
+  { key: "tcs", value: "₹3,860.90", change: "-0.34%", up: false },
+  { key: "hdfc", value: "₹1,634.80", change: "+0.44%", up: true },
+  { key: "infy", value: "₹1,466.10", change: "-0.12%", up: false }
 ] as const;
 
 const NAV_KEYS = ["home", "politics", "sports", "entertainment", "business", "tech", "world"] as const;
@@ -33,7 +38,7 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 bg-background">
       <div className="bg-ink text-background">
-        <div className="mx-auto grid max-w-[1200px] grid-cols-[auto_minmax(0,1fr)] items-center gap-3 px-4 py-1.5 text-[11px]">
+        <div className="mx-auto grid max-w-[1250px] grid-cols-[auto_minmax(0,1fr)] items-center gap-3 py-1.5 text-[11px]">
           <span className="shrink-0 bg-primary px-2 py-0.5 font-bold tracking-wide uppercase">
             {t("header.breaking")}
           </span>
@@ -42,7 +47,7 @@ export function Header() {
       </div>
 
       <div className="border-b border-border">
-        <div className="mx-auto grid max-w-[1200px] grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-4 py-3 lg:flex lg:justify-between">
+        <div className="mx-auto grid max-w-[1250px] grid-cols-[minmax(0,1fr)_auto] items-center gap-4 py-3 lg:flex lg:justify-between">
           <Link to="/" className="flex min-w-0 items-center gap-2">
             <span className="grid h-9 w-9 shrink-0 place-items-center bg-primary text-sm font-black text-primary-foreground">
               ZT
@@ -98,7 +103,7 @@ export function Header() {
       </div>
 
       <div className="overflow-hidden border-b border-border bg-secondary">
-        <div className="mx-auto flex max-w-[1200px] px-4 items-center justify-center">
+        <div className="mx-auto flex max-w-[1250px] items-center justify-center">
           <span className="shrink-0 bg-primary px-3 py-1.5 text-[10px] font-bold tracking-wider text-primary-foreground uppercase">
             {t("header.trending")}
           </span>
@@ -120,7 +125,7 @@ export function Header() {
       </div>
 
       <div className="border-b border-border">
-        <div className="mx-auto flex max-w-[1200px] gap-5 overflow-x-auto px-4 py-1.5 text-[11px]">
+        <div className="mx-auto flex max-w-[1250px] gap-5 overflow-x-auto py-1.5 text-[11px] scrollbar-none">
           {MARKET_VALUES.map((m) => (
             <div key={m.key} className="flex shrink-0 items-center gap-1.5">
               <span className="font-bold">{t(`header.markets.${m.key}`)}</span>
