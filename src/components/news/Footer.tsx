@@ -8,7 +8,7 @@ export function Newsletter() {
   const { t } = useTranslation();
 
   return (
-    <section className="mx-auto max-w-[1200px] px-4 py-10">
+    <section className="mx-auto max-w-[1300px] px-4 py-10">
       <div className="relative overflow-hidden bg-primary px-6 py-10 text-primary-foreground sm:px-10">
         <div
           className="pointer-events-none absolute inset-y-0 right-0 w-1/2 opacity-20"
@@ -49,7 +49,7 @@ export function Footer() {
 
   return (
     <footer className="border-t border-border bg-secondary">
-      <div className="mx-auto grid max-w-[1200px] gap-8 px-4 py-12 md:grid-cols-[1.4fr_repeat(5,1fr)]">
+      <div className="mx-auto grid max-w-[1300px] gap-8 px-4 py-12 md:grid-cols-[1.4fr_repeat(5,1fr)]">
         <div>
           <div className="flex items-center gap-2">
             <span className="grid h-9 w-9 place-items-center bg-primary text-sm font-black text-primary-foreground">

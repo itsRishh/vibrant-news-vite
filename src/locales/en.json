@@ -25,7 +25,7 @@
   },
   "header": {
     "breaking": "Breaking",
-    "breakingUpdate": "UPDATE: Mumbai rainfall breaks 50-year record, NDRF teams deployed",
+    "breakingUpdate": "UPDATE: अयोध्या राम मंदिर के नए व्यवस्था प्रमुख बने आचार्य इंद्रदेव मिश्र, दिसंबर 2026 तक संभालेंगे कमान",
     "search": "Search",
     "trending": "Trending",
     "nav": {
@@ -62,84 +62,113 @@
       "promoDesc": "Launch Price ₹4,999 · Free Delivery on Pre-Order",
       "shopNow": "Shop Now",
       "hero": {
-        "category": "Politics",
+        "category": "LATEST",
         "badge": "Exclusive",
-        "title": "Monsoon Session: Key Bills to Watch This Week",
-        "summary": "Seven crucial bills including the Digital India Act, Data Protection Amendment and Infrastructure Bill are scheduled for debate in Parliament this session.",
-        "time": "2 hours ago"
+        "title": "मुख्यमंत्री डॉ. मोहन यादव ने भोपाल स्थित शौर्य स्मारक में भारत माता की प्रतिमा पर पुष्प अर्पित कर नमन किया",
+        "summary": "भारत माता की प्रतिमा पर पुष्प अर्पित कर नमन किया और नवनिर्मित डिजिटल लाइब्रेरी का शुभारंभ किया। इस अवसर पर उन्होंने भारतीय स्वतंत्रता के गौरवशाली इतिहास से जुड़ी डिजिटल सामग्री एवं लाइब्रेरी की अन्य व्यवस्थाओं का अवलोकन कर जानकारी प्राप्त की।",
+        "time": "1 hours ago"
       },
       "cards": [
         {
-          "category": "Sports",
-          "badge": "LIVE",
-          "title": "India vs Australia: T20 Series Kicks Off Tonight",
-          "summary": "Jasprit Bumrah leads the pace attack as India looks to dominate the 5-match series at Wankhede Stadium.",
+          "category": "REGIONAL",
+          "badge": "EXCLUSIVE",
+          "title": "बारिश से कोटर बेहाल, घर-दुकानों में घुसा पानी नगर परिषद कार्यालय में घुटनों तक पानी, कामकाज प्रभावित ",
+          "summary": "मैहर विधायक श्री श्रीकांत चतुर्वेदी ने मप्र के स्कूल शिक्षा मंत्री से मुलाकात कर मैहर क्षेत्र के लिए करोड़ों रुपये की सौगात दिलाई।",
+          "time": "5 hours ago"
+        },
+        {
+          "category": "BREAKING",
+          "title": "दुबई से सट्टा रैकेट चलाने वाले सतीश सनपाल को MP हाईकोर्ट से नहीं मिली राहत, FIR रद्द करने की सभी 6 याचिकाएं खारिज।",
+          "summary": "मध्य प्रदेश हाईकोर्ट जबलपुर की जस्टिस हिमांशु जोशी की एकलपीठ ने दुबई से सट्टा रैकेट संचालित करने के आरोपी सतीश सनपाल और उसके चार सह-आरोपियों की याचिकाओं पर यह फैसला सुनाया है। ",
+          "time": "5 hours ago"
+        },
+        {
+          "category": "6",
+          "badge": "EXCLUSIVE",
+          "title": "विधायक ने दिलाई मैहर को बड़ी सौगात। 5 करोड़ 73 लाख रुपए शाला भवनों के निर्माण के लिए स्वीकृत।",
+          "summary": "मैहर विधायक श्री श्रीकांत चतुर्वेदी ने मप्र के स्कूल शिक्षा मंत्री से मुलाकात कर मैहर क्षेत्र के लिए करोड़ों रुपये की सौगात दिलाई।",
+          "time": "5 hours ago"
+        },
+        {
+          "category": "7",
+          "badge": "EXCLUSIVE",
+          "title": "विधायक ने दिलाई मैहर को बड़ी सौगात। 5 करोड़ 73 लाख रुपए शाला भवनों के निर्माण के लिए स्वीकृत।",
+          "summary": "मैहर विधायक श्री श्रीकांत चतुर्वेदी ने मप्र के स्कूल शिक्षा मंत्री से मुलाकात कर मैहर क्षेत्र के लिए करोड़ों रुपये की सौगात दिलाई।",
+          "time": "5 hours ago"
+        },
+        {
+          "category": "Latest",
+          "badge": "",
+          "title": "शहादत दिवस पर याद किये गये लाल पदमधर सिंह ",
+          "summary": "84 वी शहादत दिवस पर भारत छोड़ो आंदोलन में शहादत करने वाले लाल परमिधर सिंह को याद किया गया. ",
           "time": "1 hour ago"
         },
         {
-          "category": "Tech",
-          "title": "Jio AirFiber 2.0 Launches in 500 Cities",
-          "summary": "Reliance Jio rolls out next-gen wireless broadband with speeds up to 1Gbps across tier-2 towns.",
+          "category": "HEALTH",
+          "title": "सतना में 8 फीट लंबा अजगर रेस्क्यू, सुरक्षित जंगल में छोड़ा",
+          "summary": "सतना के नंदहा गांव में बुधवार देर रात एक बुनकर के घर में 8 फीट लंबा अजगर घुसने से हड़कंप मच गया। परिजनों ने तुरंत डायल-112 को सूचना दी।",
           "time": "3 hours ago"
         },
         {
-          "category": "Business",
-          "title": "Sensex Hits Record High: Nifty Crosses 25,000",
-          "summary": "Bull run continues as foreign investors pour in record ₹1.4 lakh crore this quarter, driven by IT and banking stocks.",
+          "category": "AD",
+          "title": "सद्गुरु सेवा ट्रस्ट में चोरी, लाखों के सामान पर हाथ साफ",
+          "summary": "जानकी कुंड स्थित सद्गुरु सेवा ट्रस्ट की नर्मदा कॉलोनी के रूम नंबर 19 में चोरों ने दरवाजे की कुंडी काटकर चोरी की वारदात को अंजाम दिया। ",
           "time": "45 min ago"
         },
         {
-          "category": "Bollywood",
-          "title": "Shah Rukh Khan Announces New Production House",
-          "summary": "SRK launches Red Chillies International with a 10-film slate focusing on Hollywood collaborations.",
+          "category": "LATEST",
+          "badge": "EXCLUSIVE",
+          "title": "दूरंतो एक्सप्रेस ट्रेन में 1.24 किलो विदेशी सोना जब्त, दो तस्कर पकड़े गए",
+          "summary": "रेलवे में अवैध गतिविधियों के खिलाफ कार्रवाई करते हुए RPF क्राइम ब्रांच की टीम ने DRI  के साथ संयुक्त अभियान चलाकर बड़ी सफलता हासिल की है। टीम ने गाड़ी संख्या 12262 हावड़ा-मुंबई दूरंतो एक्सप्रेस से करीब 1.242 किलोग्राम विदेशी सोना बरामद किया है। इस मामले में दो व्यक्तियों को पकड़ा गया है।",
           "time": "5 hours ago"
         }
+        
       ],
       "smallCards": [
         {
-          "tag": "Environment",
-          "title": "Delhi AQI Drops to Best Level in 5 Years After Rain",
-          "time": "5 hours ago"
+          "tag": "REGIONAL",
+          "title": "सतना: नगर दंडाधिकारी के पहुंचते ही स्कूल में मचा हड़कंप",
+          "time": "45 mins ago"
         },
         {
-          "tag": "Health",
-          "title": "New Study Links Sleep Quality to Heart Disease Prevention",
-          "time": "5 hours ago"
+          "tag": "RELIGION",
+          "title": "अयोध्या राम मंदिर के नए व्यवस्था प्रमुख बने आचार्य इंद्रदेव मिश्र, दिसंबर 2026 तक संभालेंगे कमान",
+          "time": "1 hours ago"
         },
         {
           "tag": "Education",
-          "title": "IIT Bombay Unveils AI-Powered Campus for Rural Students",
+          "title": "रानी दुर्गावती विश्वविद्यालय में छात्रों और कर्मचारियों के बीच जमकर हुई मारपीट",
+          "time": "1 hours ago"
+        },
+        {
+          "tag": "LATEST",
+          "title": "कलेक्टर विदिशा मुखर्जी व एसपी अवधेश प्रताप सिंह ने ली सलामी, स्वतंत्रता दिवस की फाइनल रिहर्सल सम्पन्न",
+          "time": "2 hours ago"
+        },
+        {
+          "tag": "REGIONAL",
+          "title": "स्टंटबाजों को ट्रैफिक पुलिस ने पकड़ा, माफी मांगते रहे युवक दोबारा ऐसा न करने का लिया संकल्प",
+          "time": "15 mins ago"
+        },
+        {
+          "tag": "GENERAL",
+          "title": "घर में सो रहे भाई-बहन को सर्प ने डसा, छतरपुर में दोनों की दर्दनाक मौत",
           "time": "5 hours ago"
         },
         {
-          "tag": "Auto",
-          "title": "Tata Motors Launches Cheapest EV at ₹7.99 Lakh",
-          "time": "5 hours ago"
-        },
-        {
-          "tag": "Technology",
-          "title": "ISRO Successfully Launches Next-Gen Weather Satellite Into Orbit",
-          "time": "5 hours ago"
-        },
-        {
-          "tag": "Business",
-          "title": "RBI Keeps Repo Rate Unchanged at 6.5% Amid Stable Inflation",
-          "time": "5 hours ago"
-        },
-        {
-          "tag": "Sports",
-          "title": "India Claims Gold in World Archery Championship Final",
+          "tag": "REGIONAL",
+          "title": "मैहर में हर घर तिरंगा अभियान के तहत भव्य तिरंगा यात्रा निकाली गई। सुबह 11 बजे खेल मैदान से शुरू हुई यात्रा ",
           "time": "5 hours ago"
         },
         {
           "tag": "Science",
-          "title": "NASA Detects Evidence of Water Vapor on Nearby Exoplanet",
+          "title": "सतना में 8 फीट लंबा अजगर रेस्क्यू, सुरक्षित जंगल में छोड़ा",
           "time": "5 hours ago"
         }
       ]
     },
     "regional": {
-      "title": "Regional News",
+      "title": "Latest News",
       "subtitle": "Stories from every corner of India",
       "items": [
         { "city": "Maharashtra", "title": "Mumbai Metro Line 3 Opens: 10 Lakh Daily Riders Expected", "time": "2h ago" },
@@ -191,14 +220,14 @@
       "shorts": "Shorts",
       "views": "views",
       "full": [
-        { "title": "Inside the Parliament: How the Digital India Bill Was Passed", "views": "2.4M views" },
-        { "title": "IPL Auction Highlights: Top 10 Bids That Shocked Everyone", "views": "1.8M views" },
-        { "title": "Mumbai Floods: Ground Report from Worst-Hit Areas", "views": "946K views" }
+        { "title": "कलेक्टर श्रीमती बिदिशा मुखर्जी ने जिलेवासियों को स्वतंत्रता दिवस की शुभकामनाएं दी।", "views": "2.4M views", "vidsrc": "./src/assets/videos/vnews/madam.mp4" },
+        { "title": "IPL Auction Highlights: Top 10 Bids That Shocked Everyone", "views": "1.8M views", "vidsrc": "./src/assets/videos/vnews/ipl.mp4" },
+        { "title": "रानी दुर्गावती विश्वविद्यालय में छात्रों और कर्मचारियों के बीच जमकर हुई मारपीट", "views": "946K views", "vidsrc": "./src/assets/videos/vnews/marpeet.mp4" }
       ],
       "shortItems": [
-        { "title": "60-Second News: Today's Top Stories", "views": "512K" },
-        { "title": "Quick Take: Sensex Hits Record High", "views": "318K" },
-        { "title": "60-Second Update: IND vs AUS", "views": "274K" }
+        { "title": "सतना के कोटर नगर परिषद कार्यालय में घुसा पानी , नगर परिषद के की वाहन डूबे , कर्मचारी कार्यालय के बाहर सड़क पर खड़े।", "views": "512K", "vidsrc": "./src/assets/videos/shorts/paani.mp4" },
+        { "title": "रामनगर : पेट्रोल पंप में खड़े टैंकर से 200 लीटर डीजल चोरी, सीसीटीवी में कैद बदमाश", "views": "318K", "vidsrc": "./src/assets/videos/shorts/petrolchori.mp4" },
+        { "title": "सुखबीर सिंह बादल पर जानलेवा हमला!", "views": "274K", "vidsrc": "./src/assets/videos/shorts/hamla.mp4" }
       ]
     },
     "quickReads": {

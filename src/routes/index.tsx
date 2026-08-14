@@ -36,7 +36,7 @@ function Index() {
     <div className="min-h-screen bg-background text-foreground">
       <Header />
       <main>
-        <div className="mx-auto grid max-w-[1280px] gap-2 lg:grid-cols-[minmax(0,1fr)_340px]">
+        <div className="mx-auto grid max-w-[1250px] flex items-center justify-center flex-col gap-2 lg:grid-cols-[minmax(0,1fr)_300px]">
           <NewsClickArea>
             <HotRightNow />
             <Regional />

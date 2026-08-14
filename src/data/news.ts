@@ -1,9 +1,11 @@
-import cricket from "@/assets/cricket.jpg";
-import redcarpet from "@/assets/redcarpet.jpg";
-import parliament from "@/assets/parliament.jpg";
-import tech from "@/assets/tech.jpg";
+import cricket from "@/assets/images/rewa.jpg";
+import redcarpet from "@/assets/images/profile.jpeg";
+import parliament from "@/assets/videos/tiranga.mp4";
+import tech from "@/assets/images/ajgar.jpeg";
 import i18n from "@/i18n";
 import { findFeedItem } from "./feeds";
+
+const t = i18n.t.bind(i18n);
 
 export type Comment = {
   name: string;
@@ -66,12 +68,70 @@ const CURATED_IMAGES: Record<string, string> = {
   "jio-airfiber-2-0-launches-in-500-cities": tech,
 };
 
+const ORDER = CURATED_SLUGS;
+
+const CURATED: Record<string, Partial<ArticleSeed>> = {
+  "monsoon-session-key-bills-to-watch-this-week": {
+    title: "Monsoon Session: Key Bills to Watch This Week",
+    category: "India",
+    dek: "Parliament set to debate key legislative priorities",
+    body: [],
+    keyPoints: [],
+  },
+  "india-vs-australia-t20-series-kicks-off-tonight": {
+    title: "India vs Australia T20 Series Kicks Off Tonight",
+    category: "Sports",
+    dek: "T20 cricket series begins with high expectations",
+    body: [],
+    keyPoints: [],
+  },
+  "shah-rukh-khan-announces-new-production-house": {
+    title: "Shah Rukh Khan Announces New Production House",
+    category: "Bollywood",
+    dek: "Bollywood star launches new venture in entertainment",
+    body: [],
+    keyPoints: [],
+  },
+  "jio-airfiber-2-0-launches-in-500-cities": {
+    title: "Jio Airfiber 2.0 Launches in 500 Cities",
+    category: "Tech",
+    dek: "New broadband service expands to major markets",
+    body: [],
+    keyPoints: [],
+  },
+};
+
+const BASE_COMMENTS: Comment[] = [
+  {
+    name: "Rajesh Kumar",
+    initials: "RK",
+    time: "2 hours ago",
+    text: "This is an important development. Looking forward to more updates on this story.",
+    likes: 45,
+  },
+  {
+    name: "Priya Sharma",
+    initials: "PS",
+    time: "1 hour ago",
+    text: "Great reporting on this issue. The coverage is comprehensive and well-researched.",
+    likes: 32,
+  },
+  {
+    name: "Amit Patel",
+    initials: "AP",
+    time: "45 minutes ago",
+    text: "Very insightful article. Raises some important questions we need to address.",
+    likes: 28,
+  },
+];
+
 type ArticleSeed = {
-  title: string;
-  category: string;
-  dek: string;
-  body: string[];
-  keyPoints: string[];
+  title?: string;
+  category?: string;
+  dek?: string;
+  body?: string[];
+  keyPoints?: string[];
+  image?: string;
 };
 
 export function getArticle(slug: string): Article {
@@ -141,6 +201,5 @@ export function getArticle(slug: string): Article {
     tags: [category, "India", "Zero Tolerance", "Explained"],
     comments: BASE_COMMENTS,
     next,
-
   };
 }

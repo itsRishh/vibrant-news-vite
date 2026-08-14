@@ -25,7 +25,7 @@ export function NewsClickArea({ children }: { children: ReactNode }) {
 
         navigate({ to: "/news/$slug", params: { slug: slugify(title) } });
       }}
-      className="[&_article]:cursor-pointer [&_li]:cursor-pointer"
+      className="[&_article]:cursor-pointer [&_li]:cursor-pointer flex items-center justify-center flex-col"
     >
       {children}
     </div>

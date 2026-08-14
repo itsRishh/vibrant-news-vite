@@ -9,10 +9,16 @@ import {
   Tag,
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import cricket from "@/assets/cricket.jpg";
-import redcarpet from "@/assets/redcarpet.jpg";
-import parliament from "@/assets/parliament.jpg";
-import tech from "@/assets/tech.jpg";
+// import cricket from "@/assets/cricket.jpg";
+import cricket from "@/assets/images/rewa.jpg";
+import tech from "@/assets/images/ajgar.jpeg";
+import adNalanda from "@/assets/images/ad-nalanda.jpg";
+// import parliament from "@/assets/parliament.jpg";
+import parliament from "@/assets/videos/tiranga.mp4";
+import mohan from "@/assets/images/mohan-yadav.jpeg";
+import racket from "@/assets/images/racket.jpeg";
+import paani from "@/assets/images/paani.jpeg";
+import redcarpet from "@/assets/images/profile.jpeg";
 
 export function Badge({
   children,
@@ -91,7 +97,43 @@ function Thumb({
       src={src}
       alt={alt}
       loading="lazy"
-      className={`object-cover ${className}`}
+      className={`w-[100%] h-[100%] ${className}`}
+    />
+  );
+}
+
+function ThumbVideo({
+  src,
+  alt = "",
+  className = "",
+}: {
+  src?: string;
+  alt?: string;
+  className?: string;
+}) {
+  if (!src) return <div className={`img-placeholder ${className}`} aria-hidden />;
+  
+  // Check if src is a video by file extension
+  const isVideo = src && /\.(mp4|webm|ogg|mov|avi)$/i.test(src);
+  
+  if (isVideo) {
+    return (
+      <video
+        src={src}
+        className={`w-full h-full object-cover ${className}`}
+        controls
+        autoplay
+        playsInline
+      />
+    );
+  }
+  
+  return (
+    <img
+      src={src}
+      alt={alt}
+      loading="lazy"
+      className={`w-full h-full object-cover ${className}`}
     />
   );
 }
@@ -111,10 +153,11 @@ export function HotRightNow() {
   const hero = t("sections.hotRightNow.hero", { returnObjects: true }) as CardItem;
   const cards = t("sections.hotRightNow.cards", { returnObjects: true }) as CardItem[];
   const smallCards = t("sections.hotRightNow.smallCards", { returnObjects: true }) as CardItem[];
-  const cardImages = [cricket, tech, undefined, redcarpet];
+  const cardImages = [paani, racket, undefined, redcarpet];
 
   return (
-    <section className="mx-auto max-w-[1200px] px-4 pt-6">
+    <section className="lg:max-w-[1250px] max-w-[100vw] sm:px-4 px-4 lg:px-0  pt-6">
+      {/* title */}
       <div className="mb-3 flex items-center justify-between">
         <div className="section-rule">
           <h2 className="text-lg font-black tracking-tight uppercase">
@@ -126,48 +169,143 @@ export function HotRightNow() {
         </span>
       </div>
 
-      <div className="mb-5 grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 bg-tint p-3 sm:p-4">
-        <div className="flex min-w-0 items-center gap-3">
-          <Thumb src={tech} alt="" className="hidden h-14 w-20 shrink-0 sm:block" />
-          <div className="min-w-0">
-            <Badge>{t("sections.hotRightNow.promoBadge")}</Badge>
-            <h3 className="mt-1 truncate text-sm font-bold">
-              {t("sections.hotRightNow.promoTitle")}
-            </h3>
-            <p className="truncate text-[11px] text-muted-foreground">
-              {t("sections.hotRightNow.promoDesc")}
-            </p>
-          </div>
-        </div>
-        <a
-          href="#"
-          className="shrink-0 bg-primary px-4 py-2 text-[11px] font-bold text-primary-foreground"
-        >
-          {t("sections.hotRightNow.shopNow")}
-        </a>
-      </div>
+      {/* main news */}
 
-      <div className="grid gap-4 lg:grid-cols-[1.6fr_1fr_1fr]">
-        <article className="group relative min-h-[320px] overflow-hidden bg-ink lg:row-span-2">
-          <Thumb
-            src={parliament}
-            alt={hero.title}
-            className="absolute inset-0 h-full w-full opacity-80 transition-transform duration-500 group-hover:scale-105"
+      <div className="grid gap-4 lg:grid-cols-[2fr_1fr_1fr]"> 
+        <article className="group relative lg:min-h-[320px] min-h-[520px] overflow-hidden bg-ink lg:row-span-2">
+          <ThumbVideo
+            src={mohan}
+            className="absolute inset-0 opacity-100 transition-transform duration-500"
           />
           <div className="absolute top-3 left-3 flex gap-2">
             <Badge>{hero.category}</Badge>
             <Badge tone="ink">{hero.badge}</Badge>
           </div>
           <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-ink via-ink/80 to-transparent p-5">
-            <h3 className="text-xl font-black text-background sm:text-2xl">{hero.title}</h3>
+            <h3 className="text-md font-black text-background sm:text-2xl">{hero.title}</h3>
             <p className="mt-2 line-clamp-2 text-xs text-background/75">{hero.summary}</p>
+            <div className="mt-3 flex items-center gap-1 text-[10px] text-background/60">
+            </div>
+          </div>
+        </article>
+
+        {cards.slice(0, 2).map((c, i) => (
+          <article key={c.title} className="group overflow-hidden border border-border">
+            <div className="relative lg:h-32 h-48 overflow-hidden">
+              <Thumb
+                src={cardImages[i]}
+                alt={c.title}
+                className="transition-transform duration-500 group-hover:scale-105"
+              />
+              <span className="absolute top-2 left-2">
+                <Badge>{c.category}</Badge>
+              </span>
+              {c.badge && (
+                <span className="absolute top-2 right-2 bg-ink px-2 py-0.5 text-[9px] font-bold text-background">
+                  {c.badge}
+                </span>
+              )}
+            </div>
+            <div className="p-3">
+              <h3 className="text-sm font-bold">{c.title}</h3>
+              <p className="mt-1 line-clamp-2 text-[11px] text-muted-foreground">{c.summary}</p>
+              <div className="mt-2">
+                <Stamp time={c.time ?? ""} />
+              </div>
+            </div>
+          </article>
+        ))}
+
+        {/* <article className="border border-border bg-tint p-4">
+          <Thumb
+            src={cardImages[2]}
+            className="h-full w-full transition-transform duration-500 group-hover:scale-105"
+          />
+          <Badge>{cards[2]?.category}</Badge>
+          <h3 className="mt-2 text-sm font-bold">{cards[2]?.title}</h3>
+          <p className="mt-1 line-clamp-3 text-[11px] text-muted-foreground">{cards[2]?.summary}</p>
+          <div className="mt-3">
+            <Stamp time={cards[2]?.time ?? ""} />
+          </div>
+        </article> */}
+
+        <article className="group relative overflow-hidden border border-border">
+          <div className=" from-ink to-transparent p-3">
+            <Badge>{cards[2]?.category}</Badge>
+          </div>
+          <Thumb src={adNalanda} alt={cards[3]?.title ?? ""} className="w-[100%]" />
+        </article>
+
+        <article className="group relative overflow-hidden">
+          <Thumb src={redcarpet} alt={cards[3]?.title ?? ""} className="h-full min-h-[150px] w-full" />
+          <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-ink to-transparent p-3">
+            <Badge>{cards[3]?.category}</Badge>
+            <h3 className="mt-1 text-sm font-bold text-background">{cards[3]?.title}</h3>
+            <p className="line-clamp-2 text-[10px] text-background/70">{cards[3]?.summary}</p>
+          </div>
+        </article>
+      </div>
+
+
+        {/* no image news */}
+      <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:grid-rows-2">
+        {smallCards.map((c) => (
+          <article key={c.title} className="group overflow-hidden border border-border">
+            <div className="px-2 py-1">
+              <Badge tone="soft">{c.tag}</Badge>
+              <h3 className="mt-1.5 text-xs font-bold group-hover:text-primary">{c.title}</h3>
+              <div className="mt-2">
+                <Stamp time={c.time ?? ""} />
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+export function Regional() {
+  const { t } = useTranslation();
+  const hero = t("sections.hotRightNow.hero", { returnObjects: true }) as CardItem;
+  const cards = t("sections.hotRightNow.cards", { returnObjects: true }) as CardItem[];
+  const smallCards = t("sections.hotRightNow.smallCards", { returnObjects: true }) as CardItem[];
+  const cardImages = [cricket, tech, undefined, redcarpet];
+
+  return (
+    <section className="lg:max-w-[1250px] max-w-[100vw] sm:px-4 px-4 lg:px-0  pt-6">
+      <div className="mb-3 flex items-center justify-between">
+        <div className="section-rule">
+          <h2 className="text-lg font-black tracking-tight uppercase">
+            {t("sections.regional.title")}
+          </h2>
+        </div>
+        <span className="flex items-center gap-1 bg-primary px-2 py-0.5 text-[9px] font-bold text-primary-foreground uppercase">
+          <Flame className="h-3 w-3" /> {t("sections.live")}
+        </span>
+      </div>
+
+      <div className="grid gap-4 lg:grid-cols-[2fr_1fr_1fr]">
+        <article className="group relative min-h-[320px] overflow-hidden bg-ink lg:row-span-2">
+          <ThumbVideo
+            src={parliament}
+            className="absolute inset-0 w-full opacity-100 transition-transform duration-500"
+          />
+          <div className="absolute top-3 left-3 flex gap-2">
+            <Badge>{hero.category}</Badge>
+            <Badge tone="ink">{hero.badge}</Badge>
+          </div>
+          <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-ink via-ink/80 to-transparent p-5">
+            <h3 className="text-xl font-black text-background sm:text-2xl">मैहर में हर घर तिरंगा अभियान के तहत भव्य तिरंगा यात्रा निकाली गई। सुबह 11 बजे खेल मैदान से शुरू हुई यात्रा</h3>
+            <p className="mt-2 line-clamp-2 text-xs text-background/75">देशभक्ति नारों और गीतों के साथ अलाउद्दीन तिराहे होते हुए घंटाघर पहुंची, जहां इसका समापन हुआ। यात्रा में विधायक श्रीकांत चतुर्वेदी, कलेक्टर बिदिशा मुखर्जी, एसपी अवधेश प्रताप सिंह सहित अधिकारी, छात्र-छात्राएं और गणमान्य नागरिक शामिल हुए।</p>
             <div className="mt-3 flex items-center gap-1 text-[10px] text-background/60">
               <Clock className="h-3 w-3" /> {hero.time}
             </div>
           </div>
         </article>
 
-        {cards.slice(0, 2).map((c, i) => (
+
+        {cards.slice(4, 6).map((c, i) => (
           <article key={c.title} className="group overflow-hidden border border-border">
             <div className="relative h-32 overflow-hidden">
               <Thumb
@@ -194,21 +332,22 @@ export function HotRightNow() {
           </article>
         ))}
 
+        {/* ad */}
         <article className="border border-border bg-tint p-4">
-          <Badge>{cards[2]?.category}</Badge>
-          <h3 className="mt-2 text-sm font-bold">{cards[2]?.title}</h3>
-          <p className="mt-1 line-clamp-3 text-[11px] text-muted-foreground">{cards[2]?.summary}</p>
+          <Badge>{cards[7]?.category}</Badge>
+          <h3 className="mt-2 text-sm font-bold">{cards[7]?.title}</h3>
+          <p className="mt-1 line-clamp-3 text-[11px] text-muted-foreground">{cards[7]?.summary}</p>
           <div className="mt-3">
-            <Stamp time={cards[2]?.time ?? ""} />
+            <Stamp time={cards[7]?.time ?? ""} />
           </div>
         </article>
 
         <article className="group relative overflow-hidden">
-          <Thumb src={redcarpet} alt={cards[3]?.title ?? ""} className="h-full min-h-[150px] w-full" />
+          <Thumb src={redcarpet} alt={cards[7]?.title ?? ""} className="h-full min-h-[150px] w-full" />
           <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-ink to-transparent p-3">
-            <Badge>{cards[3]?.category}</Badge>
-            <h3 className="mt-1 text-sm font-bold text-background">{cards[3]?.title}</h3>
-            <p className="line-clamp-2 text-[10px] text-background/70">{cards[3]?.summary}</p>
+            <Badge>{cards[7]?.category}</Badge>
+            <h3 className="mt-1 text-sm font-bold text-background">{cards[7]?.title}</h3>
+            <p className="line-clamp-2 text-[10px] text-background/70">{cards[7]?.summary}</p>
           </div>
         </article>
       </div>
@@ -230,44 +369,44 @@ export function HotRightNow() {
   );
 }
 
-export function Regional() {
-  const { t } = useTranslation();
-  const items = t("sections.regional.items", { returnObjects: true }) as CardItem[];
+// export function Regional() {
+//   const { t } = useTranslation();
+//   const items = t("sections.regional.items", { returnObjects: true }) as CardItem[];
 
-  return (
-    <section className="mx-auto max-w-[1200px] px-4 py-8">
-      <SectionHead
-        title={t("sections.regional.title")}
-        subtitle={t("sections.regional.subtitle")}
-      />
-      <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
-        {items.map((r) => (
-          <article
-            key={r.title}
-            className="grid grid-cols-[auto_minmax(0,1fr)] gap-3 border border-border p-3 transition-colors hover:border-primary"
-          >
-            <span className="h-fit shrink-0">
-              <Badge tone="soft">{r.city}</Badge>
-            </span>
-            <div className="min-w-0">
-              <h3 className="text-xs font-bold">{r.title}</h3>
-              <div className="mt-1.5">
-                <Stamp time={r.time ?? ""} />
-              </div>
-            </div>
-          </article>
-        ))}
-      </div>
-    </section>
-  );
-}
+//   return (
+//     <section className="mx-auto max-w-[1200px] px-4 py-8">
+//       <SectionHead
+//         title={t("sections.regional.title")}
+//         subtitle={t("sections.regional.subtitle")}
+//       />
+//       <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
+//         {items.map((r) => (
+//           <article
+//             key={r.title}
+//             className="grid grid-cols-[auto_minmax(0,1fr)] gap-3 border border-border p-3 transition-colors hover:border-primary"
+//           >
+//             <span className="h-fit shrink-0">
+//               <Badge tone="soft">{r.city}</Badge>
+//             </span>
+//             <div className="min-w-0">
+//               <h3 className="text-xs font-bold">{r.title}</h3>
+//               <div className="mt-1.5">
+//                 <Stamp time={r.time ?? ""} />
+//               </div>
+//             </div>
+//           </article>
+//         ))}
+//       </div>
+//     </section>
+//   );
+// }
 
 export function Sports() {
   const { t } = useTranslation();
   const items = t("sections.sports.items", { returnObjects: true }) as CardItem[];
 
   return (
-    <section className="mx-auto max-w-[1200px] px-4 py-8">
+    <section className="lg:max-w-[1250px] max-w-[100vw] sm:px-4 px-4 lg:px-0 pt-6">
       <SectionHead title={t("sections.sports.title")} subtitle={t("sections.sports.subtitle")} />
 
       <article className="group relative overflow-hidden">
@@ -316,7 +455,7 @@ export function Bollywood() {
   const list = t("sections.bollywood.list", { returnObjects: true }) as (CardItem & { tag?: string })[];
 
   return (
-    <section className="mx-auto max-w-[1200px] px-4 py-8">
+    <section className="lg:max-w-[1250px] max-w-[100vw] sm:px-4 px-4 lg:px-0 pt-6">
       <SectionHead
         title={t("sections.bollywood.title")}
         subtitle={t("sections.bollywood.subtitle")}
@@ -375,7 +514,7 @@ export function VideoNews() {
   const shorts = t("sections.video.shortItems", { returnObjects: true }) as { title: string; views: string }[];
 
   return (
-    <section className="mx-auto max-w-[1200px] px-4 py-8">
+    <section className="lg:max-w-[1250px] max-w-[100vw] sm:px-4 px-4 lg:px-0 pt-6">
       <SectionHead
         title={t("sections.video.title")}
         subtitle={t("sections.video.subtitle")}
@@ -388,10 +527,12 @@ export function VideoNews() {
       <div className="grid gap-4 md:grid-cols-3">
         {full.map((v) => (
           <article key={v.title} className="group">
-            <div className="img-placeholder relative grid h-40 place-items-center">
-              <span className="grid h-11 w-11 place-items-center rounded-full bg-primary text-primary-foreground transition-transform group-hover:scale-110">
-                <Play className="h-4 w-4 fill-current" />
-              </span>
+            <div className="img-placeholder relative grid h-48 place-items-center">
+              <ThumbVideo
+                src={v.vidsrc}
+                alt={v.title}
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+              </ThumbVideo>
               <span className="absolute right-2 bottom-2 bg-ink px-1.5 py-0.5 text-[9px] font-bold text-background">
                 08:24
               </span>
@@ -407,15 +548,17 @@ export function VideoNews() {
       <p className="mt-8 mb-3 text-[11px] font-bold tracking-wider text-primary uppercase">
         ▸ {t("sections.video.shorts")}
       </p>
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
+      <div className="flex gap-4 overflow-x-auto pb-2 w-full">
         {shorts.map((s) => (
-          <article key={s.title} className="group">
+          <article key={s.title} className="group shrink-0 w-38">
             <div className="img-placeholder relative grid aspect-[9/16] place-items-center">
-              <span className="grid h-10 w-10 place-items-center rounded-full bg-primary text-primary-foreground transition-transform group-hover:scale-110">
-                <Play className="h-4 w-4 fill-current" />
-              </span>
+              <ThumbVideo
+                src={s.vidsrc}
+                alt={s.title}
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+              </ThumbVideo>
             </div>
-            <h3 className="mt-2 text-[11px] font-bold">{s.title}</h3>
+            <h3 className="mt-2 text-[11px] font-bold line-clamp-2">{s.title}</h3>
             <p className="text-[10px] text-muted-foreground">
               {s.views} {t("sections.video.views")}
             </p>
@@ -431,7 +574,7 @@ export function QuickReads() {
   const topics = t("sections.quickReads.topics", { returnObjects: true }) as string[];
 
   return (
-    <section className="mx-auto max-w-[1200px] px-4 py-8">
+    <section className="lg:max-w-[1250px] max-w-[100vw] sm:px-4 px-4 lg:px-0 pt-6">
       <SectionHead
         title={t("sections.quickReads.title")}
         subtitle={t("sections.quickReads.subtitle")}

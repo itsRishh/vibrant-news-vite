@@ -1,17 +1,22 @@
-import { Search, Bell, Menu } from "lucide-react";
+import { Search, Bell, Menu, X } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { useState } from "react";
 
 import { FaFacebook, FaInstagram } from "react-icons/fa";
 import { Link } from "@tanstack/react-router";
 
+import tiranga from "@/assets/images/tiranga.gif";
+
 const NAV: { label: string; to: string; params?: { category: string } }[] = [
   { label: "Home", to: "/" },
-  { label: "Politics", to: "/category/$category", params: { category: "politics" } },
-  { label: "Sports", to: "/category/$category", params: { category: "sports" } },
-  { label: "Entertainment", to: "/category/$category", params: { category: "entertainment" } },
-  { label: "Business", to: "/category/$category", params: { category: "business" } },
-  { label: "Tech", to: "/category/$category", params: { category: "tech" } },
-  { label: "World", to: "/category/$category", params: { category: "world" } },
+  { label: "About Us", to: "/aboutus" },
+  { label: "Latest", to: "/category/$category", params: { category: "politics" } },
+  { label: "Breaking", to: "/category/$category", params: { category: "sports" } },
+  { label: "Regional", to: "/category/$category", params: { category: "entertainment" } },
+  { label: "India", to: "/category/$category", params: { category: "business" } },
+  { label: "International", to: "/category/$category", params: { category: "tech" } },
+  { label: "Blog", to: "/category/$category", params: { category: "world" } },
+  { label: "Contact Us", to: "/category/$category", params: { category: "world" } },
 ];
 
 import { LanguageSwitcher } from "@/components/language/LanguageSwitcher";
@@ -34,23 +39,25 @@ const NAV_KEYS = ["home", "politics", "sports", "entertainment", "business", "te
 export function Header() {
   const { t } = useTranslation();
   const ticker = t("header.ticker", { returnObjects: true }) as string[];
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
     <header className="sticky top-0 z-50 bg-background">
       <div className="bg-ink text-background">
-        <div className="mx-auto grid max-w-[1250px] grid-cols-[auto_minmax(0,1fr)] items-center gap-3 py-1.5 text-[11px]">
+        <div className="mx-auto grid max-w-[1250px] grid-cols-[auto_minmax(0,1fr)] items-center gap-3 lg:px-0 px-4 py-1.5 text-[11px]">
           <span className="shrink-0 bg-primary px-2 py-0.5 font-bold tracking-wide uppercase">
             {t("header.breaking")}
           </span>
-          <p className="min-w-0 truncate opacity-90">{t("header.breakingUpdate")}</p>
+          <p className="min-w-0 lg:text-[16px] text-[8px] truncate opacity-90">{t("header.breakingUpdate")}</p>
         </div>
       </div>
 
       <div className="border-b border-border">
-        <div className="mx-auto grid max-w-[1250px] grid-cols-[minmax(0,1fr)_auto] items-center gap-4 py-3 lg:flex lg:justify-between">
+        <div className="mx-auto grid max-w-[1250px] grid-cols-[minmax(0,1fr)_auto] items-center gap-4 lg:px-0 px-4 py-3 lg:flex lg:justify-between">
           <Link to="/" className="flex min-w-0 items-center gap-2">
-            <span className="grid h-9 w-9 shrink-0 place-items-center bg-primary text-sm font-black text-primary-foreground">
-              ZT
+            <span className="grid h-9 w-9 shrink-0 place-items-center font-black text-primary-foreground">
+              {/* ZT */}
+              <img src={tiranga} alt="" />
             </span>
             <span className="min-w-0">
               <span className="block truncate text-base leading-none font-black tracking-tight">
@@ -78,32 +85,75 @@ export function Header() {
             ))}
           </nav>
 
-          <div className="flex items-center gap-2">
+          {/* Desktop - All Items Visible */}
+          <div className="hidden lg:flex items-center gap-2">
             <LanguageSwitcher />
-            <button className="grid h-8 w-8 place-items-center rounded-full border border-border">
+            <button className="grid h-8 w-8 place-items-center rounded-full border border-border hover:bg-secondary transition-colors">
               <FaInstagram className="h-4 w-4" />
             </button>
-            <button className="grid h-8 w-8 place-items-center rounded-full border border-border">
+            <button className="grid h-8 w-8 place-items-center rounded-full border border-border hover:bg-secondary transition-colors">
               <FaFacebook className="h-4 w-4" />
             </button>
-            <button className="hidden items-center gap-2 rounded-full border border-border px-3 py-1.5 text-xs text-muted-foreground transition-colors hover:border-primary hover:text-primary sm:flex">
+            <button className="flex items-center gap-2 rounded-full border border-border px-3 py-1.5 text-xs text-muted-foreground transition-colors hover:border-primary hover:text-primary hover:bg-secondary">
               <Search className="h-3.5 w-3.5" /> {t("header.search")}
             </button>
-            <button className="relative grid h-8 w-8 place-items-center rounded-full border border-border text-foreground">
+            <button className="relative grid h-8 w-8 place-items-center rounded-full border border-border text-foreground hover:bg-secondary transition-colors">
               <Bell className="h-4 w-4" />
               <span className="absolute -top-1 -right-1 grid h-4 w-4 place-items-center rounded-full bg-primary text-[9px] font-bold text-primary-foreground">
                 3
               </span>
             </button>
-            <button className="grid h-8 w-8 place-items-center rounded-full border border-border lg:hidden">
-              <Menu className="h-4 w-4" />
+          </div>
+
+          {/* Mobile - Menu Button with Dropdown */}
+          <div className="flex lg:hidden items-center gap-2 relative">
+            <button 
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="grid h-8 w-8 place-items-center rounded-full border border-border hover:bg-secondary transition-colors"
+            >
+              {isMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
             </button>
+
+            {/* Dropdown Menu */}
+            {isMenuOpen && (
+              <div className="absolute top-full right-0 mt-2 w-48 bg-background border border-border rounded-lg shadow-lg z-50">
+                <div className="flex flex-col gap-3 p-4">
+                  {/* Language Switcher */}
+                  <div className="pb-3 border-b border-border">
+                    <LanguageSwitcher />
+                  </div>
+
+                  {/* Social Icons */}
+                  <div className="flex gap-2">
+                    <button className="flex-1 grid h-9 place-items-center rounded border border-border hover:bg-secondary transition-colors">
+                      <FaInstagram className="h-4 w-4" />
+                    </button>
+                    <button className="flex-1 grid h-9 place-items-center rounded border border-border hover:bg-secondary transition-colors">
+                      <FaFacebook className="h-4 w-4" />
+                    </button>
+                  </div>
+
+                  {/* Search Button */}
+                  <button className="flex items-center justify-center gap-2 rounded border border-border px-3 py-2 text-xs text-muted-foreground transition-colors hover:border-primary hover:text-primary hover:bg-secondary w-full">
+                    <Search className="h-3.5 w-3.5" /> {t("header.search")}
+                  </button>
+
+                  {/* Notification Bell */}
+                  <button className="relative flex items-center justify-center h-9 rounded border border-border text-foreground hover:bg-secondary transition-colors w-full">
+                    <Bell className="h-4 w-4" />
+                    <span className="absolute -top-2 -right-2 grid h-4 w-4 place-items-center rounded-full bg-primary text-[9px] font-bold text-primary-foreground">
+                      3
+                    </span>
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
 
       <div className="overflow-hidden border-b border-border bg-secondary">
-        <div className="mx-auto flex max-w-[1250px] items-center justify-center">
+        <div className="mx-auto flex max-w-[1250px] lg:px-0 px-4 items-center justify-center">
           <span className="shrink-0 bg-primary px-3 py-1.5 text-[10px] font-bold tracking-wider text-primary-foreground uppercase">
             {t("header.trending")}
           </span>
@@ -125,7 +175,7 @@ export function Header() {
       </div>
 
       <div className="border-b border-border">
-        <div className="mx-auto flex max-w-[1250px] gap-5 overflow-x-auto py-1.5 text-[11px] scrollbar-none">
+        <div className="mx-auto flex max-w-[1250px] lg:px-0 px-4 gap-5 overflow-x-auto py-1.5 text-[11px] scrollbar-none">
           {MARKET_VALUES.map((m) => (
             <div key={m.key} className="flex shrink-0 items-center gap-1.5">
               <span className="font-bold">{t(`header.markets.${m.key}`)}</span>
