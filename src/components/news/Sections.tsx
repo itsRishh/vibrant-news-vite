@@ -19,7 +19,7 @@ import cricket from "@/assets/images/rewa.jpg";
 import tech from "@/assets/images/ajgar.jpeg";
 import adNalanda from "@/assets/images/ad-nalanda.jpg";
 // import parliament from "@/assets/parliament.jpg";
-import parliament from "@/assets/videos/tiranga.mp4";
+// import parliament from "@/assets/videos/tiranga.mp4";
 import mohan from "@/assets/images/mohan-yadav.jpeg";
 import racket from "@/assets/images/racket.jpeg";
 import paani from "@/assets/images/paani.jpeg";
@@ -443,10 +443,10 @@ export function LatestNews() {
 
       <div className="grid gap-4 lg:grid-cols-[2fr_1fr_1fr]">
         <article className="group relative min-h-[320px] overflow-hidden bg-ink lg:row-span-2">
-          <ThumbVideo
+          {/* <ThumbVideo
             src={parliament}
             className="absolute inset-0 w-full opacity-100 transition-transform duration-500"
-          />
+          /> */}
           <div className="absolute top-3 left-3 flex gap-2">
             <Badge>{hero.category}</Badge>
             <Badge tone="ink">{hero.badge}</Badge>
@@ -788,7 +788,7 @@ export function QuickReads() {
             {t("sections.quickReads.readFullStory")}
           </a>
         </div>
-        <Thumb src={parliament} alt={t("sections.quickReads.featuredTitle")} className="h-32 w-full md:h-full" />
+        {/* <Thumb src={parliament} alt={t("sections.quickReads.featuredTitle")} className="h-32 w-full md:h-full" /> */}
       </div>
     </section>
   );

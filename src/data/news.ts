@@ -1,6 +1,6 @@
 import cricket from "@/assets/images/rewa.jpg";
 import redcarpet from "@/assets/images/profile.jpeg";
-import parliament from "@/assets/videos/tiranga.mp4";
+// import parliament from "@/assets/videos/tiranga.mp4";
 import tech from "@/assets/images/ajgar.jpeg";
 import i18n from "@/i18n";
 import { findFeedItem } from "./feeds";
@@ -52,7 +52,7 @@ function titleFromSlug(slug: string) {
     .join(" ");
 }
 
-const IMAGES = [parliament, cricket, redcarpet, tech];
+const IMAGES = [cricket, redcarpet, tech];
 
 const CURATED_SLUGS = [
   "monsoon-session-key-bills-to-watch-this-week",
@@ -62,7 +62,7 @@ const CURATED_SLUGS = [
 ];
 
 const CURATED_IMAGES: Record<string, string> = {
-  "monsoon-session-key-bills-to-watch-this-week": parliament,
+  // "monsoon-session-key-bills-to-watch-this-week": parliament,
   "india-vs-australia-t20-series-kicks-off-tonight": cricket,
   "shah-rukh-khan-announces-new-production-house": redcarpet,
   "jio-airfiber-2-0-launches-in-500-cities": tech,
