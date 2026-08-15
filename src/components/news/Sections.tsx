@@ -13,7 +13,7 @@ import {
   Maximize,
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 // import cricket from "@/assets/cricket.jpg";
 import cricket from "@/assets/images/rewa.jpg";
 import tech from "@/assets/images/ajgar.jpeg";
@@ -249,13 +249,78 @@ function ThumbVideo({
   alt?: string;
   className?: string;
 }) {
+  const [videoFrame, setVideoFrame] = useState<string | null>(null);
+  const isVideo = !!src && /\.(mp4|webm|ogg|mov|avi)$/i.test(src);
+
+  useEffect(() => {
+    if (!isVideo || !src) {
+      setVideoFrame(null);
+      return;
+    }
+
+    let cancelled = false;
+    const video = document.createElement("video");
+    video.preload = "metadata";
+    video.muted = true;
+    video.playsInline = true;
+    video.src = src;
+
+    const captureFrame = () => {
+      if (!video.videoWidth || !video.videoHeight || cancelled) return;
+
+      const canvas = document.createElement("canvas");
+      const targetTime = video.duration > 0 ? Math.min(1, video.duration / 4) : 0;
+
+      video.currentTime = targetTime;
+
+      const onSeeked = () => {
+        if (cancelled) return;
+
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+
+        const context = canvas.getContext("2d");
+        if (!context) return;
+
+        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+        setVideoFrame(canvas.toDataURL("image/jpeg", 0.8));
+      };
+
+      video.addEventListener("seeked", onSeeked, { once: true });
+      video.addEventListener(
+        "error",
+        () => {
+          if (!cancelled) setVideoFrame(null);
+        },
+        { once: true }
+      );
+    };
+
+    if (video.readyState >= 1) {
+      captureFrame();
+    } else {
+      video.addEventListener("loadedmetadata", captureFrame, { once: true });
+    }
+
+    return () => {
+      cancelled = true;
+      video.pause();
+      video.src = "";
+      video.removeAttribute("src");
+    };
+  }, [src, isVideo]);
+
   if (!src) return <div className={`img-placeholder ${className}`} aria-hidden />;
-  
-  // Check if src is a video by file extension
-  const isVideo = src && /\.(mp4|webm|ogg|mov|avi)$/i.test(src);
-  
+
   if (isVideo) {
-    return <CustomVideoPlayer src={src} alt={alt} className={className} />;
+    return (
+      <img
+        src={videoFrame ?? ""}
+        alt={alt}
+        loading="lazy"
+        className={`w-full h-full object-cover ${className}`}
+      />
+    );
   }
 
   return (
