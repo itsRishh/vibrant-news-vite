@@ -7,8 +7,13 @@ import {
   ShoppingBag,
   Ticket,
   Tag,
+  Pause,
+  Volume2,
+  VolumeX,
+  Maximize,
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { useState, useRef } from "react";
 // import cricket from "@/assets/cricket.jpg";
 import cricket from "@/assets/images/rewa.jpg";
 import tech from "@/assets/images/ajgar.jpeg";
@@ -19,6 +24,12 @@ import mohan from "@/assets/images/mohan-yadav.jpeg";
 import racket from "@/assets/images/racket.jpeg";
 import paani from "@/assets/images/paani.jpeg";
 import redcarpet from "@/assets/images/profile.jpeg";
+import bannerAd from "@/assets/images/ads/bannerad.jpeg";
+import tirangapaint from "@/assets/images/tirangapaint.jpeg";
+import dog from "@/assets/images/dog.jpeg";
+import school from "@/assets/images/school.jpeg";
+import medal from "@/assets/images/medal.jpeg";
+import petrol from "@/assets/images/petrol.jpeg";
 
 export function Badge({
   children,
@@ -102,6 +113,124 @@ function Thumb({
   );
 }
 
+function CustomVideoPlayer({
+  src,
+  alt = "",
+  className = "",
+}: {
+  src: string;
+  alt?: string;
+  className?: string;
+}) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isMuted, setIsMuted] = useState(false);
+  const [showControls, setShowControls] = useState(true);
+
+  const handlePlayPause = () => {
+    if (videoRef.current) {
+      if (videoRef.current.paused) {
+        videoRef.current.play();
+        setIsPlaying(true);
+        setShowControls(false);
+      } else {
+        videoRef.current.pause();
+        setIsPlaying(false);
+        setShowControls(true);
+      }
+    }
+  };
+
+  const handleMute = () => {
+    if (videoRef.current) {
+      videoRef.current.muted = !isMuted;
+      setIsMuted(!isMuted);
+    }
+  };
+
+  const handleFullscreen = () => {
+    if (containerRef.current) {
+      if (document.fullscreenElement) {
+        document.exitFullscreen();
+      } else {
+        containerRef.current.requestFullscreen().catch(() => {});
+      }
+    }
+  };
+
+  const handleMouseEnter = () => {
+    setShowControls(true);
+  };
+
+  const handleMouseLeave = () => {
+    if (isPlaying) {
+      setShowControls(false);
+    }
+  };
+
+  return (
+    <div
+      ref={containerRef}
+      className={`relative w-full h-full bg-black overflow-hidden ${className}`}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      <video
+        ref={videoRef}
+        src={src}
+        className="w-full h-full object-cover"
+        playsInline
+      />
+
+      {/* Center Play Button */}
+      <button
+        onClick={handlePlayPause}
+        className={`absolute inset-0 flex items-center justify-center hover:bg-black/20 transition-all duration-200 z-10 ${
+          showControls ? "opacity-100" : "opacity-0"
+        }`}
+      >
+        <span className="bg-primary hover:bg-primary/90 p-4 rounded-full transition-colors shadow-lg">
+          {isPlaying ? (
+            <Pause className="h-4 w-4 text-primary-foreground fill-primary-foreground" />
+          ) : (
+            <Play className="h-4 w-4 text-primary-foreground fill-primary-foreground" />
+          )}
+        </span>
+      </button>
+
+      {/* Bottom Right Controls */}
+      <div
+        className={`absolute bottom-4 right-4 flex gap-2 z-20 transition-all duration-200 ${
+          showControls ? "opacity-100" : "opacity-0"
+        }`}
+      >
+        {/* Mute Button */}
+        <button
+          onClick={handleMute}
+          className="bg-black/70 hover:bg-black/90 p-2 rounded-full transition-colors backdrop-blur-sm shadow-lg"
+          title="Toggle Mute"
+        >
+          {isMuted ? (
+            <VolumeX className="h-3 w-3 text-white" />
+          ) : (
+            <Volume2 className="h-3 w-3 text-white" />
+          )}
+        </button>
+
+        {/* Fullscreen Button */}
+        <button
+          onClick={handleFullscreen}
+          className="bg-black/70 hover:bg-black/90 p-2 rounded-full transition-colors backdrop-blur-sm shadow-lg"
+          title="Toggle Fullscreen"
+        >
+          <Maximize className="h-3 w-3 text-white" />
+        </button>
+      </div>
+    </div>
+  );
+}
+
 function ThumbVideo({
   src,
   alt = "",
@@ -117,17 +246,9 @@ function ThumbVideo({
   const isVideo = src && /\.(mp4|webm|ogg|mov|avi)$/i.test(src);
   
   if (isVideo) {
-    return (
-      <video
-        src={src}
-        className={`w-full h-full object-cover ${className}`}
-        controls
-        autoplay
-        playsInline
-      />
-    );
+    return <CustomVideoPlayer src={src} alt={alt} className={className} />;
   }
-  
+
   return (
     <img
       src={src}
@@ -147,6 +268,41 @@ type CardItem = {
   summary?: string;
   time?: string;
 };
+
+
+export function IndependenceWishes() {
+  const { t } = useTranslation();
+  const wish = t("sections.wishes.full", { returnObjects: true }) as { title: string; views: string }[];
+
+  return (
+    <section className="lg:max-w-[1250px] max-w-[100vw] sm:px-4 px-4 lg:px-0 pt-6">
+      <SectionHead
+        title={t("sections.wishes.title")}
+        subtitle={t("sections.wishes.subtitle")}
+        action={t("sections.seeAll")}
+      />
+
+      <div className="grid gap-4 md:grid-cols-3">
+        {wish.map((w) => (
+          <article key={w.title} className="group">
+            <div className="img-placeholder relative grid h-48 place-items-center">
+              <ThumbVideo
+                src={w.vidsrc}
+                alt={w.title}
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+              </ThumbVideo>
+            </div>
+            <h3 className="mt-2 text-xs font-bold">{w.title}</h3>
+            <p className="mt-1 flex items-center gap-1 text-[10px] text-muted-foreground">
+              <Eye className="h-3 w-3" /> {w.views}
+            </p>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 
 export function HotRightNow() {
   const { t } = useTranslation();
@@ -265,7 +421,7 @@ export function HotRightNow() {
   );
 }
 
-export function Regional() {
+export function LatestNews() {
   const { t } = useTranslation();
   const hero = t("sections.hotRightNow.hero", { returnObjects: true }) as CardItem;
   const cards = t("sections.hotRightNow.cards", { returnObjects: true }) as CardItem[];
@@ -351,15 +507,33 @@ export function Regional() {
           </div>
         </article>
       </div>
+    </section>
+  );
+}
 
-      <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:grid-rows-2">
-        {smallCards.map((c) => (
-          <article key={c.title} className="group overflow-hidden border border-border">
-            <div className="px-2 py-1">
-              <Badge tone="soft">{c.tag}</Badge>
-              <h3 className="mt-1.5 text-xs font-bold group-hover:text-primary">{c.title}</h3>
-              <div className="mt-2">
-                <Stamp time={c.time ?? ""} />
+export function Breaking() {
+  const { t } = useTranslation();
+  const items = t("sections.regionals.items", { returnObjects: true }) as CardItem[];
+
+  return (
+    <section className="lg:max-w-[1250px] max-w-[100vw] sm:px-4 px-4 lg:px-0 pt-6 my-4">
+      <SectionHead
+        title={t("sections.regionals.title")}
+        subtitle={t("sections.regionals.subtitle")}
+      />
+      <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
+        {items.map((r) => (
+          <article
+            key={r.title}
+            className="grid grid-cols-[auto_minmax(0,1fr)] gap-3 border border-border p-3 transition-colors hover:border-primary"
+          >
+            <span className="h-fit shrink-0">
+              <Badge tone="soft">{r.city}</Badge>
+            </span>
+            <div className="min-w-0">
+              <h3 className="text-xs font-bold">{r.title}</h3>
+              <div className="mt-1.5">
+                <Stamp time={r.time ?? ""} />
               </div>
             </div>
           </article>
@@ -369,48 +543,35 @@ export function Regional() {
   );
 }
 
-// export function Regional() {
-//   const { t } = useTranslation();
-//   const items = t("sections.regional.items", { returnObjects: true }) as CardItem[];
+export function BannerAd() {
+  const { t } = useTranslation();
 
-//   return (
-//     <section className="mx-auto max-w-[1200px] px-4 py-8">
-//       <SectionHead
-//         title={t("sections.regional.title")}
-//         subtitle={t("sections.regional.subtitle")}
-//       />
-//       <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
-//         {items.map((r) => (
-//           <article
-//             key={r.title}
-//             className="grid grid-cols-[auto_minmax(0,1fr)] gap-3 border border-border p-3 transition-colors hover:border-primary"
-//           >
-//             <span className="h-fit shrink-0">
-//               <Badge tone="soft">{r.city}</Badge>
-//             </span>
-//             <div className="min-w-0">
-//               <h3 className="text-xs font-bold">{r.title}</h3>
-//               <div className="mt-1.5">
-//                 <Stamp time={r.time ?? ""} />
-//               </div>
-//             </div>
-//           </article>
-//         ))}
-//       </div>
-//     </section>
-//   );
-// }
+  return (
+    <section className="lg:max-w-[1250px] max-w-[100vw] sm:px-4 px-4 lg:px-0 border border-border bg-tint">
+      <div className="p-3">
+            <Badge className="!bg-[#FFF]">Ad</Badge>
+          </div>
+      <div className="grid gap-3">
+        <article className="group relative overflow-hidden border border-border">
+          <img src={bannerAd} alt="" />
+        </article>
+      </div>
+    </section>
+  );
+}
 
-export function Sports() {
+export function Regional() {
   const { t } = useTranslation();
   const items = t("sections.sports.items", { returnObjects: true }) as CardItem[];
+  const cards = t("sections.sports.cards", { returnObjects: true }) as CardItem[];
+  const cardImages = [medal, petrol, dog, school];
 
   return (
     <section className="lg:max-w-[1250px] max-w-[100vw] sm:px-4 px-4 lg:px-0 pt-6">
       <SectionHead title={t("sections.sports.title")} subtitle={t("sections.sports.subtitle")} />
 
       <article className="group relative overflow-hidden">
-        <Thumb src={cricket} alt={t("sections.sports.heroTitle")} className="h-64 w-full sm:h-80" />
+        <Thumb src={tirangapaint} alt={t("sections.sports.heroTitle")} className="h-64 w-full sm:h-80" />
         <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-ink via-ink/70 to-transparent p-5">
           <Badge>{t("sections.sports.featured")}</Badge>
           <h3 className="mt-2 text-lg font-black text-background sm:text-2xl">
@@ -419,6 +580,35 @@ export function Sports() {
           <p className="mt-1 text-[11px] text-background/70">{t("sections.sports.heroDesc")}</p>
         </div>
       </article>
+
+      <div className="mt-4 grid gap-3 md:grid-cols-2 lg:grid-cols-4">
+        {cards.slice(0, 4).map((c, i) => (
+            <article key={c.title} className="group overflow-hidden border border-border">
+              <div className="relative h-32 overflow-hidden">
+                <Thumb
+                  src={cardImages[i]}
+                  alt={c.title}
+                  className="h-full w-full transition-transform duration-500 group-hover:scale-105"
+                />
+                <span className="absolute top-2 left-2">
+                  <Badge>{c.category}</Badge>
+                </span>
+                {c.badge && (
+                  <span className="absolute top-2 right-2 bg-ink px-2 py-0.5 text-[9px] font-bold text-background">
+                    {c.badge}
+                  </span>
+                )}
+              </div>
+              <div className="p-3">
+                <h3 className="text-sm font-bold">{c.title}</h3>
+                <p className="mt-1 line-clamp-2 text-[11px] text-muted-foreground">{c.summary}</p>
+                <div className="mt-2">
+                  <Stamp time={c.time ?? ""} />
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
 
       <div className="mt-4 grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 border border-border bg-tint p-3">
         <div className="flex min-w-0 items-center gap-3">

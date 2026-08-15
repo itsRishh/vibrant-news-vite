@@ -224,3 +224,20 @@
 .lang-navbar-highlight {
   animation: lang-navbar-pulse 0.9s ease-in-out 2;
 }
+
+/* Custom Video Player Styling */
+video {
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  display: block;
+}
+
+/* Hide default controls */
+video::-webkit-media-controls {
+  display: none !important;
+}
+
+video::-moz-media-controls {
+  display: none !important;
+}

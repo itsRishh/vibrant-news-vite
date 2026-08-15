@@ -167,9 +167,21 @@
         }
       ]
     },
+    "regionals": {
+      "title": "Breaking NEWS",
+      "subtitle": "",
+      "items": [
+        { "city": "Maharashtra", "title": "Mumbai Metro Line 3 Opens: 10 Lakh Daily Riders Expected", "time": "2h ago" },
+        { "city": "Tamil Nadu", "title": "Chennai Water Crisis: New Desalination Plant Operational", "time": "3h ago" },
+        { "city": "Delhi", "title": "Yamuna River Cleanup Project Enters Phase 3", "time": "4h ago" },
+        { "city": "Kerala", "title": "Kerala Wins Best Tourism State Award for 5th Year Running", "time": "6h ago" },
+        { "city": "Gujarat", "title": "Ahmedabad Smart City Project Receives Global Recognition", "time": "11h ago" },
+        { "city": "West Bengal", "title": "Kolkata Underground Metro Extension Complete", "time": "1d ago" }
+      ]
+    },
     "regional": {
-      "title": "Latest News",
-      "subtitle": "Stories from every corner of India",
+      "title": "Latest NEWS",
+      "subtitle": "",
       "items": [
         { "city": "Maharashtra", "title": "Mumbai Metro Line 3 Opens: 10 Lakh Daily Riders Expected", "time": "2h ago" },
         { "city": "Tamil Nadu", "title": "Chennai Water Crisis: New Desalination Plant Operational", "time": "3h ago" },
@@ -180,19 +192,45 @@
       ]
     },
     "sports": {
-      "title": "Sports",
-      "subtitle": "Cricket, football, tennis & more",
+      "title": "Regional news",
+      "subtitle": "",
       "featured": "Featured",
-      "heroTitle": "India vs Australia T20 Series: Complete Schedule & Where to Watch",
-      "heroDesc": "Live on Star Sports & JioCinema · Starting 7:30 PM IST",
+      "heroTitle": "हर घर तिरंगा अभियान अंतर्गत विद्यार्थियों ने की आकर्षक वॉल पेंटिंग",
+      "heroDesc": " इस अवसर पर मैहर विधायक श्री श्रीकांत चतुर्वेदी, नगर पालिका अध्यक्ष श्रीमती गीता सोनी, मुख्य नगर पालिका अधिकारी श्री प्रभात बरकड़े, वार्ड पार्षद श्री सूर्यप्रकाश चौरसिया, श्री संतोष सोनी, श्री प्रवीण तिवारी एवं विद्यालय के प्राचार्य श्री डी.पी. गोस्वामी उपस्थित रहे।",
       "adBadge": "Nike India",
       "adTitle": "Just Do It — New Air Max Collection",
       "shopSports": "Shop Sports",
+      "cards": [
+        {
+          "category": "REGIONAL",
+          "title": "एसपी ग्वालियर धर्मवीर सिंह को मिलेगा राष्ट्रपति विशिष्ट सेवा पदक।",
+          "summary": "श्री धर्मवीर सिंह को ये राष्ट्रपति विशिष्ट सेवा पदक का सम्मान चौथी बार प्राप्त होने जा रहा है, जो अपने आप में किसी भी पुलिस अधिकारी के लिए एक अत्यंत उल्लेखनीय उपलब्धि है।ज्ञात हो पूर्व में एसपी धर्मवीर सिंह सतना के पुलिस अधीक्षक रह चुके हैं।",
+          "time": "5 hours ago"
+        },
+        {
+          "category": "REGIONAL",
+          "title": "पेट्रोल पंप में खड़े टैंकर से 2 सौ लीटर डीजल की चोरी सीसीटीवी में गैलन और पाइप के साथ दिखे बदमाश",
+          "summary": "मैहर विधायक श्री श्रीकांत चतुर्वेदी ने मप्र के स्कूल शिक्षा मंत्री से मुलाकात कर मैहर क्षेत्र के लिए करोड़ों रुपये की सौगात दिलाई।",
+          "time": "5 hours ago"
+        },
+        {
+          "category": "REGIONAL",
+          "title": "सतना - आज डॉग स्पार्टन सतना को नई गाड़ी मिली",
+          "summary": "डॉग स्पार्टन सतना का परफॉर्मेंस देखते हुऐ डीएफओ सतना मयंक चाँदीवाल ने डॉग हैंडलर विनय पांडे को नई गाड़ी सौंपी।",
+          "time": "5 hours ago"
+        },
+        {
+          "category": "4",
+          "title": "बच्चों ने गायन, वादन, चित्रकला व निबंध प्रतियोगिताओं में लिया भाग, कर्मचारियों को मेडल व प्रमाण पत्र से किया सम्मानित",
+          "summary": "मैहर। अधिकारी-कर्मचारियों के मध्य आपसी सामंजस्यपूर्ण एवं सौहार्दपूर्ण वातावरण निर्मित करने तथा कर्मचारियों की दक्षता, मानसिक एवं भावनात्मक विकास व सकारात्मक दृष्टिकोण बढ़ाने के उद्देश्य से गुरुवार को सिविल न्यायालय मैहर में 'उल्लास : एक अभिनव प्रयोग' कार्यक्रम का सफल आयोजन किया गया।",
+          "time": "5 hours ago"
+        }
+      ],
       "items": [
-        { "tag": "Cricket", "title": "IPL 2026 Auction: Record ₹25 Crore Bid for Young Pacer", "time": "2h ago" },
-        { "tag": "Football", "title": "ISL Final: Mohun Bagan vs Mumbai City — Who Will Lift the Trophy?", "time": "5h ago" },
-        { "tag": "Tennis", "title": "Sumit Nagal Reaches Australian Open Quarterfinals", "time": "7h ago" },
-        { "tag": "Hockey", "title": "India Women's Hockey Team Qualifies for Para Olympics", "time": "9h ago" },
+        { "tag": "", "title": "इंदौर: सहायक राजस्व अधिकारी जितेंद्र पांडेय के ठिकानों पर लोकायुक्त की सर्च कार्रवाई, आय से 216% अधिक संपत्ति का खुलासा", "time": "2h ago" },
+        { "tag": "", "title": "मैहर,14 अगस्त। हर घर तिरंगा अभियान अंतर्गत कलेक्टर श्रीमती बिदिशा मुखर्जी के निर्देशन में मैहर संदीपनी विद्यालय के नन्हे छात्र-छात्राओं ने नवनिर्मित विद्यालय भवन की बाउंड्री वॉल पर आकर्षक वॉल पेंटिंग कर देशभक्ति एवं राष्ट्रप्रेम का संदेश दिया।", "time": "5h ago" },
+        { "tag": "", "title": "भेडाघाट - रामस्नेही महराज आश्रम भेडाघाट चौक पर श्री शिव महापुराण का आयोजन 15/8/2026 से 23/8/26 तक किया जा रहा है ", "time": "7h ago" },
+        { "tag": "", "title": "गाजीपुर काली माई माता मंदिर से लगभग 60 लाख रुपए से अधिक का चांदी का सिंहासन चोरी, दो बार हुई वारदात के बाद भी पुलिस के हाथ खाली आखिर ", "time": "9h ago" },
         { "tag": "Badminton", "title": "PV Sindhu Announces Comeback After Injury Break", "time": "12h ago" }
       ]
     },
@@ -211,6 +249,23 @@
         { "title": "Animal 2: Ranbir Kapoor's Action Sequel Goes on Floors", "time": "6h ago" },
         { "title": "Alia Bhatt's New Film Breaks Opening Day Records", "time": "8h ago" },
         { "title": "Salman Khan's Eid Release Postponed to Diwali", "time": "10h ago" }
+      ]
+    },
+    "wishes": {
+      "title": "INDEPENDENCE DAY SPECIAL",
+      "subtitle": "Watch Wishesh from across India",
+      "fullStories": "Full Stories",
+      "shorts": "Shorts",
+      "views": "views",
+      "full": [
+        { "title": "कलेक्टर श्रीमती बिदिशा मुखर्जी ने जिलेवासियों को स्वतंत्रता दिवस की शुभकामनाएं दी।", "views": "2.4M views", "vidsrc": "./src/assets/videos/vnews/madam.mp4" },
+        { "title": "IPL Auction Highlights: Top 10 Bids That Shocked Everyone", "views": "1.8M views", "vidsrc": "./src/assets/videos/wishes/1.mp4" },
+        { "title": "रानी दुर्गावती विश्वविद्यालय में छात्रों और कर्मचारियों के बीच जमकर हुई मारपीट", "views": "946K views", "vidsrc": "./src/assets/videos/vnews/marpeet.mp4" }
+      ],
+      "shortItems": [
+        { "title": "सतना के कोटर नगर परिषद कार्यालय में घुसा पानी , नगर परिषद के की वाहन डूबे , कर्मचारी कार्यालय के बाहर सड़क पर खड़े।", "views": "512K", "vidsrc": "./src/assets/videos/shorts/paani.mp4" },
+        { "title": "रामनगर : पेट्रोल पंप में खड़े टैंकर से 200 लीटर डीजल चोरी, सीसीटीवी में कैद बदमाश", "views": "318K", "vidsrc": "./src/assets/videos/shorts/petrolchori.mp4" },
+        { "title": "सुखबीर सिंह बादल पर जानलेवा हमला!", "views": "274K", "vidsrc": "./src/assets/videos/shorts/hamla.mp4" }
       ]
     },
     "video": {
