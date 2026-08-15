@@ -13,7 +13,7 @@ import {
   Maximize,
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 // import cricket from "@/assets/cricket.jpg";
 import cricket from "@/assets/images/rewa.jpg";
 import tech from "@/assets/images/ajgar.jpeg";
@@ -30,14 +30,14 @@ import dog from "@/assets/images/dog.jpeg";
 import school from "@/assets/images/school.jpeg";
 import medal from "@/assets/images/medal.jpeg";
 import petrol from "@/assets/images/petrol.jpeg";
-import col1 from "@/assets/videos/vnews/madam.mp4";
-import col2 from "@/assets/videos/wishes/1.mp4";
+import col1 from "@/assets/videos/vnews/madam.png";
+import col2 from "@/assets/videos/wishes/1.png";
 import col3 from "@/assets/videos/tiranga.mp4";
 import vn2 from "@/assets/videos/tiranga.mp4";
-import vn3 from "@/assets/videos/vnews/marpeet.mp4";
-import s1 from "@/assets/videos/shorts/hamla.mp4";
-import s2 from "@/assets/videos/shorts/paani.mp4";
-import s3 from "@/assets/videos/shorts/petrolchori.mp4";
+import vn3 from "@/assets/videos/vnews/marpeet.png";
+import s1 from "@/assets/videos/shorts/hamla.png";
+import s2 from "@/assets/videos/shorts/paani.png";
+import s3 from "@/assets/videos/shorts/petrolchori.png";
 
 
 export function Badge({
@@ -249,79 +249,7 @@ function ThumbVideo({
   alt?: string;
   className?: string;
 }) {
-  const [videoFrame, setVideoFrame] = useState<string | null>(null);
-  const isVideo = !!src && /\.(mp4|webm|ogg|mov|avi)$/i.test(src);
-
-  useEffect(() => {
-    if (!isVideo || !src) {
-      setVideoFrame(null);
-      return;
-    }
-
-    let cancelled = false;
-    const video = document.createElement("video");
-    video.preload = "metadata";
-    video.muted = true;
-    video.playsInline = true;
-    video.src = src;
-
-    const captureFrame = () => {
-      if (!video.videoWidth || !video.videoHeight || cancelled) return;
-
-      const canvas = document.createElement("canvas");
-      const targetTime = video.duration > 0 ? Math.min(1, video.duration / 4) : 0;
-
-      video.currentTime = targetTime;
-
-      const onSeeked = () => {
-        if (cancelled) return;
-
-        canvas.width = video.videoWidth;
-        canvas.height = video.videoHeight;
-
-        const context = canvas.getContext("2d");
-        if (!context) return;
-
-        context.drawImage(video, 0, 0, canvas.width, canvas.height);
-        setVideoFrame(canvas.toDataURL("image/jpeg", 0.8));
-      };
-
-      video.addEventListener("seeked", onSeeked, { once: true });
-      video.addEventListener(
-        "error",
-        () => {
-          if (!cancelled) setVideoFrame(null);
-        },
-        { once: true }
-      );
-    };
-
-    if (video.readyState >= 1) {
-      captureFrame();
-    } else {
-      video.addEventListener("loadedmetadata", captureFrame, { once: true });
-    }
-
-    return () => {
-      cancelled = true;
-      video.pause();
-      video.src = "";
-      video.removeAttribute("src");
-    };
-  }, [src, isVideo]);
-
   if (!src) return <div className={`img-placeholder ${className}`} aria-hidden />;
-
-  if (isVideo) {
-    return (
-      <img
-        src={videoFrame ?? ""}
-        alt={alt}
-        loading="lazy"
-        className={`w-full h-full object-cover ${className}`}
-      />
-    );
-  }
 
   return (
     <img
