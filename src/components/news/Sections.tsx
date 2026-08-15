@@ -30,14 +30,14 @@ import dog from "@/assets/images/dog.jpeg";
 import school from "@/assets/images/school.jpeg";
 import medal from "@/assets/images/medal.jpeg";
 import petrol from "@/assets/images/petrol.jpeg";
-import col1 from "@/assets/videos/vnews/madam.png";
-import col2 from "@/assets/videos/wishes/1.png";
-import col3 from "@/assets/videos/tiranga.png";
-import vn2 from "@/assets/videos/tiranga.png";
-import vn3 from "@/assets/videos/vnews/marpeet.png";
-import s1 from "@/assets/videos/shorts/hamla.png";
-import s2 from "@/assets/videos/shorts/paani.png";
-import s3 from "@/assets/videos/shorts/petrolchori.png";
+import col1 from "@/assets/images/madam.png";
+import col2 from "@/assets/images/1.png";
+import col3 from "@/assets/images/tiranga.png";
+import vn2 from "@/assets/images/tiranga.png";
+import vn3 from "@/assets/images/marpeet.png";
+import s1 from "@/assets/images/hamla.png";
+import s2 from "@/assets/images/paani.png";
+import s3 from "@/assets/images/petrolchori.png";
 
 
 export function Badge({
