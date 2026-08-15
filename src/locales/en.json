@@ -258,14 +258,14 @@
       "shorts": "Shorts",
       "views": "views",
       "full": [
-        { "title": "कलेक्टर श्रीमती बिदिशा मुखर्जी ने जिलेवासियों को स्वतंत्रता दिवस की शुभकामनाएं दी।", "views": "2.4M views", "vidsrc": "./src/assets/videos/vnews/madam.mp4" },
-        { "title": "IPL Auction Highlights: Top 10 Bids That Shocked Everyone", "views": "1.8M views", "vidsrc": "./src/assets/videos/wishes/1.mp4" },
-        { "title": "रानी दुर्गावती विश्वविद्यालय में छात्रों और कर्मचारियों के बीच जमकर हुई मारपीट", "views": "946K views", "vidsrc": "./src/assets/videos/vnews/marpeet.mp4" }
+        { "title": "कलेक्टर श्रीमती बिदिशा मुखर्जी ने जिलेवासियों को स्वतंत्रता दिवस की शुभकामनाएं दी।", "views": "2.4M views", "vidsrc": "/src/assets/videos/vnews/madam.mp4" },
+        { "title": "IPL Auction Highlights: Top 10 Bids That Shocked Everyone", "views": "1.8M views", "vidsrc": "/src/assets/videos/wishes/1.mp4" },
+        { "title": "रानी दुर्गावती विश्वविद्यालय में छात्रों और कर्मचारियों के बीच जमकर हुई मारपीट", "views": "946K views", "vidsrc": "/src/assets/videos/vnews/marpeet.mp4" }
       ],
       "shortItems": [
-        { "title": "सतना के कोटर नगर परिषद कार्यालय में घुसा पानी , नगर परिषद के की वाहन डूबे , कर्मचारी कार्यालय के बाहर सड़क पर खड़े।", "views": "512K", "vidsrc": "./src/assets/videos/shorts/paani.mp4" },
-        { "title": "रामनगर : पेट्रोल पंप में खड़े टैंकर से 200 लीटर डीजल चोरी, सीसीटीवी में कैद बदमाश", "views": "318K", "vidsrc": "./src/assets/videos/shorts/petrolchori.mp4" },
-        { "title": "सुखबीर सिंह बादल पर जानलेवा हमला!", "views": "274K", "vidsrc": "./src/assets/videos/shorts/hamla.mp4" }
+        { "title": "सतना के कोटर नगर परिषद कार्यालय में घुसा पानी , नगर परिषद के की वाहन डूबे , कर्मचारी कार्यालय के बाहर सड़क पर खड़े।", "views": "512K", "vidsrc": "/src/assets/videos/shorts/paani.mp4" },
+        { "title": "रामनगर : पेट्रोल पंप में खड़े टैंकर से 200 लीटर डीजल चोरी, सीसीटीवी में कैद बदमाश", "views": "318K", "vidsrc": "/src/assets/videos/shorts/petrolchori.mp4" },
+        { "title": "सुखबीर सिंह बादल पर जानलेवा हमला!", "views": "274K", "vidsrc": "/public/src/assets/videos/shorts/hamla.mp4" }
       ]
     },
     "video": {
@@ -275,14 +275,14 @@
       "shorts": "Shorts",
       "views": "views",
       "full": [
-        { "title": "कलेक्टर श्रीमती बिदिशा मुखर्जी ने जिलेवासियों को स्वतंत्रता दिवस की शुभकामनाएं दी।", "views": "2.4M views", "vidsrc": "./src/assets/videos/vnews/madam.mp4" },
-        { "title": "IPL Auction Highlights: Top 10 Bids That Shocked Everyone", "views": "1.8M views", "vidsrc": "./src/assets/videos/vnews/ipl.mp4" },
-        { "title": "रानी दुर्गावती विश्वविद्यालय में छात्रों और कर्मचारियों के बीच जमकर हुई मारपीट", "views": "946K views", "vidsrc": "./src/assets/videos/vnews/marpeet.mp4" }
+        { "title": "कलेक्टर श्रीमती बिदिशा मुखर्जी ने जिलेवासियों को स्वतंत्रता दिवस की शुभकामनाएं दी।", "views": "2.4M views", "vidsrc": "/src/assets/videos/vnews/madam.mp4" },
+        { "title": "IPL Auction Highlights: Top 10 Bids That Shocked Everyone", "views": "1.8M views", "vidsrc": "/src/assets/videos/vnews/ipl.mp4" },
+        { "title": "रानी दुर्गावती विश्वविद्यालय में छात्रों और कर्मचारियों के बीच जमकर हुई मारपीट", "views": "946K views", "vidsrc": "/src/assets/videos/vnews/marpeet.mp4" }
       ],
       "shortItems": [
-        { "title": "सतना के कोटर नगर परिषद कार्यालय में घुसा पानी , नगर परिषद के की वाहन डूबे , कर्मचारी कार्यालय के बाहर सड़क पर खड़े।", "views": "512K", "vidsrc": "./src/assets/videos/shorts/paani.mp4" },
-        { "title": "रामनगर : पेट्रोल पंप में खड़े टैंकर से 200 लीटर डीजल चोरी, सीसीटीवी में कैद बदमाश", "views": "318K", "vidsrc": "./src/assets/videos/shorts/petrolchori.mp4" },
-        { "title": "सुखबीर सिंह बादल पर जानलेवा हमला!", "views": "274K", "vidsrc": "./src/assets/videos/shorts/hamla.mp4" }
+        { "title": "सतना के कोटर नगर परिषद कार्यालय में घुसा पानी , नगर परिषद के की वाहन डूबे , कर्मचारी कार्यालय के बाहर सड़क पर खड़े।", "views": "512K", "vidsrc": "/src/assets/videos/shorts/paani.mp4" },
+        { "title": "रामनगर : पेट्रोल पंप में खड़े टैंकर से 200 लीटर डीजल चोरी, सीसीटीवी में कैद बदमाश", "views": "318K", "vidsrc": "/src/assets/videos/shorts/petrolchori.mp4" },
+        { "title": "सुखबीर सिंह बादल पर जानलेवा हमला!", "views": "274K", "vidsrc": "/src/assets/videos/shorts/hamla.mp4" }
       ]
     },
     "quickReads": {

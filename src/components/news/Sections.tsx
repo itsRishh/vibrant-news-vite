@@ -19,7 +19,7 @@ import cricket from "@/assets/images/rewa.jpg";
 import tech from "@/assets/images/ajgar.jpeg";
 import adNalanda from "@/assets/images/ad-nalanda.jpg";
 // import parliament from "@/assets/parliament.jpg";
-// import parliament from "@/assets/videos/tiranga.mp4";
+import parliament from "@/assets/videos/tiranga.mp4";
 import mohan from "@/assets/images/mohan-yadav.jpeg";
 import racket from "@/assets/images/racket.jpeg";
 import paani from "@/assets/images/paani.jpeg";
@@ -30,6 +30,15 @@ import dog from "@/assets/images/dog.jpeg";
 import school from "@/assets/images/school.jpeg";
 import medal from "@/assets/images/medal.jpeg";
 import petrol from "@/assets/images/petrol.jpeg";
+import col1 from "@/assets/videos/vnews/madam.mp4";
+import col2 from "@/assets/videos/wishes/1.mp4";
+import col3 from "@/assets/videos/tiranga.mp4";
+import vn2 from "@/assets/videos/tiranga.mp4";
+import vn3 from "@/assets/videos/vnews/marpeet.mp4";
+import s1 from "@/assets/videos/shorts/hamla.mp4";
+import s2 from "@/assets/videos/shorts/paani.mp4";
+import s3 from "@/assets/videos/shorts/petrolchori.mp4";
+
 
 export function Badge({
   children,
@@ -273,7 +282,7 @@ type CardItem = {
 export function IndependenceWishes() {
   const { t } = useTranslation();
   const wish = t("sections.wishes.full", { returnObjects: true }) as { title: string; views: string }[];
-
+  const vidsrc = [col1, col2, col3]
   return (
     <section className="lg:max-w-[1250px] max-w-[100vw] sm:px-4 px-4 lg:px-0 pt-6">
       <SectionHead
@@ -283,11 +292,11 @@ export function IndependenceWishes() {
       />
 
       <div className="grid gap-4 md:grid-cols-3">
-        {wish.map((w) => (
+        {wish.map((w, index) => (
           <article key={w.title} className="group">
             <div className="img-placeholder relative grid h-48 place-items-center">
               <ThumbVideo
-                src={w.vidsrc}
+                src={vidsrc[index]}
                 alt={w.title}
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
               </ThumbVideo>
@@ -443,10 +452,10 @@ export function LatestNews() {
 
       <div className="grid gap-4 lg:grid-cols-[2fr_1fr_1fr]">
         <article className="group relative min-h-[320px] overflow-hidden bg-ink lg:row-span-2">
-          {/* <ThumbVideo
+          <ThumbVideo
             src={parliament}
             className="absolute inset-0 w-full opacity-100 transition-transform duration-500"
-          /> */}
+          />
           <div className="absolute top-3 left-3 flex gap-2">
             <Badge>{hero.category}</Badge>
             <Badge tone="ink">{hero.badge}</Badge>
@@ -549,7 +558,7 @@ export function BannerAd() {
   return (
     <section className="lg:max-w-[1250px] max-w-[100vw] sm:px-4 px-4 lg:px-0 border border-border bg-tint">
       <div className="p-3">
-            <Badge className="!bg-[#FFF]">Ad</Badge>
+            <Badge>Ad</Badge>
           </div>
       <div className="grid gap-3">
         <article className="group relative overflow-hidden border border-border">
@@ -702,7 +711,8 @@ export function VideoNews() {
   const { t } = useTranslation();
   const full = t("sections.video.full", { returnObjects: true }) as { title: string; views: string }[];
   const shorts = t("sections.video.shortItems", { returnObjects: true }) as { title: string; views: string }[];
-
+  const vidsrc = [col1, vn2, vn3]
+  const vshorts = [s1, s2, s3]
   return (
     <section className="lg:max-w-[1250px] max-w-[100vw] sm:px-4 px-4 lg:px-0 pt-6">
       <SectionHead
@@ -715,11 +725,11 @@ export function VideoNews() {
         ▸ {t("sections.video.fullStories")}
       </p>
       <div className="grid gap-4 md:grid-cols-3">
-        {full.map((v) => (
+        {full.map((v, index) => (
           <article key={v.title} className="group">
             <div className="img-placeholder relative grid h-48 place-items-center">
               <ThumbVideo
-                src={v.vidsrc}
+                src={vidsrc[index]}
                 alt={v.title}
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
               </ThumbVideo>
@@ -739,11 +749,11 @@ export function VideoNews() {
         ▸ {t("sections.video.shorts")}
       </p>
       <div className="flex gap-4 overflow-x-auto pb-2 w-full">
-        {shorts.map((s) => (
+        {shorts.map((s, index) => (
           <article key={s.title} className="group shrink-0 w-38">
             <div className="img-placeholder relative grid aspect-[9/16] place-items-center">
               <ThumbVideo
-                src={s.vidsrc}
+                src={vshorts[index]}
                 alt={s.title}
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
               </ThumbVideo>
@@ -759,47 +769,47 @@ export function VideoNews() {
   );
 }
 
-export function QuickReads() {
-  const { t } = useTranslation();
-  const topics = t("sections.quickReads.topics", { returnObjects: true }) as string[];
+// export function QuickReads() {
+//   const { t } = useTranslation();
+//   const topics = t("sections.quickReads.topics", { returnObjects: true }) as string[];
 
-  return (
-    <section className="lg:max-w-[1250px] max-w-[100vw] sm:px-4 px-4 lg:px-0 pt-6">
-      <SectionHead
-        title={t("sections.quickReads.title")}
-        subtitle={t("sections.quickReads.subtitle")}
-        action=""
-      />
-      <div className="flex gap-4 overflow-x-auto pb-2">
-        {topics.map((q) => (
-          <a key={q} href="#" className="w-16 shrink-0 text-center">
-            <span className="img-placeholder grid h-16 w-16 place-items-center border-2 border-primary bg-ink" />
-            <span className="mt-1.5 block text-[9px] leading-tight font-semibold">{q}</span>
-          </a>
-        ))}
-      </div>
+//   return (
+//     <section className="lg:max-w-[1250px] max-w-[100vw] sm:px-4 px-4 lg:px-0 pt-6">
+//       <SectionHead
+//         title={t("sections.quickReads.title")}
+//         subtitle={t("sections.quickReads.subtitle")}
+//         action=""
+//       />
+//       <div className="flex gap-4 overflow-x-auto pb-2">
+//         {topics.map((q) => (
+//           <a key={q} href="#" className="w-16 shrink-0 text-center">
+//             <span className="img-placeholder grid h-16 w-16 place-items-center border-2 border-primary bg-ink" />
+//             <span className="mt-1.5 block text-[9px] leading-tight font-semibold">{q}</span>
+//           </a>
+//         ))}
+//       </div>
 
-      <div className="mt-6 grid gap-4 border border-border bg-tint p-4 md:grid-cols-[minmax(0,1fr)_260px]">
-        <div className="min-w-0">
-          <Badge>{t("sections.sports.featured")}</Badge>
-          <h3 className="mt-2 text-lg font-black">{t("sections.quickReads.featuredTitle")}</h3>
-          <p className="mt-1 text-xs text-muted-foreground">{t("sections.quickReads.featuredDesc")}</p>
-          <a href="#" className="mt-3 inline-block text-[11px] font-bold text-primary uppercase">
-            {t("sections.quickReads.readFullStory")}
-          </a>
-        </div>
-        {/* <Thumb src={parliament} alt={t("sections.quickReads.featuredTitle")} className="h-32 w-full md:h-full" /> */}
-      </div>
-    </section>
-  );
-}
+//       <div className="mt-6 grid gap-4 border border-border bg-tint p-4 md:grid-cols-[minmax(0,1fr)_260px]">
+//         <div className="min-w-0">
+//           <Badge>{t("sections.sports.featured")}</Badge>
+//           <h3 className="mt-2 text-lg font-black">{t("sections.quickReads.featuredTitle")}</h3>
+//           <p className="mt-1 text-xs text-muted-foreground">{t("sections.quickReads.featuredDesc")}</p>
+//           <a href="#" className="mt-3 inline-block text-[11px] font-bold text-primary uppercase">
+//             {t("sections.quickReads.readFullStory")}
+//           </a>
+//         </div>
+//         {/* <Thumb src={parliament} alt={t("sections.quickReads.featuredTitle")} className="h-32 w-full md:h-full" /> */}
+//       </div>
+//     </section>
+//   );
+// }
 
 export function MoreNews() {
   const { t } = useTranslation();
   const items = t("sections.moreNews.items", { returnObjects: true }) as CardItem[];
 
   return (
-    <section className="mx-auto max-w-[1200px] px-4 py-8">
+    <section className="lg:max-w-[1250px] max-w-[100vw] sm:px-4 px-4 lg:px-0 pt-6">
       <SectionHead title={t("sections.moreNews.title")} subtitle={t("sections.moreNews.subtitle")} />
       <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
         {items.map((m) => (

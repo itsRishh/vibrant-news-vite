@@ -49,7 +49,7 @@ function Index() {
             <Regional />
             <Bollywood />
             <VideoNews />
-            <QuickReads />
+            {/* <QuickReads /> */}
             <MoreNews />
           </NewsClickArea>
           <QuickNewsRail />
