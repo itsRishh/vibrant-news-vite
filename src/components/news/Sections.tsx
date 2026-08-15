@@ -19,7 +19,7 @@ import cricket from "@/assets/images/rewa.jpg";
 import tech from "@/assets/images/ajgar.jpeg";
 import adNalanda from "@/assets/images/ad-nalanda.jpg";
 // import parliament from "@/assets/parliament.jpg";
-import parliament from "@/assets/videos/tiranga.mp4";
+import parliament from "@/assets/images/tiranga.png";
 import mohan from "@/assets/images/mohan-yadav.jpeg";
 import racket from "@/assets/images/racket.jpeg";
 import paani from "@/assets/images/paani.jpeg";
