@@ -9,9 +9,9 @@ import tiranga from "@/assets/images/tiranga.gif";
 
 const NAV: { label: string; to: string; params?: { category: string } }[] = [
   { label: "Home", to: "/" },
-  { label: "About Us", to: "/aboutus" },
   { label: "Latest", to: "/category/$category", params: { category: "politics" } },
   { label: "Breaking", to: "/category/$category", params: { category: "sports" } },
+  { label: "Local", to: "/category/$category", params: { category: "sports" } },
   { label: "Regional", to: "/category/$category", params: { category: "entertainment" } },
   { label: "India", to: "/category/$category", params: { category: "business" } },
   { label: "International", to: "/category/$category", params: { category: "tech" } },
@@ -43,14 +43,7 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 bg-background">
-      <div className="bg-ink text-background">
-        <div className="mx-auto grid max-w-[1250px] grid-cols-[auto_minmax(0,1fr)] items-center gap-3 lg:px-0 px-4 py-1.5 text-[11px]">
-          <span className="shrink-0 bg-primary px-2 py-0.5 font-bold tracking-wide uppercase">
-            {t("header.breaking")}
-          </span>
-          <p className="min-w-0 lg:text-[16px] text-[8px] truncate opacity-90">{t("header.breakingUpdate")}</p>
-        </div>
-      </div>
+      
 
       <div className="border-b border-border">
         <div className="mx-auto grid max-w-[1250px] grid-cols-[minmax(0,1fr)_auto] items-center gap-4 lg:px-0 px-4 py-3 lg:flex lg:justify-between">
@@ -152,7 +145,16 @@ export function Header() {
         </div>
       </div>
 
-      <div className="overflow-hidden border-b border-border bg-secondary">
+
+      <div className="bg-ink text-background">
+        <div className="mx-auto grid max-w-[1250px] grid-cols-[auto_minmax(0,1fr)] items-center gap-3 lg:px-0 px-4 py-1.5 text-[11px]">
+          <span className="shrink-0 bg-primary px-2 py-0.5 font-bold tracking-wide uppercase">
+            {t("header.breaking")}
+          </span>
+          <p className="min-w-0 lg:text-[16px] text-[8px] truncate opacity-90">{t("header.breakingUpdate")}</p>
+        </div>
+      </div>
+      {/* <div className="overflow-hidden border-b border-border bg-secondary">
         <div className="mx-auto flex max-w-[1250px] lg:px-0 px-4 items-center justify-center">
           <span className="shrink-0 bg-primary px-3 py-1.5 text-[10px] font-bold tracking-wider text-primary-foreground uppercase">
             {t("header.trending")}
@@ -172,9 +174,9 @@ export function Header() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
-      <div className="border-b border-border">
+      {/* <div className="border-b border-border">
         <div className="mx-auto flex max-w-[1250px] lg:px-0 px-4 gap-5 overflow-x-auto py-1.5 text-[11px] scrollbar-none">
           {MARKET_VALUES.map((m) => (
             <div key={m.key} className="flex shrink-0 items-center gap-1.5">
@@ -188,7 +190,7 @@ export function Header() {
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
     </header>
   );
 }
