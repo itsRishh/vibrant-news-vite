@@ -66,9 +66,6 @@ export function Header() {
                 key={item.label}
                 to={item.to}
                 params={item.params as never}
-                activeOptions={{ exact: item.to === "/" }}
-                activeProps={{ className: "text-primary" }}
-                inactiveProps={{ className: "text-foreground" }}
                 className="transition-colors hover:text-primary"
               >
                 {item.label}
