@@ -42,6 +42,8 @@ import s3 from "@/assets/images/petrolchori.png";
 import mohanpooja from "@/assets/images/mohanpooja.jpg";
 import mohanflag from "@/assets/images/mohanflag.jpeg";
 import stall from "@/assets/images/stall.jpg";
+import safar2 from "@/assets/images/safar2.jpg";
+import ztinews from "@/assets/images/ZTInews.png";
 
 export function Badge({
   children,
@@ -476,7 +478,7 @@ export function LatestNews() {
   const hero = t("sections.latestNews.hero", { returnObjects: true }) as CardItem;
   const cards = t("sections.latestNews.cards", { returnObjects: true }) as CardItem[];
   const smallCards = t("sections.latestNews.smallCards", { returnObjects: true }) as CardItem[];
-  const cardImages = [cricket, tech, undefined, redcarpet];
+  const cardImages = [safar2, tech, undefined, redcarpet];
 
   return (
     <section className="lg:max-w-[1250px] max-w-[100vw] sm:px-4 px-4 lg:px-0  pt-6">
@@ -491,11 +493,11 @@ export function LatestNews() {
         </span>
       </div>
 
-      <div className="grid gap-4 lg:grid-cols-[2fr_1fr_1fr]">
-        <article className="group relative min-h-[320px] overflow-hidden bg-ink lg:row-span-2">
+      <div className="w-full grid gap-4 lg:grid-cols-[2fr_1fr_1fr]">
+        <article className="group relative min-h-[320px] w-full overflow-hidden bg-ink lg:row-span-2">
           <ThumbVideo
             src={parliament}
-            className="absolute inset-0 w-full opacity-100 transition-transform duration-500"
+            className="absolute inset-0 h-full w-full object-cover opacity-100 transition-transform duration-500"
           />
           <div className="absolute top-3 left-3 flex gap-2">
             <Badge>{hero.category}</Badge>
@@ -539,23 +541,22 @@ export function LatestNews() {
         ))}
 
         {/* ad */}
-        <article className="border border-border bg-tint p-4">
-          <Badge>{cards[7]?.category}</Badge>
-          <h3 className="mt-2 text-sm font-bold">{cards[7]?.title}</h3>
-          <p className="mt-1 line-clamp-3 text-[11px] text-muted-foreground">{cards[7]?.subHead}</p>
-          <div className="mt-3">
-            <Stamp time={cards[7]?.time ?? ""} />
+        <article className="group relative overflow-hidden border border-border">
+          <div className=" from-ink to-transparent p-3">
+            <Badge>Ad</Badge>
           </div>
+          <Thumb src={safar2} alt={cards[3]?.title ?? ""} className="w-[100%]" />
         </article>
 
-        <article className="group relative overflow-hidden">
-          <Thumb src={redcarpet} alt={cards[7]?.title ?? ""} className="h-full min-h-[150px] w-full" />
-          <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-ink to-transparent p-3">
-            <Badge>{cards[7]?.category}</Badge>
-            <h3 className="mt-1 text-sm font-bold text-background">{cards[7]?.title}</h3>
-            <p className="line-clamp-2 text-[10px] text-background/70">{cards[7]?.subHead}</p>
+        {/* ad */}
+        <article className="group relative overflow-hidden border border-border">
+          <div className=" from-ink to-transparent p-3">
+            <Badge>Ad</Badge>
           </div>
+          <Thumb src={ztinews} alt={cards[3]?.title ?? ""} className="w-[100%] h-[80%] object-contain pb-3" />
         </article>
+
+        
       </div>
     </section>
   );
@@ -567,10 +568,6 @@ export function Breaking() {
 
   return (
     <section className="lg:max-w-[1250px] max-w-[100vw] sm:px-4 px-4 lg:px-0 pt-6 my-4">
-      <SectionHead
-        title={t("sections.regionals.title")}
-        subtitle={t("sections.regionals.subtitle")}
-      />
       <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
         {items.map((r) => (
           <article
@@ -686,96 +683,6 @@ export function Regional() {
           </article>
         ))}
       </div>
-    </section>
-  );
-}
-
-export function Bollywood() {
-  const { t } = useTranslation();
-  const list = t("sections.bollywood.list", { returnObjects: true }) as (CardItem & { tag?: string })[];
-  const cards = t("sections.hotRightNow.cards", { returnObjects: true }) as CardItem[];
-  const cardImages = [medal, petrol, dog, school];
-
-
-  return (
-    <section className="lg:max-w-[1250px] max-w-[100vw] sm:px-4 px-4 lg:px-0 pt-6 my-4">
-      <SectionHead
-        title={t("sections.bollywood.title")}
-        subtitle={t("sections.bollywood.subtitle")}
-      />
-
-      <article className="group relative overflow-hidden">
-        <Thumb src={redcarpet} alt={t("sections.bollywood.heroTitle")} className="h-64 w-full sm:h-96" />
-        <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-ink via-ink/70 to-transparent p-5">
-          <Badge>{t("sections.bollywood.exclusive")}</Badge>
-          <h3 className="mt-2 text-lg font-black text-background sm:text-2xl">
-            {t("sections.bollywood.heroTitle")}
-          </h3>
-          <p className="mt-1 text-[11px] text-background/70">{t("sections.bollywood.heroDesc")}</p>
-        </div>
-      </article>
-
-      <div className="wrapper grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-        <div className="mt-4 grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 border border-border bg-tint p-3">
-          <div className="flex min-w-0 items-center gap-3">
-            <span className="grid h-9 w-9 shrink-0 place-items-center bg-primary text-primary-foreground">
-              <Ticket className="h-4 w-4" />
-            </span>
-            <div className="min-w-0">
-              <Badge tone="soft">{t("sections.bollywood.adBadge")}</Badge>
-              <p className="truncate text-xs font-bold">{t("sections.bollywood.adTitle")}</p>
-            </div>
-          </div>
-          <a href="#" className="shrink-0 bg-primary px-4 py-2 text-[11px] font-bold text-primary-foreground">
-            {t("sections.bollywood.bookNow")}
-          </a>
-        </div>
-
-        {cards.slice(4, 6).map((c, i) => (
-            <article key={c.title} className="group overflow-hidden border border-border">
-              <div className="relative h-32 overflow-hidden">
-                <Thumb
-                  src={cardImages[i]}
-                  alt={c.title}
-                  className="h-full w-full transition-transform duration-500 group-hover:scale-105"
-                />
-                <span className="absolute top-2 left-2">
-                  <Badge>{c.category}</Badge>
-                </span>
-                {c.badge && (
-                  <span className="absolute top-2 right-2 bg-ink px-2 py-0.5 text-[9px] font-bold text-background">
-                    {c.badge}
-                  </span>
-                )}
-              </div>
-              <div className="p-3">
-                <h3 className="text-sm font-bold">{c.title}</h3>
-                <p className="mt-1 line-clamp-2 text-[11px] text-muted-foreground">{c.subHead}</p>
-                <div className="mt-2">
-                  <Stamp time={c.time ?? ""} />
-                </div>
-              </div>
-            </article>
-          ))}
-      </div>
-
-      <ol className="mt-4 divide-y divide-border border border-border">
-        {list.map((row, i) => (
-          <li
-            key={row.title}
-            className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 p-3 transition-colors hover:bg-tint"
-          >
-            <span className="grid h-6 w-6 shrink-0 place-items-center bg-primary text-[10px] font-black text-primary-foreground">
-              {i + 1}
-            </span>
-            <span className="min-w-0 truncate text-xs font-semibold">{row.title}</span>
-            <span className="flex shrink-0 items-center gap-2">
-              {row.tag && <Badge tone="ink">{row.tag}</Badge>}
-              <Stamp time={row.time ?? ""} />
-            </span>
-          </li>
-        ))}
-      </ol>
     </section>
   );
 }

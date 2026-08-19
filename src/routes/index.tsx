@@ -6,7 +6,6 @@ import {
   Breaking,
   Regional,
   BannerAd,
-  Bollywood,
   VideoNews,
   MoreNews,
   IndependenceWishes,
@@ -48,7 +47,6 @@ function Index() {
             <Breaking />
             <BannerAd />
             <Regional />
-            <Bollywood />
             <VideoNews />
             {/* <QuickReads /> */}
             <MoreNews />
