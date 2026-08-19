@@ -43,8 +43,6 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 bg-background">
-      
-
       <div className="border-b border-border">
         <div className="mx-auto grid max-w-[1250px] grid-cols-[minmax(0,1fr)_auto] items-center gap-4 lg:px-0 px-4 py-3 lg:flex lg:justify-between">
           <Link to="/" className="flex min-w-0 items-center gap-2">
@@ -100,7 +98,7 @@ export function Header() {
 
           {/* Mobile - Menu Button with Dropdown */}
           <div className="flex lg:hidden items-center gap-2 relative">
-            <button 
+            <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="grid h-8 w-8 place-items-center rounded-full border border-border hover:bg-secondary transition-colors"
             >
@@ -118,12 +116,24 @@ export function Header() {
 
                   {/* Social Icons */}
                   <div className="flex gap-2">
-                    <button className="flex-1 grid h-9 place-items-center rounded border border-border hover:bg-secondary transition-colors">
+                    <a
+                      href="https://www.instagram.com/dainik.zti?igsh=MWpoeHAxaHMyd2t1cA==&igsi=MWpoeHAxaHMyd2t1cA=="
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label="Instagram"
+                      className="flex flex-1 items-center justify-center rounded border border-border transition-colors hover:bg-secondary"
+                    >
                       <FaInstagram className="h-4 w-4" />
-                    </button>
-                    <button className="flex-1 grid h-9 place-items-center rounded border border-border hover:bg-secondary transition-colors">
+                    </a>
+                    <a
+                      href="https://www.facebook.com/share/r/19DsEHUXcc/"
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label="Facebook"
+                      className="flex flex-1 items-center justify-center rounded border border-border transition-colors hover:bg-secondary"
+                    >
                       <FaFacebook className="h-4 w-4" />
-                    </button>
+                    </a>
                   </div>
 
                   {/* Search Button */}
@@ -145,13 +155,14 @@ export function Header() {
         </div>
       </div>
 
-
       <div className="bg-ink text-background">
         <div className="mx-auto grid max-w-[1250px] grid-cols-[auto_minmax(0,1fr)] items-center gap-3 lg:px-0 px-4 py-1.5 text-[11px]">
           <span className="shrink-0 bg-primary px-2 py-0.5 font-bold tracking-wide uppercase">
             {t("header.breaking")}
           </span>
-          <p className="min-w-0 lg:text-[16px] text-[8px] truncate opacity-90">{t("header.breakingUpdate")}</p>
+          <p className="min-w-0 lg:text-[16px] text-[8px] truncate opacity-90">
+            {t("header.breakingUpdate")}
+          </p>
         </div>
       </div>
       {/* <div className="overflow-hidden border-b border-border bg-secondary">

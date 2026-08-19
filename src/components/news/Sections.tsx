@@ -26,6 +26,7 @@ import paani from "@/assets/images/paani.jpeg";
 import redcarpet from "@/assets/images/profile.jpeg";
 import bannerAd from "@/assets/images/ads/bannerad.jpeg";
 import tirangapaint from "@/assets/images/tirangapaint.jpeg";
+import cmnirik from "@/assets/images/cmnirik.jpeg";
 import dog from "@/assets/images/dog.jpeg";
 import school from "@/assets/images/school.jpeg";
 import medal from "@/assets/images/medal.jpeg";
@@ -38,7 +39,9 @@ import vn3 from "@/assets/images/marpeet.png";
 import s1 from "@/assets/images/hamla.png";
 import s2 from "@/assets/images/paani.png";
 import s3 from "@/assets/images/petrolchori.png";
-
+import mohanpooja from "@/assets/images/mohanpooja.jpg";
+import mohanflag from "@/assets/images/mohanflag.jpeg";
+import stall from "@/assets/images/stall.jpg";
 
 export function Badge({
   children,
@@ -299,28 +302,50 @@ export function IndependenceWishes() {
   const { t } = useTranslation();
   const wish = t("sections.wishes.full", { returnObjects: true }) as { title: string; views: string }[];
   const vidsrc = [col1, col2, col3]
+  const cards = t("sections.breaking.cards", { returnObjects: true }) as CardItem[];
+  const cardImages = [tirangapaint, mohanpooja, mohanflag, stall];
   return (
     <section className="lg:max-w-[1250px] max-w-[100vw] sm:px-4 px-4 lg:px-0 pt-6">
       <SectionHead
         title={t("sections.wishes.title")}
-        subtitle={t("sections.wishes.subtitle")}
-        action={t("sections.seeAll")}
       />
 
-      <div className="grid gap-4 md:grid-cols-3">
-        {wish.map((w, index) => (
-          <article key={w.title} className="group">
-            <div className="img-placeholder relative grid h-48 place-items-center">
-              <ThumbVideo
-                src={vidsrc[index]}
-                alt={w.title}
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
-              </ThumbVideo>
+      <div className="flex w-full grid gap-4 lg:grid-cols-[1fr_1fr_1fr_1fr]">
+        <article className="group relative w-full overflow-hidden lg:col-span-4 bg-ink">
+          <Thumb src={cmnirik} alt={t("ZTI-NEWS")} className="h-70 w-full sm:h-80 lg:h-100" />
+          <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-ink via-ink/40 to-transparent p-5">
+            <Badge>{t("sections.breaking.hero.category")}</Badge>
+            <h3 className="mt-2 text-sm font-black text-background sm:text-2xl">
+              {t("sections.breaking.hero.title")}
+            </h3>
+            <p className="mt-1 text-[11px] text-background/70">{t("sections.sports.heroDesc")}</p>
+          </div>
+        </article>
+
+        {cards.slice(0, 4).map((c, i) => (
+        <article key={c.title} className="group overflow-hidden border border-border">
+            <div className="relative lg:h-24 h-48 overflow-hidden">
+              <Thumb
+                src={cardImages[i]}
+                alt={c.title}
+                className="h-32 transition-transform duration-500 group-hover:scale-105"
+              />
+              <span className="absolute top-2 left-2">
+                <Badge>{c.category}</Badge>
+              </span>
+              {c.badge && (
+                <span className="absolute top-2 right-2 bg-ink px-2 py-0.5 text-[9px] font-bold text-background">
+                  {c.badge}
+                </span>
+              )}
             </div>
-            <h3 className="mt-2 text-xs font-bold">{w.title}</h3>
-            <p className="mt-1 flex items-center gap-1 text-[10px] text-muted-foreground">
-              <Eye className="h-3 w-3" /> {w.views}
-            </p>
+            <div className="p-3">
+              <h3 className="text-sm font-bold">{c.title}</h3>
+              <p className="mt-1 line-clamp-2 text-[11px] text-muted-foreground">{c.subHead}</p>
+              <div className="mt-2">
+                <Stamp time={c.time ?? ""} />
+              </div>
+            </div>
           </article>
         ))}
       </div>
