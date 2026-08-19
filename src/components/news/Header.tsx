@@ -9,14 +9,14 @@ import tiranga from "@/assets/images/tiranga.gif";
 
 const NAV: { label: string; to: string; params?: { category: string } }[] = [
   { label: "Home", to: "/" },
-  { label: "Latest", to: "/category/$category", params: { category: "politics" } },
-  { label: "Breaking", to: "/category/$category", params: { category: "sports" } },
-  { label: "Local", to: "/category/$category", params: { category: "sports" } },
-  { label: "Regional", to: "/category/$category", params: { category: "entertainment" } },
-  { label: "India", to: "/category/$category", params: { category: "business" } },
-  { label: "International", to: "/category/$category", params: { category: "tech" } },
-  { label: "Blog", to: "/category/$category", params: { category: "world" } },
-  { label: "Contact Us", to: "/category/$category", params: { category: "world" } },
+  { label: "Latest", to: "/", params: { category: "politics" } },
+  { label: "Breaking", to: "/", params: { category: "sports" } },
+  { label: "Local", to: "/", params: { category: "sports" } },
+  { label: "Regional", to: "/", params: { category: "entertainment" } },
+  { label: "India", to: "/", params: { category: "business" } },
+  { label: "International", to: "/", params: { category: "tech" } },
+  { label: "Blog", to: "/", params: { category: "world" } },
+  { label: "Contact Us", to: "/", params: { category: "world" } },
 ];
 
 import { LanguageSwitcher } from "@/components/language/LanguageSwitcher";
