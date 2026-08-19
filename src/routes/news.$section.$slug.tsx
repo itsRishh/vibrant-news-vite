@@ -7,22 +7,23 @@ import { Newsletter, Footer } from "@/components/news/Footer";
 import { Badge } from "@/components/news/Sections";
 import { getArticle } from "@/data/news";
 
-export const Route = createFileRoute("/news/$slug")({
-  loader: ({ params }) => ({ slug: params.slug }),
+export const Route = createFileRoute("/news/$section/$slug")({
+  loader: ({ params }) => ({ section: params.section, slug: params.slug }),
   head: ({ loaderData }) => {
     if (!loaderData) {
       return {
         meta: [{ title: "Story unavailable — Zero Tolerance India" }, { name: "robots", content: "noindex" }],
       };
     }
-    const article = getArticle(loaderData.slug);
+
+    const article = getArticle(loaderData.section, loaderData.slug);
     const title = `${article.title} — Zero Tolerance India`;
     return {
       meta: [
         { title },
-        { name: "description", content: article.dek },
+        { name: "description", content: article.subHead },
         { property: "og:title", content: title },
-        { property: "og:description", content: article.dek },
+        { property: "og:description", content: article.subHead },
         { property: "og:type", content: "article" },
         { name: "twitter:card", content: "summary_large_image" },
       ],
@@ -56,15 +57,15 @@ function AdSlot({ labelKey = "article.advertisement" }: { labelKey?: string }) {
 }
 
 function NewsArticle() {
-  const { slug } = Route.useLoaderData();
+  const { section, slug } = Route.useLoaderData();
   const { t, i18n } = useTranslation();
-  const a = useMemo(() => getArticle(slug), [slug, i18n.language]);
+  const a = useMemo(() => getArticle(section, slug), [section, slug, i18n.language]);
   const mostRead = t("article.mostReadItems", { returnObjects: true }) as string[];
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Header />
 
-      <main className="lg:max-w-[1250px] mx-auto max-w-[100vw] sm:px-4 px-4 lg:px-0  pt-6">
+      <main className="lg:max-w-[1250px] mx-auto max-w-[100vw] sm:px-4 px-4 lg:px-0 pt-6">
         <nav className="flex items-center gap-1.5 text-[11px] text-muted-foreground">
           <Link to="/" className="hover:text-primary">
             {t("article.home")}
@@ -79,8 +80,7 @@ function NewsArticle() {
             <h1 className="mt-3 text-2xl leading-tight font-black tracking-tight sm:text-4xl">
               {a.title}
             </h1>
-
-            <p className="mt-3 text-sm text-muted-foreground sm:text-base">{a.dek}</p>
+            <p className="mt-3 text-sm text-muted-foreground sm:text-base">{a.subHead}</p>
 
             <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 border-y border-border py-3 text-[11px] text-muted-foreground">
               <span className="font-bold text-foreground">{a.author}</span>
@@ -206,15 +206,11 @@ function NewsArticle() {
                 </h2>
               </div>
               <Link
-                to="/news/$slug"
-                params={{ slug: a.next.slug }}
+                to="/news/$section/$slug"
+                params={{ section: a.next.section ?? "general", slug: a.next.slug }}
                 className="group grid gap-4 border border-border p-3 transition-colors hover:border-primary sm:grid-cols-[220px_minmax(0,1fr)]"
               >
-                <img
-                  src={a.next.image}
-                  alt={a.next.title}
-                  className="h-36 w-full object-cover sm:h-full"
-                />
+                <img src={a.next.image} alt={a.next.title} className="h-36 w-full object-cover sm:h-full" />
                 <div className="min-w-0">
                   <Badge>{a.next.category}</Badge>
                   <h3 className="mt-2 text-base font-black group-hover:text-primary">

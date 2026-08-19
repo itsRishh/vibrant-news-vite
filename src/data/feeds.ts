@@ -7,7 +7,7 @@ import { slugify } from "./news";
 export type FeedItem = {
   slug: string;
   title: string;
-  dek: string;
+  subHead: string;
   image: string;
   time: string;
 };

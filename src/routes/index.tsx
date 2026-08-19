@@ -8,9 +8,9 @@ import {
   BannerAd,
   Bollywood,
   VideoNews,
-  QuickReads,
   MoreNews,
   IndependenceWishes,
+  Live,
 } from "@/components/news/Sections";
 import { Newsletter, Footer } from "@/components/news/Footer";
 import { NewsClickArea } from "@/components/news/NewsClickArea";
@@ -41,6 +41,7 @@ function Index() {
       <main>
         <div className="mx-auto grid max-w-[1250px] flex items-center justify-center flex-col gap-2 lg:grid-cols-[minmax(0,1fr)_300px]">
           <NewsClickArea>
+            <Live />
             <IndependenceWishes />
             <HotRightNow />
             <LatestNews />

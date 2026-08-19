@@ -267,9 +267,32 @@ type CardItem = {
   badge?: string;
   tag?: string;
   title: string;
-  summary?: string;
+  subHead?: string;
   time?: string;
 };
+
+export function Live() {
+  const { t } = useTranslation();
+
+  return (
+    <section className="w-full py-4 sm:px-0">
+      <SectionHead
+        title={t("BREAKING LIVE")}
+      />
+      <div className="mx-auto aspect-video w-full max-w-4xl overflow-hidden">
+        <iframe
+          className="h-full w-full"
+          src="https://www.youtube.com/embed/UyvUsjcTtxE?si=bxVU0YgUuDa3HSL9"
+          title="YouTube video player"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerPolicy="strict-origin-when-cross-origin"
+          allowFullScreen
+        />
+      </div>
+    </section>
+  );
+}
 
 
 export function IndependenceWishes() {
@@ -341,7 +364,7 @@ export function HotRightNow() {
           </div>
           <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-ink via-ink/80 to-transparent p-5">
             <h3 className="text-md font-black text-background sm:text-2xl">{hero.title}</h3>
-            <p className="mt-2 line-clamp-2 text-xs text-background/75">{hero.summary}</p>
+            <p className="mt-2 line-clamp-2 text-xs text-background/75">{hero.subHead}</p>
             <div className="mt-3 flex items-center gap-1 text-[10px] text-background/60">
             </div>
           </div>
@@ -366,7 +389,7 @@ export function HotRightNow() {
             </div>
             <div className="p-3">
               <h3 className="text-sm font-bold">{c.title}</h3>
-              <p className="mt-1 line-clamp-2 text-[11px] text-muted-foreground">{c.summary}</p>
+              <p className="mt-1 line-clamp-2 text-[11px] text-muted-foreground">{c.subHead}</p>
               <div className="mt-2">
                 <Stamp time={c.time ?? ""} />
               </div>
@@ -381,7 +404,7 @@ export function HotRightNow() {
           />
           <Badge>{cards[2]?.category}</Badge>
           <h3 className="mt-2 text-sm font-bold">{cards[2]?.title}</h3>
-          <p className="mt-1 line-clamp-3 text-[11px] text-muted-foreground">{cards[2]?.summary}</p>
+          <p className="mt-1 line-clamp-3 text-[11px] text-muted-foreground">{cards[2]?.subHead}</p>
           <div className="mt-3">
             <Stamp time={cards[2]?.time ?? ""} />
           </div>
@@ -399,7 +422,7 @@ export function HotRightNow() {
           <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-ink to-transparent p-3">
             <Badge>{cards[3]?.category}</Badge>
             <h3 className="mt-1 text-sm font-bold text-background">{cards[3]?.title}</h3>
-            <p className="line-clamp-2 text-[10px] text-background/70">{cards[3]?.summary}</p>
+            <p className="line-clamp-2 text-[10px] text-background/70">{cards[3]?.subHead}</p>
           </div>
         </article>
       </div>
@@ -425,9 +448,9 @@ export function HotRightNow() {
 
 export function LatestNews() {
   const { t } = useTranslation();
-  const hero = t("sections.hotRightNow.hero", { returnObjects: true }) as CardItem;
-  const cards = t("sections.hotRightNow.cards", { returnObjects: true }) as CardItem[];
-  const smallCards = t("sections.hotRightNow.smallCards", { returnObjects: true }) as CardItem[];
+  const hero = t("sections.latestNews.hero", { returnObjects: true }) as CardItem;
+  const cards = t("sections.latestNews.cards", { returnObjects: true }) as CardItem[];
+  const smallCards = t("sections.latestNews.smallCards", { returnObjects: true }) as CardItem[];
   const cardImages = [cricket, tech, undefined, redcarpet];
 
   return (
@@ -482,7 +505,7 @@ export function LatestNews() {
             </div>
             <div className="p-3">
               <h3 className="text-sm font-bold">{c.title}</h3>
-              <p className="mt-1 line-clamp-2 text-[11px] text-muted-foreground">{c.summary}</p>
+              <p className="mt-1 line-clamp-2 text-[11px] text-muted-foreground">{c.subHead}</p>
               <div className="mt-2">
                 <Stamp time={c.time ?? ""} />
               </div>
@@ -494,7 +517,7 @@ export function LatestNews() {
         <article className="border border-border bg-tint p-4">
           <Badge>{cards[7]?.category}</Badge>
           <h3 className="mt-2 text-sm font-bold">{cards[7]?.title}</h3>
-          <p className="mt-1 line-clamp-3 text-[11px] text-muted-foreground">{cards[7]?.summary}</p>
+          <p className="mt-1 line-clamp-3 text-[11px] text-muted-foreground">{cards[7]?.subHead}</p>
           <div className="mt-3">
             <Stamp time={cards[7]?.time ?? ""} />
           </div>
@@ -505,7 +528,7 @@ export function LatestNews() {
           <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-ink to-transparent p-3">
             <Badge>{cards[7]?.category}</Badge>
             <h3 className="mt-1 text-sm font-bold text-background">{cards[7]?.title}</h3>
-            <p className="line-clamp-2 text-[10px] text-background/70">{cards[7]?.summary}</p>
+            <p className="line-clamp-2 text-[10px] text-background/70">{cards[7]?.subHead}</p>
           </div>
         </article>
       </div>
@@ -603,7 +626,7 @@ export function Regional() {
               </div>
               <div className="p-3">
                 <h3 className="text-sm font-bold">{c.title}</h3>
-                <p className="mt-1 line-clamp-2 text-[11px] text-muted-foreground">{c.summary}</p>
+                <p className="mt-1 line-clamp-2 text-[11px] text-muted-foreground">{c.subHead}</p>
                 <div className="mt-2">
                   <Stamp time={c.time ?? ""} />
                 </div>
@@ -645,9 +668,12 @@ export function Regional() {
 export function Bollywood() {
   const { t } = useTranslation();
   const list = t("sections.bollywood.list", { returnObjects: true }) as (CardItem & { tag?: string })[];
+  const cards = t("sections.hotRightNow.cards", { returnObjects: true }) as CardItem[];
+  const cardImages = [medal, petrol, dog, school];
+
 
   return (
-    <section className="lg:max-w-[1250px] max-w-[100vw] sm:px-4 px-4 lg:px-0 pt-6">
+    <section className="lg:max-w-[1250px] max-w-[100vw] sm:px-4 px-4 lg:px-0 pt-6 my-4">
       <SectionHead
         title={t("sections.bollywood.title")}
         subtitle={t("sections.bollywood.subtitle")}
@@ -664,19 +690,48 @@ export function Bollywood() {
         </div>
       </article>
 
-      <div className="mt-4 grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 border border-border bg-tint p-3">
-        <div className="flex min-w-0 items-center gap-3">
-          <span className="grid h-9 w-9 shrink-0 place-items-center bg-primary text-primary-foreground">
-            <Ticket className="h-4 w-4" />
-          </span>
-          <div className="min-w-0">
-            <Badge tone="soft">{t("sections.bollywood.adBadge")}</Badge>
-            <p className="truncate text-xs font-bold">{t("sections.bollywood.adTitle")}</p>
+      <div className="wrapper grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-4 grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 border border-border bg-tint p-3">
+          <div className="flex min-w-0 items-center gap-3">
+            <span className="grid h-9 w-9 shrink-0 place-items-center bg-primary text-primary-foreground">
+              <Ticket className="h-4 w-4" />
+            </span>
+            <div className="min-w-0">
+              <Badge tone="soft">{t("sections.bollywood.adBadge")}</Badge>
+              <p className="truncate text-xs font-bold">{t("sections.bollywood.adTitle")}</p>
+            </div>
           </div>
+          <a href="#" className="shrink-0 bg-primary px-4 py-2 text-[11px] font-bold text-primary-foreground">
+            {t("sections.bollywood.bookNow")}
+          </a>
         </div>
-        <a href="#" className="shrink-0 bg-primary px-4 py-2 text-[11px] font-bold text-primary-foreground">
-          {t("sections.bollywood.bookNow")}
-        </a>
+
+        {cards.slice(4, 6).map((c, i) => (
+            <article key={c.title} className="group overflow-hidden border border-border">
+              <div className="relative h-32 overflow-hidden">
+                <Thumb
+                  src={cardImages[i]}
+                  alt={c.title}
+                  className="h-full w-full transition-transform duration-500 group-hover:scale-105"
+                />
+                <span className="absolute top-2 left-2">
+                  <Badge>{c.category}</Badge>
+                </span>
+                {c.badge && (
+                  <span className="absolute top-2 right-2 bg-ink px-2 py-0.5 text-[9px] font-bold text-background">
+                    {c.badge}
+                  </span>
+                )}
+              </div>
+              <div className="p-3">
+                <h3 className="text-sm font-bold">{c.title}</h3>
+                <p className="mt-1 line-clamp-2 text-[11px] text-muted-foreground">{c.subHead}</p>
+                <div className="mt-2">
+                  <Stamp time={c.time ?? ""} />
+                </div>
+              </div>
+            </article>
+          ))}
       </div>
 
       <ol className="mt-4 divide-y divide-border border border-border">
@@ -707,7 +762,7 @@ export function VideoNews() {
   const vidsrc = [col1, vn2, vn3]
   const vshorts = [s1, s2, s3]
   return (
-    <section className="lg:max-w-[1250px] max-w-[100vw] sm:px-4 px-4 lg:px-0 pt-6">
+    <section className="lg:max-w-[1250px] max-w-[100vw] sm:px-4 px-4 lg:px-0 pt-6 overflow-hidden">
       <SectionHead
         title={t("sections.video.title")}
         subtitle={t("sections.video.subtitle")}

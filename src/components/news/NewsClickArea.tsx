@@ -1,11 +1,11 @@
 import { useNavigate } from "@tanstack/react-router";
 import type { ReactNode } from "react";
-import { slugify } from "@/data/news";
+import { buildSectionArticleSlug, getArticleByTitle, normalizeSectionKey, slugify } from "@/data/news";
 
 /**
  * Makes every news block on the homepage clickable without duplicating link
  * markup in each card. Clicking a card resolves its headline and routes to the
- * matching story page.
+ * matching story page using a section-aware slug.
  */
 export function NewsClickArea({ children }: { children: ReactNode }) {
   const navigate = useNavigate();
@@ -23,7 +23,17 @@ export function NewsClickArea({ children }: { children: ReactNode }) {
         const title = heading?.textContent?.trim();
         if (!title) return;
 
-        navigate({ to: "/news/$slug", params: { slug: slugify(title) } });
+        const lookup = getArticleByTitle(title);
+        const section = lookup?.section ?? "general";
+        const slug = lookup?.slug ?? slugify(title);
+
+        // navigate({
+        //   to: "/news/$section/$slug",
+        //   params: {
+        //     section: normalizeSectionKey(section),
+        //     slug,
+        //   },
+        // });
       }}
       className="[&_article]:cursor-pointer [&_li]:cursor-pointer flex items-center justify-center flex-col"
     >
