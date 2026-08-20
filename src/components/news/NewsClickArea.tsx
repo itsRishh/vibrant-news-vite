@@ -27,13 +27,13 @@ export function NewsClickArea({ children }: { children: ReactNode }) {
         const section = lookup?.section ?? "general";
         const slug = lookup?.slug ?? slugify(title);
 
-        navigate({
-          to: "/news/$section/$slug",
-          params: {
-            section: normalizeSectionKey(section),
-            slug,
-          },
-        });
+        // navigate({
+        //   to: "/news/$section/$slug",
+        //   params: {
+        //     section: normalizeSectionKey(section),
+        //     slug,
+        //   },
+        // });
       }}
       className="[&_article]:cursor-pointer [&_li]:cursor-pointer flex items-center justify-center flex-col"
     >
