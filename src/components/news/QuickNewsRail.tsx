@@ -33,11 +33,11 @@ export function QuickNewsRail() {
           src={parliament}
           alt="Zero Tolerance India live newsroom stream"
           loading="lazy"
-          className="h-44 w-full object-cover opacity-100 transition-transform duration-500 group-hover:scale-105"
+          className="h-80 w-full object-cover opacity-100 transition-transform duration-500 group-hover:scale-105"
         />
         <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-ink to-transparent p-3">
           <p className="text-xs font-bold text-background">
-            त्रिकूट पर विराजी त्रिपुर सुंदरी माई शारदा के आज दिन शुक्रवार के प्रातःकालीन दिव्य दर्शन।
+            त्रिकूट पर विराजी त्रिपुर सुंदरी माई शारदा के आज दिन गुरुवार के प्रातःकालीन दिव्य दर्शन।
           </p>
         </div>
       </article>

@@ -13,7 +13,7 @@ import {
   Maximize,
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 // import cricket from "@/assets/cricket.jpg";
 import cricket from "@/assets/images/rewa.jpg";
 import tech from "@/assets/images/ajgar.jpeg";
@@ -21,7 +21,7 @@ import adNalanda from "@/assets/images/ad-nalanda.jpg";
 // import parliament from "@/assets/parliament.jpg";
 import mohanvid from "@/assets/Videos/shorts/mohan.mp4";
 import parliament from "@/assets/images/tiranga.png";
-import mohan from "@/assets/images/mohan-yadav.jpeg";
+import mohan from "@/assets/Videos/shorts/happy.mp4";
 import racket from "@/assets/images/racket.jpeg";
 import paani from "@/assets/images/paani.jpeg";
 import redcarpet from "@/assets/images/profile.jpeg";
@@ -246,9 +246,62 @@ function CustomVideoPlayer({
   );
 }
 
+
 function isVideoSrc(src: string) {
   return /\.(mp4|webm|ogg|mov|m4v)(\?.*)?$/i.test(src);
 }
+
+/**
+ * Shared singleton that tracks all in-view ThumbVideo instances and decides
+ * which single one should have audio enabled (the most visible one).
+ */
+type Listener = (activeId: string | null) => void;
+
+const activeVideoManager = (() => {
+  const ratios = new Map<string, number>(); // id -> intersection ratio
+  const listeners = new Set<Listener>();
+  let activeId: string | null = null;
+
+  function recompute() {
+    let winner: string | null = null;
+    let best = 0;
+    for (const [id, ratio] of ratios) {
+      if (ratio > best) {
+        best = ratio;
+        winner = id;
+      }
+    }
+    // Require a minimum visibility before granting audio to anyone
+    if (best < 0.6) winner = null;
+
+    if (winner !== activeId) {
+      activeId = winner;
+      listeners.forEach((l) => l(activeId));
+    }
+  }
+
+  return {
+    report(id: string, ratio: number) {
+      if (ratio <= 0) {
+        ratios.delete(id);
+      } else {
+        ratios.set(id, ratio);
+      }
+      recompute();
+    },
+    unregister(id: string) {
+      ratios.delete(id);
+      recompute();
+    },
+    subscribe(listener: Listener) {
+      listeners.add(listener);
+      listener(activeId); // sync immediately on subscribe
+      return () => listeners.delete(listener);
+    },
+  };
+})();
+
+let idCounter = 0;
 
 function ThumbVideo({
   src,
@@ -259,13 +312,62 @@ function ThumbVideo({
   alt?: string;
   className?: string;
 }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const idRef = useRef(`thumb-video-${++idCounter}`);
+  const [isActive, setIsActive] = useState(false);
+
+  const isVideo = !!src && isVideoSrc(src);
+
+  // Report visibility ratio to the shared manager
+  useEffect(() => {
+    if (!isVideo || !videoRef.current) return;
+    const el = videoRef.current;
+    const id = idRef.current;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => activeVideoManager.report(id, entry.intersectionRatio),
+      { threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1] }
+    );
+
+    observer.observe(el);
+    return () => {
+      observer.disconnect();
+      activeVideoManager.unregister(id);
+    };
+  }, [isVideo]);
+
+  // Subscribe to "who is the active video" changes
+  useEffect(() => {
+    if (!isVideo) return;
+    const id = idRef.current;
+    return activeVideoManager.subscribe((activeId) => {
+      setIsActive(activeId === id);
+    });
+  }, [isVideo]);
+
+  // Apply mute/unmute + play based on active state
+  useEffect(() => {
+    const el = videoRef.current;
+    if (!el || !isVideo) return;
+
+    if (isActive) {
+      el.muted = false;
+      el.play().catch(() => {
+        el.muted = true;
+        el.play().catch(() => {});
+      });
+    } else {
+      el.muted = true;
+    }
+  }, [isActive, isVideo]);
+
   if (!src) return <div className={`img-placeholder ${className}`} aria-hidden />;
 
-  if (isVideoSrc(src)) {
+  if (isVideo) {
     return (
       <video
+        ref={videoRef}
         src={src}
-        muted
         loop
         playsInline
         autoPlay
@@ -325,7 +427,7 @@ export function IndependenceWishes() {
   const wish = t("sections.wishes.full", { returnObjects: true }) as { title: string; views: string }[];
   const vidsrc = [col1, col2, col3]
   const cards = t("sections.breaking.cards", { returnObjects: true }) as CardItem[];
-  const cardImages = [tirangapaint, mohanpooja, mohanflag, stall];
+  const cardImages = [stall, mohanpooja, tirangapaint, mohanflag];
   return (
     <section className="lg:max-w-[1250px] max-w-[100vw] sm:px-4 px-4 lg:px-0 pt-6">
       <SectionHead
