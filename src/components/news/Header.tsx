@@ -77,10 +77,27 @@ export function Header() {
           <div className="hidden lg:flex items-center gap-2">
             {/* <LanguageSwitcher /> */}
             <button className="grid h-8 w-8 place-items-center rounded-full border border-border hover:bg-secondary transition-colors">
-              <FaInstagram className="h-4 w-4" />
+              <a
+                href="https://www.instagram.com/dainik.zti?igsh=MWpoeHAxaHMyd2t1cA==&igsi=MWpoeHAxaHMyd2t1cA=="
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Instagram"
+                className="flex flex-1 items-center justify-center rounded border border-border transition-colors hover:bg-secondary"
+              >
+                <FaInstagram className="h-4 w-4" />
+              </a>
+
             </button>
             <button className="grid h-8 w-8 place-items-center rounded-full border border-border hover:bg-secondary transition-colors">
-              <FaFacebook className="h-4 w-4" />
+              <a
+                href="https://www.facebook.com/share/r/19DsEHUXcc/"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Facebook"
+                className="flex flex-1 items-center justify-center rounded border border-border transition-colors hover:bg-secondary"
+              >
+                <FaFacebook className="h-4 w-4" />
+              </a>
             </button>
             <button className="flex items-center gap-2 rounded-full border border-border px-3 py-1.5 text-xs text-muted-foreground transition-colors hover:border-primary hover:text-primary hover:bg-secondary">
               <Search className="h-3.5 w-3.5" /> {t("header.search")}

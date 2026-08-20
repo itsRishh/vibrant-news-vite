@@ -355,6 +355,84 @@ export function IndependenceWishes() {
   );
 }
 
+const STATE_TABS = ["उत्तर प्रदेश", "बिहार", "दिल्ली", "उत्तराखंड", "मध्य प्रदेश", "राजस्थान", "बंगाल", "छत्तीसगढ़", "झारखंड", "महाराष्ट्र"];
+
+export function StateNews() {
+  const { t } = useTranslation();
+  const [activeState, setActiveState] = useState(STATE_TABS[0]);
+  const breakingHero = t("sections.breaking.hero", { returnObjects: true }) as CardItem;
+  const breakingCards = t("sections.breaking.cards", { returnObjects: true }) as CardItem[];
+  const hotCards = t("sections.hotRightNow.cards", { returnObjects: true }) as CardItem[];
+  const regionalCards = t("sections.regionals.items", { returnObjects: true }) as CardItem[];
+  const sportsCards = t("sections.sports.cards", { returnObjects: true }) as CardItem[];
+  const contentSets = [breakingCards, hotCards, regionalCards, sportsCards];
+  const activeIndex = STATE_TABS.indexOf(activeState);
+  const selectedCards = contentSets[activeIndex % contentSets.length] ?? breakingCards;
+  const hero = activeIndex === 0
+    ? breakingHero
+    : selectedCards[0] ?? breakingHero;
+  const cards = activeIndex === 0
+    ? breakingCards
+    : [...selectedCards.slice(1), ...selectedCards.slice(0, 1)];
+  const images = [mohanpooja, mohanflag, stall, tirangapaint];
+
+  return (
+    <section className="w-full overflow-hidden bg-background py-5 sm:py-7">
+      <div className="mx-auto w-full max-w-[1250px] px-4 lg:px-0">
+        <div className="mb-4 flex items-center justify-between gap-4">
+          <h2 className="flex items-center gap-2 text-lg font-black sm:text-xl">
+            <span className="text-primary">◀</span> राज्यवार खबरें
+          </h2>
+          <a href="#" className="shrink-0 text-sm font-bold text-primary">
+            और भी <span aria-hidden="true">▶</span>
+          </a>
+        </div>
+
+        <nav className="flex overflow-x-auto bg-[#062b67] text-sm font-bold text-white scrollbar-none sm:text-base">
+          {STATE_TABS.map((state) => (
+            <button
+              key={state}
+              type="button"
+              onClick={() => setActiveState(state)}
+              aria-selected={activeState === state}
+              className={`shrink-0 px-5 py-2.5 transition-colors hover:bg-primary ${activeState === state ? "bg-primary" : ""}`}
+            >
+              {state}
+            </button>
+          ))}
+        </nav>
+
+        <div className="mt-5 grid gap-5 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)]">
+          <article className="group grid min-w-0 gap-4 sm:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)]">
+            <div className="relative min-h-56 overflow-hidden bg-tint sm:min-h-72">
+              <Thumb src={cmnirik} alt={hero.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+            </div>
+            <div className="min-w-0 self-center">
+              <Badge>{activeState}</Badge>
+              <h3 className="mt-2 text-xl leading-tight font-black sm:text-2xl">{hero.title}</h3>
+              <p className="mt-4 line-clamp-5 text-sm leading-7 text-muted-foreground">{hero.subHead}</p>
+            </div>
+          </article>
+
+          <div className="grid gap-x-5 gap-y-5 sm:grid-cols-2">
+            {cards.slice(0, 4).map((card, index) => (
+              <article key={card.title} className="group grid min-w-0 grid-cols-[minmax(0,1fr)_minmax(0,1.25fr)] gap-3">
+                <div className="h-24 overflow-hidden bg-tint sm:h-28">
+                  <Thumb src={images[index]} alt={card.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                </div>
+                <div className="min-w-0">
+                  <h3 className="line-clamp-3 text-sm leading-6 font-black">{card.title}</h3>
+                  <p className="mt-1 line-clamp-2 text-xs leading-5 text-muted-foreground">{card.subHead}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 
 export function HotRightNow() {
   const { t } = useTranslation();

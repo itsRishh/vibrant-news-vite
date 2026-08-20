@@ -318,8 +318,8 @@ export function getArticle(sectionOrSlug: string, maybeSlug?: string): Article {
   const idx = Math.abs(
     [...slug].reduce((a, c) => (a * 31 + c.charCodeAt(0)) | 0, 7),
   );
-  const imgpath = normalizedSection.cards;
-  const image = imgpath?.image;
+  // const imgpath = normalizedSection;
+  const image = localeArticle?.image;
   const category = localeArticle?.category ?? seed?.category ?? t("categories.India", { defaultValue: "India" });
 
   let next: Article["next"];
