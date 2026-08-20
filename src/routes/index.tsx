@@ -41,7 +41,7 @@ function Index() {
       <main>
         <div className="mx-auto grid max-w-[1250px] flex items-center justify-center flex-col gap-2 lg:grid-cols-[minmax(0,1fr)_300px]">
           <NewsClickArea>
-            <Live />
+            {/* <Live /> */}
             {/* <StateNews /> */}
             <IndependenceWishes />
             <HotRightNow />

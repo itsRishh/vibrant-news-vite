@@ -19,6 +19,7 @@ import cricket from "@/assets/images/rewa.jpg";
 import tech from "@/assets/images/ajgar.jpeg";
 import adNalanda from "@/assets/images/ad-nalanda.jpg";
 // import parliament from "@/assets/parliament.jpg";
+import mohanvid from "@/assets/Videos/shorts/mohan.mp4";
 import parliament from "@/assets/images/tiranga.png";
 import mohan from "@/assets/images/mohan-yadav.jpeg";
 import racket from "@/assets/images/racket.jpeg";
@@ -26,7 +27,7 @@ import paani from "@/assets/images/paani.jpeg";
 import redcarpet from "@/assets/images/profile.jpeg";
 import bannerAd from "@/assets/images/ads/bannerad.jpeg";
 import tirangapaint from "@/assets/images/tirangapaint.jpeg";
-import cmnirik from "@/assets/images/cmnirik.jpeg";
+import award from "@/assets/images/award.jpg";
 import dog from "@/assets/images/dog.jpeg";
 import school from "@/assets/images/school.jpeg";
 import medal from "@/assets/images/medal.jpeg";
@@ -245,6 +246,10 @@ function CustomVideoPlayer({
   );
 }
 
+function isVideoSrc(src: string) {
+  return /\.(mp4|webm|ogg|mov|m4v)(\?.*)?$/i.test(src);
+}
+
 function ThumbVideo({
   src,
   alt = "",
@@ -255,6 +260,21 @@ function ThumbVideo({
   className?: string;
 }) {
   if (!src) return <div className={`img-placeholder ${className}`} aria-hidden />;
+
+  if (isVideoSrc(src)) {
+    return (
+      <video
+        src={src}
+        muted
+        loop
+        playsInline
+        autoPlay
+        preload="metadata"
+        aria-label={alt}
+        className={`w-full h-full object-cover ${className}`}
+      />
+    );
+  }
 
   return (
     <img
@@ -313,14 +333,21 @@ export function IndependenceWishes() {
       />
 
       <div className="flex w-full grid gap-4 lg:grid-cols-[1fr_1fr_1fr_1fr]">
-        <article className="group relative w-full overflow-hidden lg:col-span-4 bg-ink">
-          <Thumb src={cmnirik} alt={t("ZTI-NEWS")} className="h-70 w-full sm:h-80 lg:h-100" />
+        <article className="group relative w-full overflow-hidden lg:col-span-3 bg-ink">
+          <Thumb src={award} alt={t("ZTI-NEWS")} className="h-70 w-full sm:h-80 lg:h-100" />
           <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-ink via-ink/40 to-transparent p-5">
             <Badge>{t("sections.breaking.hero.category")}</Badge>
             <h3 className="mt-2 text-sm font-black text-background sm:text-2xl">
               {t("sections.breaking.hero.title")}
             </h3>
             <p className="mt-1 text-[11px] text-background/70">{t("sections.sports.heroDesc")}</p>
+          </div>
+        </article>
+
+        <article className="group relative w-full overflow-hidden bg-ink">
+          <ThumbVideo src={mohanvid} alt={t("ZTI-NEWS")} className="h-70 w-full sm:h-80 lg:h-100" />
+          <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-ink via-ink/40 to-transparent p-5">
+            <Badge>{t("sections.breaking.hero.category")}</Badge>
           </div>
         </article>
 

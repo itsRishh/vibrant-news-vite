@@ -124,30 +124,34 @@ export function Header() {
               <div className="absolute top-full right-0 mt-2 w-48 bg-background border border-border rounded-lg shadow-lg z-50">
                 <div className="flex flex-col gap-3 p-4">
                   {/* Language Switcher */}
-                  <div className="pb-3 border-b border-border">
+                  {/* <div className="pb-3 border-b border-border">
                     <LanguageSwitcher />
-                  </div>
+                  </div> */}
 
                   {/* Social Icons */}
-                  <div className="flex gap-2">
-                    <a
-                      href="https://www.instagram.com/dainik.zti?igsh=MWpoeHAxaHMyd2t1cA==&igsi=MWpoeHAxaHMyd2t1cA=="
-                      target="_blank"
-                      rel="noreferrer"
-                      aria-label="Instagram"
-                      className="flex flex-1 items-center justify-center rounded border border-border transition-colors hover:bg-secondary"
-                    >
-                      <FaInstagram className="h-4 w-4" />
-                    </a>
-                    <a
-                      href="https://www.facebook.com/share/r/19DsEHUXcc/"
-                      target="_blank"
-                      rel="noreferrer"
-                      aria-label="Facebook"
-                      className="flex flex-1 items-center justify-center rounded border border-border transition-colors hover:bg-secondary"
-                    >
-                      <FaFacebook className="h-4 w-4" />
-                    </a>
+                  <div className="flex gap-2 items-center justify-center">
+                    <button className="w-full">
+                      <a
+                        href="https://www.instagram.com/dainik.zti?igsh=MWpoeHAxaHMyd2t1cA==&igsi=MWpoeHAxaHMyd2t1cA=="
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label="Instagram"
+                        className="p-3 flex flex-1 items-center justify-center rounded border border-border transition-colors hover:bg-secondary"
+                      >
+                        <FaInstagram className="h-4 w-4" />
+                      </a>
+                    </button>
+                    <button className="w-full">
+                      <a
+                        href="https://www.facebook.com/share/r/19DsEHUXcc/"
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label="Facebook"
+                        className="p-3 flex flex-1 items-center justify-center rounded border border-border transition-colors hover:bg-secondary"
+                      >
+                        <FaFacebook className="h-4 w-4" />
+                      </a>
+                    </button>
                   </div>
 
                   {/* Search Button */}
@@ -156,12 +160,12 @@ export function Header() {
                   </button>
 
                   {/* Notification Bell */}
-                  <button className="relative flex items-center justify-center h-9 rounded border border-border text-foreground hover:bg-secondary transition-colors w-full">
+                  {/* <button className="relative flex items-center justify-center h-9 rounded border border-border text-foreground hover:bg-secondary transition-colors w-full">
                     <Bell className="h-4 w-4" />
                     <span className="absolute -top-2 -right-2 grid h-4 w-4 place-items-center rounded-full bg-primary text-[9px] font-bold text-primary-foreground">
                       3
                     </span>
-                  </button>
+                  </button> */}
                 </div>
               </div>
             )}
