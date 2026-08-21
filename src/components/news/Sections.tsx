@@ -4,6 +4,7 @@ import {
   Play,
   Flame,
   Eye,
+  X,
   ShoppingBag,
   Ticket,
   Tag,
@@ -12,14 +13,14 @@ import {
   VolumeX,
   Maximize,
 } from "lucide-react";
+import ShortsGrid, { Short } from "./ShortsGrid";
 import { useTranslation } from "react-i18next";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 // import cricket from "@/assets/cricket.jpg";
-import cricket from "@/assets/images/rewa.jpg";
 import tech from "@/assets/images/ajgar.jpeg";
 import adNalanda from "@/assets/images/ad-nalanda.jpg";
 // import parliament from "@/assets/parliament.jpg";
-import mohanvid from "@/assets/Videos/shorts/mohan.mp4";
+import pandey from "@/assets/images/pandey.jpeg";
 import parliament from "@/assets/images/tiranga.png";
 import mohan from "@/assets/Videos/shorts/happy.mp4";
 import racket from "@/assets/images/racket.jpeg";
@@ -27,7 +28,8 @@ import paani from "@/assets/images/paani.jpeg";
 import redcarpet from "@/assets/images/profile.jpeg";
 import bannerAd from "@/assets/images/ads/bannerad.jpeg";
 import tirangapaint from "@/assets/images/tirangapaint.jpeg";
-import award from "@/assets/images/award.jpg";
+import yatra from "@/assets/images/yatra.jpg";
+import raid from "@/assets/images/raid.jpeg";
 import dog from "@/assets/images/dog.jpeg";
 import school from "@/assets/images/school.jpeg";
 import medal from "@/assets/images/medal.jpeg";
@@ -35,11 +37,13 @@ import petrol from "@/assets/images/petrol.jpeg";
 import col1 from "@/assets/images/madam.png";
 import col2 from "@/assets/images/1.png";
 import col3 from "@/assets/images/tiranga.png";
-import vn2 from "@/assets/images/tiranga.png";
-import vn3 from "@/assets/images/marpeet.png";
-import s1 from "@/assets/images/hamla.png";
-import s2 from "@/assets/images/paani.png";
-import s3 from "@/assets/images/petrolchori.png";
+import vn1 from "@/assets/videos/vnews/madam.mp4";
+import vn2 from "@/assets/videos/vnews/dharmendra.mp4";
+import vn3 from "@/assets/videos/wishes/WhatsApp Video 2026-08-15 at 00.23.44.mp4";
+import s1 from "@/assets/videos/shorts/hamla.mp4";
+import s2 from "@/assets/Videos/shorts/paani.mp4";
+import s3 from "@/assets/videos/shorts/petrolchori.mp4";
+import s4 from "@/assets/videos/shorts/female.mp4";
 import mohanpooja from "@/assets/images/mohanpooja.jpg";
 import mohanflag from "@/assets/images/mohanflag.jpeg";
 import stall from "@/assets/images/stall.jpg";
@@ -318,19 +322,22 @@ export function IndependenceWishes() {
 
       <div className="flex w-full grid gap-4 lg:grid-cols-[1fr_1fr_1fr_1fr]">
         <article className="group relative w-full overflow-hidden lg:col-span-3 bg-ink">
-          <Thumb src={award} alt={t("ZTI-NEWS")} className="h-70 w-full sm:h-80 lg:h-100" />
+          <Thumb src={raid} alt={t("ZTI-NEWS")} className="h-70 w-full sm:h-80 lg:h-100" />
           <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-ink via-ink/40 to-transparent p-5">
             <Badge>{t("sections.breaking.hero.category")}</Badge>
             <h3 className="mt-2 text-sm font-black text-background sm:text-2xl">
               {t("sections.breaking.hero.title")}
             </h3>
-            <p className="mt-1 text-[11px] text-background/70">{t("sections.sports.heroDesc")}</p>
+            <p className="mt-1 text-[11px] text-background/70">{t("sections.breaking.hero.subHead")}</p>
           </div>
         </article>
 
         <article className="group relative w-full overflow-hidden bg-ink">
-          <ThumbVideo src={mohanvid} alt={t("ZTI-NEWS")} className="h-70 w-full sm:h-80 lg:h-100" />
+          <ThumbVideo src={pandey} alt={t("ZTI-NEWS")} className="h-70 w-full sm:h-80 lg:h-100" />
           <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-ink via-ink/40 to-transparent p-5">
+            <h3 className="mt-2 text-sm font-black text-background sm:text-2xl">
+              श्री जितेन्द्र कुमार पाण्डेय
+            </h3>
             <Badge>{t("sections.breaking.hero.category")}</Badge>
           </div>
         </article>
@@ -698,22 +705,22 @@ export function BannerAd() {
 
 export function Regional() {
   const { t } = useTranslation();
-  const items = t("sections.sports.items", { returnObjects: true }) as CardItem[];
-  const cards = t("sections.sports.cards", { returnObjects: true }) as CardItem[];
+  const items = t("sections.regional.items", { returnObjects: true }) as CardItem[];
+  const cards = t("sections.regional.cards", { returnObjects: true }) as CardItem[];
   const cardImages = [medal, petrol, dog, school];
 
   return (
     <section className="lg:max-w-[1250px] max-w-[100vw] sm:px-4 px-4 lg:px-0 pt-6">
-      <SectionHead title={t("sections.sports.title")} subtitle={t("sections.sports.subtitle")} />
+      <SectionHead title={t("sections.regional.title")} subtitle={t("sections.regional.subtitle")} />
 
       <article className="group relative overflow-hidden">
-        <Thumb src={tirangapaint} alt={t("sections.sports.heroTitle")} className="h-64 w-full sm:h-80" />
+        <Thumb src={yatra} alt={t("sections.regional.heroTitle")} className="h-64 w-full sm:h-80" />
         <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-ink via-ink/70 to-transparent p-5">
-          <Badge>{t("sections.sports.featured")}</Badge>
+          <Badge>{t("sections.regional.featured")}</Badge>
           <h3 className="mt-2 text-lg font-black text-background sm:text-2xl">
-            {t("sections.sports.heroTitle")}
+            {t("sections.regional.heroTitle")}
           </h3>
-          <p className="mt-1 text-[11px] text-background/70">{t("sections.sports.heroDesc")}</p>
+          <p className="mt-1 text-[11px] text-background/70">{t("sections.regional.heroDesc")}</p>
         </div>
       </article>
 
@@ -746,21 +753,6 @@ export function Regional() {
           ))}
         </div>
 
-      <div className="mt-4 grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 border border-border bg-tint p-3">
-        <div className="flex min-w-0 items-center gap-3">
-          <span className="grid h-9 w-9 shrink-0 place-items-center bg-primary text-primary-foreground">
-            <ShoppingBag className="h-4 w-4" />
-          </span>
-          <div className="min-w-0">
-            <Badge tone="soft">{t("sections.sports.adBadge")}</Badge>
-            <p className="truncate text-xs font-bold">{t("sections.sports.adTitle")}</p>
-          </div>
-        </div>
-        <a href="#" className="shrink-0 bg-primary px-4 py-2 text-[11px] font-bold text-primary-foreground">
-          {t("sections.sports.shopSports")}
-        </a>
-      </div>
-
       <div className="mt-4 grid gap-3 md:grid-cols-2 lg:grid-cols-3">
         {items.map((s) => (
           <article key={s.title} className="border border-border p-3 transition-colors hover:border-primary">
@@ -776,12 +768,102 @@ export function Regional() {
   );
 }
 
+type ActiveVideo = { src: string; title: string } | null;
+
+/** Fullscreen overlay player — opened when a thumbnail's play button is clicked. */
+function VideoLightbox({ video, onClose }: { video: NonNullable<ActiveVideo>; onClose: () => void }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  // Genuine user click opened this, so unmuted autoplay is allowed.
+  useEffect(() => {
+    const el = videoRef.current;
+    if (!el) return;
+    el.play().catch(() => {
+      el.muted = true;
+      el.play().catch(() => {});
+    });
+  }, [video.src]);
+
+  // Close on Escape
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [onClose]);
+
+  // Lock body scroll while open
+  useEffect(() => {
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prevOverflow;
+    };
+  }, []);
+
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 px-4"
+      role="dialog"
+      aria-modal="true"
+      aria-label={video.title}
+      onClick={onClose} // backdrop click closes
+    >
+      <button
+        onClick={(e) => {
+          e.stopPropagation();
+          onClose();
+        }}
+        aria-label="Close video"
+        className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20
+          text-white flex items-center justify-center transition-colors"
+      >
+        <X className="h-5 w-5" />
+      </button>
+
+      <video
+        ref={videoRef}
+        src={video.src}
+        controls
+        playsInline
+        autoPlay
+        loop
+        className="h-full max-h-screen w-auto max-w-full sm:h-[92vh] sm:rounded-xl object-contain"
+        onClick={(e) => e.stopPropagation()}
+      />
+    </div>
+  );
+}
+
+/** Circular play button overlaid on a thumbnail. */
+function PlayButton({ onClick, size = "md" }: { onClick: (e: React.MouseEvent) => void; size?: "sm" | "md" }) {
+  const dims = size === "sm" ? "w-9 h-9" : "w-12 h-12";
+  const iconDims = size === "sm" ? "h-4 w-4" : "h-5 w-5";
+  return (
+    <button
+      onClick={onClick}
+      aria-label="Play video"
+      className={`absolute inset-0 m-auto ${dims} rounded-full bg-white/90 text-black flex items-center justify-center
+        shadow-lg transition-transform duration-200 hover:scale-110 active:scale-95 z-[1]`}
+    >
+      <Play className={iconDims} fill="currentColor" />
+    </button>
+  );
+}
+
 export function VideoNews() {
   const { t } = useTranslation();
   const full = t("sections.video.full", { returnObjects: true }) as { title: string; views: string }[];
   const shorts = t("sections.video.shortItems", { returnObjects: true }) as { title: string; views: string }[];
-  const vidsrc = [col1, vn2, vn3]
-  const vshorts = [s1, s2, s3]
+  const vidsrc = [vn1, vn2, vn3];
+  const vshorts = [s1, s2, s3, s4];
+
+  const [activeVideo, setActiveVideo] = useState<ActiveVideo>(null);
+
+  const openVideo = useCallback((src: string, title: string) => setActiveVideo({ src, title }), []);
+  const closeVideo = useCallback(() => setActiveVideo(null), []);
+
   return (
     <section className="lg:max-w-[1250px] max-w-[100vw] sm:px-4 px-4 lg:px-0 pt-6 overflow-hidden">
       <SectionHead
@@ -797,11 +879,12 @@ export function VideoNews() {
         {full.map((v, index) => (
           <article key={v.title} className="group">
             <div className="img-placeholder relative grid h-48 place-items-center">
-              <ThumbVideo
+              <video
                 src={vidsrc[index]}
                 alt={v.title}
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
-              </ThumbVideo>
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+              <PlayButton onClick={() => openVideo(vidsrc[index], v.title)} />
               <span className="absolute right-2 bottom-2 bg-ink px-1.5 py-0.5 text-[9px] font-bold text-background">
                 08:24
               </span>
@@ -821,11 +904,11 @@ export function VideoNews() {
         {shorts.map((s, index) => (
           <article key={s.title} className="group shrink-0 w-38">
             <div className="img-placeholder relative grid aspect-[9/16] place-items-center">
-              <ThumbVideo
+              <video
                 src={vshorts[index]}
-                alt={s.title}
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
-              </ThumbVideo>
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+              <PlayButton onClick={() => openVideo(vshorts[index], s.title)} size="sm" />
             </div>
             <h3 className="mt-2 text-[11px] font-bold line-clamp-2">{s.title}</h3>
             <p className="text-[10px] text-muted-foreground">
@@ -834,6 +917,8 @@ export function VideoNews() {
           </article>
         ))}
       </div>
+
+      {activeVideo && <VideoLightbox video={activeVideo} onClose={closeVideo} />}
     </section>
   );
 }
