@@ -5,7 +5,7 @@ import { useState } from "react";
 import { FaFacebook, FaInstagram } from "react-icons/fa";
 import { Link } from "@tanstack/react-router";
 
-import tiranga from "@/assets/images/tiranga.gif";
+import logo from "@/assets/logo/logo.png";
 
 const NAV: { label: string; to: string; params?: { category: string } }[] = [
   { label: "Home", to: "/" },
@@ -54,9 +54,8 @@ export function Header() {
       <div className="border-b border-border">
         <div className="mx-auto grid max-w-[1250px] grid-cols-[minmax(0,1fr)_auto] items-center gap-4 lg:px-0 px-4 py-3 lg:flex lg:justify-between">
           <Link to="/" className="flex min-w-0 items-center gap-2">
-            <span className="grid h-9 w-9 shrink-0 place-items-center font-black text-primary-foreground">
-              {/* ZT */}
-              <img src={tiranga} alt="" />
+            <span className="grid h-9 w-9 place-items-center bg-primary font-black text-primary-foreground">
+              <img src={logo} alt="Logo" className="h-full w-full" />
             </span>
             <span className="min-w-0">
               <span className="block truncate text-base leading-none font-black tracking-tight">

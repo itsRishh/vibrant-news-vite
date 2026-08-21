@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import logo from "@/assets/logo/logo.png";
 
 const SOCIALS = ["FB", "X", "IG", "YT", "IN"];
 
@@ -52,8 +53,8 @@ export function Footer() {
       <div className="mx-auto grid max-w-[1300px] gap-8 px-4 py-12 md:grid-cols-[1.4fr_repeat(5,1fr)]">
         <div>
           <div className="flex items-center gap-2">
-            <span className="grid h-9 w-9 place-items-center bg-primary text-sm font-black text-primary-foreground">
-              ZT
+            <span className="grid h-9 w-9 place-items-center bg-primary font-black text-primary-foreground">
+              <img src={logo} alt="Logo" className="h-full w-full" />
             </span>
             <span className="text-sm leading-tight font-black">
               ZERO TOLERANCE
