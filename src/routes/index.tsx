@@ -39,7 +39,7 @@ function Index() {
     <div className="min-h-screen bg-background text-foreground">
       <Header />
       <main>
-        <div className="mx-auto grid max-w-[1250px] flex items-center justify-center flex-col gap-2 lg:grid-cols-[minmax(0,1fr)_300px]">
+        <div className="mx-auto grid max-w-[1250px] grid-cols-1 gap-2 lg:grid-cols-[minmax(0,1fr)_300px]">
           <NewsClickArea>
             {/* <Live /> */}
             {/* <StateNews /> */}
@@ -53,7 +53,9 @@ function Index() {
             {/* <QuickReads /> */}
             <MoreNews />
           </NewsClickArea>
-          <QuickNewsRail />
+          <div className="hidden lg:block">
+            <QuickNewsRail />
+          </div>
         </div>
         <Newsletter />
       </main>

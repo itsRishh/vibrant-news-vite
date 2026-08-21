@@ -20,6 +20,14 @@ const NAV: { label: string; to: string; params?: { category: string } }[] = [
 ];
 
 import { LanguageSwitcher } from "@/components/language/LanguageSwitcher";
+import { QuickNewsRail } from "@/components/news/QuickNewsRail";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 
 const MARKET_VALUES = [
   { key: "nifty", value: "25,102.40", change: "+0.62%", up: true },
@@ -110,19 +118,21 @@ export function Header() {
             </button>
           </div>
 
-          {/* Mobile - Menu Button with Dropdown */}
-          <div className="flex lg:hidden items-center gap-2 relative">
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="grid h-8 w-8 place-items-center rounded-full border border-border hover:bg-secondary transition-colors"
-            >
-              {isMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
-            </button>
-
-            {/* Dropdown Menu */}
-            {isMenuOpen && (
-              <div className="absolute top-full right-0 mt-2 w-48 bg-background border border-border rounded-lg shadow-lg z-50">
-                <div className="flex flex-col gap-3 p-4">
+          {/* Mobile - Right-side menu */}
+          <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
+            <SheetTrigger asChild>
+              <button
+                aria-label="Open menu"
+                className="flex lg:hidden h-8 w-8 items-center justify-center rounded-full border border-border transition-colors hover:bg-secondary"
+              >
+                <Menu className="h-4 w-4" />
+              </button>
+            </SheetTrigger>
+            <SheetContent side="right" className="w-[min(92vw,400px)] overflow-y-auto px-5">
+              <SheetHeader className="border-b border-border pb-4 pr-8 text-left">
+                <SheetTitle className="text-base font-black uppercase">Menu</SheetTitle>
+              </SheetHeader>
+              <div className="flex flex-col gap-3 pt-4">
                   {/* Language Switcher */}
                   {/* <div className="pb-3 border-b border-border">
                     <LanguageSwitcher />
@@ -160,16 +170,18 @@ export function Header() {
                   </button>
 
                   {/* Notification Bell */}
-                  {/* <button className="relative flex items-center justify-center h-9 rounded border border-border text-foreground hover:bg-secondary transition-colors w-full">
+                  <button className="relative flex h-9 w-full items-center justify-center rounded border border-border text-foreground transition-colors hover:bg-secondary">
                     <Bell className="h-4 w-4" />
                     <span className="absolute -top-2 -right-2 grid h-4 w-4 place-items-center rounded-full bg-primary text-[9px] font-bold text-primary-foreground">
                       3
                     </span>
-                  </button> */}
-                </div>
+                  </button>
               </div>
-            )}
-          </div>
+              <div className="mt-5 border-t border-border pt-2">
+                <QuickNewsRail />
+              </div>
+            </SheetContent>
+          </Sheet>
         </div>
       </div>
 

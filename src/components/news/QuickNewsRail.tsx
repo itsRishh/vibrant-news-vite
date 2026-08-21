@@ -17,7 +17,7 @@ const QUICK_NEWS = [
 
 export function QuickNewsRail() {
   return (
-    <aside className="px-4 pt-6 lg:sticky lg:top-24 lg:self-start w-[300px]">
+    <aside className="w-full px-2 pt-7 lg:sticky lg:top-24 lg:self-start">
       {/* live video */}
       <div className="section-rule mb-3">
         <h2 className="flex items-center gap-2 text-lg font-black tracking-tight uppercase">
