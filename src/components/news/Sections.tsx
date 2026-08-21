@@ -720,7 +720,7 @@ export function Regional() {
           <h3 className="mt-2 text-lg font-black text-background sm:text-2xl">
             {t("sections.regional.heroTitle")}
           </h3>
-          <p className="mt-1 text-[11px] text-background/70">{t("sections.regional.heroDesc")}</p>
+          <p className="hidden lg:block mt-1 text-[11px] text-background/70">{t("sections.regional.heroDesc")}</p>
         </div>
       </article>
 
