@@ -78,14 +78,36 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "ZTI NEWS | Latest News & Breaking Updates" },
+      {
+        name: "description",
+        content:
+          "ZTI NEWS brings you the latest breaking news, local updates, politics, business, entertainment and important stories.",
+      },
+      { name: "author", content: "ZTI NEWS" },
+      { name: "robots", content: "index, follow" },
+      { property: "og:title", content: "ZTI NEWS | Latest News & Breaking Updates" },
+      {
+        property: "og:description",
+        content:
+          "Latest breaking news, local updates, politics, business, entertainment and important stories.",
+      },
       { property: "og:type", content: "website" },
+      { property: "og:image", content: "https://www.dainikzti.com/src/assets/link-share/thumbnail.png" },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { property: "og:image:alt", content: "ZTI NEWS" },
+      { property: "og:url", content: "https://www.dainikzti.com/" },
+      { property: "og:site_name", content: "ZTI NEWS" },
+      { property: "og:locale", content: "hi_IN" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "ZTI NEWS | Latest News & Breaking Updates" },
+      {
+        name: "twitter:description",
+        content:
+          "Latest breaking news, local updates, politics, business, entertainment and important stories.",
+      },
+      { name: "twitter:image", content: "https://www.dainikzti.com/src/assets/link-share/thumbnail.png" },
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
