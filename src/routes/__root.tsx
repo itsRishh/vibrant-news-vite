@@ -93,7 +93,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "Latest breaking news, local updates, politics, business, entertainment and important stories.",
       },
       { property: "og:type", content: "website" },
-      { property: "og:image", content: "https://www.dainikzti.com/src/assets/link-share/thumbnail.png" },
+      { property: "og:image", content: "https://www.dainikzti.com/link-share/thumbnail.png" },
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },
       { property: "og:image:alt", content: "ZTI NEWS" },
