@@ -880,11 +880,11 @@ export function VideoNews() {
           <article key={v.title} className="group">
             <div className="img-placeholder relative grid h-48 place-items-center">
               <video
-                src={s3}
+                src={vidsrc[index]}
                 alt={v.title}
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
-              <PlayButton onClick={() => openVideo(s3, v.title)} />
+              <PlayButton onClick={() => openVideo(vidsrc[index], v.title)} />
               <span className="absolute right-2 bottom-2 bg-ink px-1.5 py-0.5 text-[9px] font-bold text-background">
                 08:24
               </span>
@@ -905,10 +905,10 @@ export function VideoNews() {
           <article key={s.title} className="group shrink-0 w-38">
             <div className="img-placeholder relative grid aspect-[9/16] place-items-center">
               <video
-                src={s3}
+                src={vshorts[index]}
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
-              <PlayButton onClick={() => openVideo(s3, s.title)} size="sm" />
+              <PlayButton onClick={() => openVideo(vshorts[index], s.title)} size="sm" />
             </div>
             <h3 className="mt-2 text-[11px] font-bold line-clamp-2">{s.title}</h3>
             <p className="text-[10px] text-muted-foreground">
