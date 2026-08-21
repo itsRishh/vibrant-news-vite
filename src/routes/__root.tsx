@@ -107,7 +107,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content:
           "Latest breaking news, local updates, politics, business, entertainment and important stories.",
       },
-      { name: "twitter:image", content: "https://www.dainikzti.com/src/assets/link-share/thumbnail.png" },
+      { name: "twitter:image", content: "https://www.dainikzti.com/link-share/thumbnail.png" },
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
