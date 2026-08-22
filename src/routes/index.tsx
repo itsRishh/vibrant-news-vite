@@ -19,6 +19,8 @@ import { QuickNewsRail } from "@/components/news/QuickNewsRail";
 const title = "Zero Tolerance India — Breaking News, Politics, Sports & Entertainment";
 const description =
   "Live breaking news from India: politics, business, cricket, Bollywood, tech and regional headlines updated every minute by Zero Tolerance India.";
+const shareImage = "https://www.dainikzti.com/link-share/thumbnail.png";
+const shareUrl = "https://www.dainikzti.com/";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -28,7 +30,16 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: title },
       { property: "og:description", content: description },
       { property: "og:type", content: "website" },
+      { property: "og:image", content: shareImage },
+      { property: "og:image:secure_url", content: shareImage },
+      { property: "og:image:type", content: "image/png" },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { property: "og:image:alt", content: title },
+      { property: "og:url", content: shareUrl },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: shareImage },
+      { name: "twitter:image:alt", content: title },
     ],
   }),
   component: Index,
@@ -42,13 +53,13 @@ function Index() {
         <div className="mx-auto grid max-w-[1250px] grid-cols-1 gap-2 lg:grid-cols-[minmax(0,1fr)_300px]">
           <NewsClickArea>
             {/* <Live /> */}
-            {/* <StateNews /> */}
             <IndependenceWishes />
             <HotRightNow />
             <LatestNews />
             <Breaking />
             <BannerAd />
             <Regional />
+            {/* <StateNews /> */}
             <VideoNews />
             {/* <QuickReads /> */}
             <MoreNews />

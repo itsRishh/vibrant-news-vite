@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CategoryCategoryRouteImport } from './routes/category.$category'
 import { Route as NewsSlugRouteImport } from './routes/news.$slug'
 import { Route as NewsSectionSlugRouteImport } from './routes/news.$section.$slug'
@@ -17,6 +18,11 @@ import { Route as NewsSectionSlugRouteImport } from './routes/news.$section.$slu
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CategoryCategoryRoute = CategoryCategoryRouteImport.update({
@@ -37,12 +43,14 @@ const NewsSectionSlugRoute = NewsSectionSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/contact': typeof ContactRoute
   '/category/$category': typeof CategoryCategoryRoute
   '/news/$slug': typeof NewsSlugRoute
   '/news/$section/$slug': typeof NewsSectionSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/contact': typeof ContactRoute
   '/category/$category': typeof CategoryCategoryRoute
   '/news/$slug': typeof NewsSlugRoute
   '/news/$section/$slug': typeof NewsSectionSlugRoute
@@ -50,6 +58,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/contact': typeof ContactRoute
   '/category/$category': typeof CategoryCategoryRoute
   '/news/$slug': typeof NewsSlugRoute
   '/news/$section/$slug': typeof NewsSectionSlugRoute
@@ -57,12 +66,22 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/category/$category' | '/news/$slug' | '/news/$section/$slug'
+    | '/'
+    | '/contact'
+    | '/category/$category'
+    | '/news/$slug'
+    | '/news/$section/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/category/$category' | '/news/$slug' | '/news/$section/$slug'
+  to:
+    | '/'
+    | '/contact'
+    | '/category/$category'
+    | '/news/$slug'
+    | '/news/$section/$slug'
   id:
     | '__root__'
     | '/'
+    | '/contact'
     | '/category/$category'
     | '/news/$slug'
     | '/news/$section/$slug'
@@ -70,6 +89,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ContactRoute: typeof ContactRoute
   CategoryCategoryRoute: typeof CategoryCategoryRoute
   NewsSlugRoute: typeof NewsSlugRoute
   NewsSectionSlugRoute: typeof NewsSectionSlugRoute
@@ -82,6 +102,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/category/$category': {
@@ -110,6 +137,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ContactRoute: ContactRoute,
   CategoryCategoryRoute: CategoryCategoryRoute,
   NewsSlugRoute: NewsSlugRoute,
   NewsSectionSlugRoute: NewsSectionSlugRoute,

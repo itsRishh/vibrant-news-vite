@@ -1,6 +1,6 @@
 import { Search, Bell, Menu, X } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { FaFacebook, FaInstagram } from "react-icons/fa";
 import { Link } from "@tanstack/react-router";
@@ -9,14 +9,14 @@ import logo from "@/assets/logo/logo.png";
 
 const NAV: { label: string; to: string; params?: { category: string } }[] = [
   { label: "Home", to: "/" },
-  { label: "Latest", to: "/", params: { category: "politics" } },
-  { label: "Breaking", to: "/", params: { category: "sports" } },
+  { label: "Breaking", to: "/", params: { category: "politics" } },
+  { label: "Latest", to: "/", params: { category: "sports" } },
   { label: "Local", to: "/", params: { category: "sports" } },
   { label: "Regional", to: "/", params: { category: "entertainment" } },
   { label: "India", to: "/", params: { category: "business" } },
   { label: "International", to: "/", params: { category: "tech" } },
   { label: "Blog", to: "/", params: { category: "world" } },
-  { label: "Contact Us", to: "/", params: { category: "world" } },
+  { label: "Contact Us", to: "/contact" },
 ];
 
 import { LanguageSwitcher } from "@/components/language/LanguageSwitcher";
@@ -44,10 +44,27 @@ const MARKET_VALUES = [
 
 const NAV_KEYS = ["home", "politics", "sports", "entertainment", "business", "tech", "world"] as const;
 
-export function Header() {
+type HeaderProps = {
+  breakingNews?: string[];
+};
+
+export function Header({ breakingNews }: HeaderProps) {
   const { t } = useTranslation();
   const ticker = t("header.ticker", { returnObjects: true }) as string[];
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const localizedBreakingNews = t("header.breakingNews", { returnObjects: true }) as string[];
+  const headlines = (breakingNews?.length ? breakingNews : localizedBreakingNews).slice(0, 5);
+  const [headlineIndex, setHeadlineIndex] = useState(0);
+
+  useEffect(() => {
+    if (headlines.length < 2) return;
+
+    const interval = window.setInterval(() => {
+      setHeadlineIndex((currentIndex) => (currentIndex + 1) % headlines.length);
+    }, 3500);
+
+    return () => window.clearInterval(interval);
+  }, [headlines.length]);
 
   return (
     <header className="sticky top-0 z-50 bg-background">
@@ -132,6 +149,20 @@ export function Header() {
                 <SheetTitle className="text-base font-black uppercase">Menu</SheetTitle>
               </SheetHeader>
               <div className="flex flex-col gap-3 pt-4">
+                  <nav className="flex flex-col border-y border-border py-2">
+                    {NAV.map((item) => (
+                      <Link
+                        key={item.label}
+                        to={item.to}
+                        params={item.params as never}
+                        onClick={() => setIsMenuOpen(false)}
+                        className="py-2 text-sm font-semibold transition-colors hover:text-primary"
+                      >
+                        {item.label}
+                      </Link>
+                    ))}
+                  </nav>
+
                   {/* Language Switcher */}
                   {/* <div className="pb-3 border-b border-border">
                     <LanguageSwitcher />
@@ -184,13 +215,22 @@ export function Header() {
         </div>
       </div>
 
-      <div className="bg-ink text-background">
+      <div className="breaking-bar relative overflow-hidden bg-ink text-background">
+        <div className="breaking-particles" aria-hidden="true" key={headlineIndex}>
+          {Array.from({ length: 56 }, (_, particleIndex) => (
+            <span key={particleIndex} />
+          ))}
+        </div>
         <div className="mx-auto grid max-w-[1250px] grid-cols-[auto_minmax(0,1fr)] items-center gap-3 lg:px-0 px-4 py-1.5 text-[11px]">
-          <span className="shrink-0 bg-primary px-2 py-0.5 font-bold tracking-wide uppercase">
+          <span className="breaking-label relative z-10 shrink-0 bg-primary px-2 py-0.5 font-bold tracking-wide uppercase">
             {t("header.breaking")}
           </span>
-          <p className="min-w-0 lg:text-[16px] text-[8px] truncate opacity-90">
-            {t("header.breakingUpdate")}
+          <p
+            key={headlines[headlineIndex]}
+            aria-live="polite"
+            className="breaking-headline relative z-10 min-w-0 truncate opacity-90 lg:text-[16px] text-[12px]"
+          >
+            {headlines[headlineIndex] ?? t("header.breakingUpdate")}
           </p>
         </div>
       </div>

@@ -26,6 +26,13 @@
   "header": {
     "breaking": "Breaking",
     "breakingUpdate": "UPDATE: अयोध्या राम मंदिर के नए व्यवस्था प्रमुख बने आचार्य इंद्रदेव मिश्र, दिसंबर 2026 तक संभालेंगे कमान",
+    "breakingNews": [
+      "UPDATE: Ayodhya Ram temple appoints Acharya Indradev Mishra as its new head of arrangements",
+      "Mumbai breaks a 50-year rainfall record as NDRF teams remain on standby",
+      "India records a sharp rise in digital payments during the festive season",
+      "New rail service connects major cities with faster overnight travel",
+      "Monsoon alert issued for several districts as weather systems intensify"
+    ],
     "search": "Search",
     "trending": "Trending",
     "nav": {
@@ -60,7 +67,7 @@
       "hero": {
         "category": "BREAKING",
         "badge": "Exclusive",
-        "title": "लोकायुक्त का छापा: सहायक राजस्व अधिकारी की 1.73 करोड़ की अनुपातहीन संपत्ति उजागर।",
+        "title": "राहुल गांधी बोले - एफआईआर दर्ज होना न्याय की पहली सीढ़ी।",
         "subHead": "महानिदेशक लोकायुक्त श्री योगेश देशमुख द्वारा चष्टाचार के विरूद्ध सख्त कार्यवाही किये जाने के निर्देश पर उप पुलिस महानिरीक्षक श्री मनोज सिंह के मार्गदर्शन तथा पुलिस अधीक्षक, लोकायुक्त इंदौर श्री राजेश सहाय के नेतृत्व में लोकायुक्त इंदौर संभाग इंदौर द्वारा सर्च / छापा कार्यवाही।",
         "time": "1 hours ago"
       },

@@ -18,6 +18,8 @@ export const Route = createFileRoute("/news/$section/$slug")({
 
     const article = getArticle(loaderData.section, loaderData.slug);
     const title = `${article.title} — Zero Tolerance India`;
+    const shareImage = "https://www.dainikzti.com/link-share/thumbnail.png";
+    const shareUrl = `https://www.dainikzti.com/news/${loaderData.section}/${loaderData.slug}`;
     return {
       meta: [
         { title },
@@ -25,7 +27,13 @@ export const Route = createFileRoute("/news/$section/$slug")({
         { property: "og:title", content: title },
         { property: "og:description", content: article.subHead },
         { property: "og:type", content: "article" },
+        { property: "og:image", content: shareImage },
+        { property: "og:image:width", content: "1200" },
+        { property: "og:image:height", content: "630" },
+        { property: "og:image:alt", content: title },
+        { property: "og:url", content: shareUrl },
         { name: "twitter:card", content: "summary_large_image" },
+        { name: "twitter:image", content: shareImage },
       ],
     };
   },

@@ -20,7 +20,7 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import tech from "@/assets/images/ajgar.jpeg";
 import adNalanda from "@/assets/images/ad-nalanda.jpg";
 // import parliament from "@/assets/parliament.jpg";
-import pandey from "@/assets/images/pandey.jpeg";
+import pandey from "@/assets/Videos/shorts/pandey.mp4";
 import parliament from "@/assets/images/tiranga.png";
 import mohan from "@/assets/Videos/shorts/happy.mp4";
 import racket from "@/assets/images/racket.jpeg";
@@ -46,7 +46,7 @@ import s3 from "@/assets/Videos/shorts/petrolchori.mp4";
 import s4 from "@/assets/Videos/shorts/female.mp4";
 import mohanpooja from "@/assets/images/mohanpooja.jpg";
 import mohanflag from "@/assets/images/mohanflag.jpeg";
-import stall from "@/assets/images/stall.jpg";
+import stall from "@/assets/images/stall.jpeg";
 import safar2 from "@/assets/images/safar2.jpg";
 import ztinews from "@/assets/images/ZTInews.png";
 
@@ -284,6 +284,90 @@ type CardItem = {
   time?: string;
 };
 
+type ActiveVideo = { src: string; title: string } | null;
+
+/** Fullscreen overlay player — opened when a thumbnail's play button is clicked. */
+function VideoLightbox({ video, onClose }: { video: NonNullable<ActiveVideo>; onClose: () => void }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  // Genuine user click opened this, so unmuted autoplay is allowed.
+  useEffect(() => {
+    const el = videoRef.current;
+    if (!el) return;
+    el.play().catch(() => {
+      el.muted = true;
+      el.play().catch(() => {});
+    });
+  }, [video.src]);
+
+  // Close on Escape
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [onClose]);
+
+  // Lock body scroll while open
+  useEffect(() => {
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prevOverflow;
+    };
+  }, []);
+
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 px-4"
+      role="dialog"
+      aria-modal="true"
+      aria-label={video.title}
+      onClick={onClose} // backdrop click closes
+    >
+      <button
+        onClick={(e) => {
+          e.stopPropagation();
+          onClose();
+        }}
+        aria-label="Close video"
+        className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20
+          text-white flex items-center justify-center transition-colors"
+      >
+        <X className="h-5 w-5" />
+      </button>
+
+      <video
+        ref={videoRef}
+        src={video.src}
+        controls
+        playsInline
+        autoPlay
+        loop
+        className="h-full max-h-screen w-auto max-w-full sm:h-[92vh] sm:rounded-xl object-contain"
+        onClick={(e) => e.stopPropagation()}
+      />
+    </div>
+  );
+}
+
+/** Circular play button overlaid on a thumbnail. */
+function PlayButton({ onClick, size = "md" }: { onClick: (e: React.MouseEvent) => void; size?: "sm" | "md" }) {
+  const dims = size === "sm" ? "w-9 h-9" : "w-12 h-12";
+  const iconDims = size === "sm" ? "h-4 w-4" : "h-5 w-5";
+  return (
+    <button
+      onClick={onClick}
+      aria-label="Play video"
+      className={`absolute inset-0 m-auto ${dims} rounded-full bg-white/90 text-black flex items-center justify-center
+        shadow-lg transition-transform duration-200 hover:scale-110 active:scale-95 z-[1]`}
+    >
+      <Play className={iconDims} fill="currentColor" />
+    </button>
+  );
+}
+
 export function Live() {
   const { t } = useTranslation();
 
@@ -313,7 +397,7 @@ export function IndependenceWishes() {
   const wish = t("sections.wishes.full", { returnObjects: true }) as { title: string; views: string }[];
   const vidsrc = [col1, col2, col3]
   const cards = t("sections.breaking.cards", { returnObjects: true }) as CardItem[];
-  const cardImages = [stall, mohanpooja, tirangapaint, mohanflag];
+  const cardImages = [raid, mohanpooja, tirangapaint, mohanflag];
   return (
     <section className="lg:max-w-[1250px] max-w-[100vw] sm:px-4 px-4 lg:px-0 pt-6">
       <SectionHead
@@ -321,8 +405,8 @@ export function IndependenceWishes() {
       />
 
       <div className="flex w-full grid gap-4 lg:grid-cols-[1fr_1fr_1fr_1fr]">
-        <article className="group relative w-full overflow-hidden lg:col-span-3 bg-ink">
-          <Thumb src={raid} alt={t("ZTI-NEWS")} className="h-70 w-full sm:h-80 lg:h-100" />
+        <article className="group relative w-full overflow-hidden lg:col-span-2 bg-ink lg:h-full h-80">
+          <Thumb src={stall} alt={t("ZTI-NEWS")} className="absolute top-0 left-0 w-full sm:h-80 lg:h-80 object-cover" />
           <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-ink via-ink/40 to-transparent p-5">
             <Badge>{t("sections.breaking.hero.category")}</Badge>
             <h3 className="mt-2 text-sm font-black text-background sm:text-2xl">
@@ -332,11 +416,11 @@ export function IndependenceWishes() {
           </div>
         </article>
 
-        <article className="group relative w-full overflow-hidden bg-ink">
+        <article className="group relative w-full overflow-hidden bg-ink lg:col-span-2">
           <ThumbVideo src={pandey} alt={t("ZTI-NEWS")} className="h-70 w-full sm:h-80 lg:h-100" />
           <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-ink via-ink/40 to-transparent p-5">
             <h3 className="mt-2 text-sm font-black text-background sm:text-2xl">
-              श्री जितेन्द्र कुमार पाण्डेय
+              
             </h3>
             <Badge>{t("sections.breaking.hero.category")}</Badge>
           </div>
@@ -374,83 +458,6 @@ export function IndependenceWishes() {
 }
 
 const STATE_TABS = ["उत्तर प्रदेश", "बिहार", "दिल्ली", "उत्तराखंड", "मध्य प्रदेश", "राजस्थान", "बंगाल", "छत्तीसगढ़", "झारखंड", "महाराष्ट्र"];
-
-export function StateNews() {
-  const { t } = useTranslation();
-  const [activeState, setActiveState] = useState(STATE_TABS[0]);
-  const breakingHero = t("sections.breaking.hero", { returnObjects: true }) as CardItem;
-  const breakingCards = t("sections.breaking.cards", { returnObjects: true }) as CardItem[];
-  const hotCards = t("sections.hotRightNow.cards", { returnObjects: true }) as CardItem[];
-  const regionalCards = t("sections.regionals.items", { returnObjects: true }) as CardItem[];
-  const sportsCards = t("sections.sports.cards", { returnObjects: true }) as CardItem[];
-  const contentSets = [breakingCards, hotCards, regionalCards, sportsCards];
-  const activeIndex = STATE_TABS.indexOf(activeState);
-  const selectedCards = contentSets[activeIndex % contentSets.length] ?? breakingCards;
-  const hero = activeIndex === 0
-    ? breakingHero
-    : selectedCards[0] ?? breakingHero;
-  const cards = activeIndex === 0
-    ? breakingCards
-    : [...selectedCards.slice(1), ...selectedCards.slice(0, 1)];
-  const images = [mohanpooja, mohanflag, stall, tirangapaint];
-
-  return (
-    <section className="w-full overflow-hidden bg-background py-5 sm:py-7">
-      <div className="mx-auto w-full max-w-[1250px] px-4 lg:px-0">
-        <div className="mb-4 flex items-center justify-between gap-4">
-          <h2 className="flex items-center gap-2 text-lg font-black sm:text-xl">
-            <span className="text-primary">◀</span> राज्यवार खबरें
-          </h2>
-          <a href="#" className="shrink-0 text-sm font-bold text-primary">
-            और भी <span aria-hidden="true">▶</span>
-          </a>
-        </div>
-
-        <nav className="flex overflow-x-auto bg-[#062b67] text-sm font-bold text-white scrollbar-none sm:text-base">
-          {STATE_TABS.map((state) => (
-            <button
-              key={state}
-              type="button"
-              onClick={() => setActiveState(state)}
-              aria-selected={activeState === state}
-              className={`shrink-0 px-5 py-2.5 transition-colors hover:bg-primary ${activeState === state ? "bg-primary" : ""}`}
-            >
-              {state}
-            </button>
-          ))}
-        </nav>
-
-        <div className="mt-5 grid gap-5 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)]">
-          <article className="group grid min-w-0 gap-4 sm:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)]">
-            <div className="relative min-h-56 overflow-hidden bg-tint sm:min-h-72">
-              <Thumb src={cmnirik} alt={hero.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
-            </div>
-            <div className="min-w-0 self-center">
-              <Badge>{activeState}</Badge>
-              <h3 className="mt-2 text-xl leading-tight font-black sm:text-2xl">{hero.title}</h3>
-              <p className="mt-4 line-clamp-5 text-sm leading-7 text-muted-foreground">{hero.subHead}</p>
-            </div>
-          </article>
-
-          <div className="grid gap-x-5 gap-y-5 sm:grid-cols-2">
-            {cards.slice(0, 4).map((card, index) => (
-              <article key={card.title} className="group grid min-w-0 grid-cols-[minmax(0,1fr)_minmax(0,1.25fr)] gap-3">
-                <div className="h-24 overflow-hidden bg-tint sm:h-28">
-                  <Thumb src={images[index]} alt={card.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
-                </div>
-                <div className="min-w-0">
-                  <h3 className="line-clamp-3 text-sm leading-6 font-black">{card.title}</h3>
-                  <p className="mt-1 line-clamp-2 text-xs leading-5 text-muted-foreground">{card.subHead}</p>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 
 export function HotRightNow() {
   const { t } = useTranslation();
@@ -581,7 +588,7 @@ export function LatestNews() {
       <div className="mb-3 flex items-center justify-between">
         <div className="section-rule">
           <h2 className="text-lg font-black tracking-tight uppercase">
-            {t("sections.regional.title")}
+            {t("sections.latestNews.title")}
           </h2>
         </div>
         <span className="flex items-center gap-1 bg-primary px-2 py-0.5 text-[9px] font-bold text-primary-foreground uppercase">
@@ -658,6 +665,7 @@ export function LatestNews() {
   );
 }
 
+// quick news below latest
 export function Breaking() {
   const { t } = useTranslation();
   const items = t("sections.regionals.items", { returnObjects: true }) as CardItem[];
@@ -768,87 +776,80 @@ export function Regional() {
   );
 }
 
-type ActiveVideo = { src: string; title: string } | null;
 
-/** Fullscreen overlay player — opened when a thumbnail's play button is clicked. */
-function VideoLightbox({ video, onClose }: { video: NonNullable<ActiveVideo>; onClose: () => void }) {
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  // Genuine user click opened this, so unmuted autoplay is allowed.
-  useEffect(() => {
-    const el = videoRef.current;
-    if (!el) return;
-    el.play().catch(() => {
-      el.muted = true;
-      el.play().catch(() => {});
-    });
-  }, [video.src]);
-
-  // Close on Escape
-  useEffect(() => {
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
-  }, [onClose]);
-
-  // Lock body scroll while open
-  useEffect(() => {
-    const prevOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = prevOverflow;
-    };
-  }, []);
+export function StateNews() {
+  const { t } = useTranslation();
+  const [activeState, setActiveState] = useState(STATE_TABS[0]);
+  const breakingHero = t("sections.breaking.hero", { returnObjects: true }) as CardItem;
+  const breakingCards = t("sections.breaking.cards", { returnObjects: true }) as CardItem[];
+  const hotCards = t("sections.hotRightNow.cards", { returnObjects: true }) as CardItem[];
+  const regionalCards = t("sections.regionals.items", { returnObjects: true }) as CardItem[];
+  const sportsCards = t("sections.sports.cards", { returnObjects: true }) as CardItem[];
+  const contentSets = [breakingCards, hotCards, regionalCards, sportsCards];
+  const activeIndex = STATE_TABS.indexOf(activeState);
+  const selectedCards = contentSets[activeIndex % contentSets.length] ?? breakingCards;
+  const hero = activeIndex === 0
+    ? breakingHero
+    : selectedCards[0] ?? breakingHero;
+  const cards = activeIndex === 0
+    ? breakingCards
+    : [...selectedCards.slice(1), ...selectedCards.slice(0, 1)];
+  const images = [mohanpooja, mohanflag, stall, tirangapaint];
 
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 px-4"
-      role="dialog"
-      aria-modal="true"
-      aria-label={video.title}
-      onClick={onClose} // backdrop click closes
-    >
-      <button
-        onClick={(e) => {
-          e.stopPropagation();
-          onClose();
-        }}
-        aria-label="Close video"
-        className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20
-          text-white flex items-center justify-center transition-colors"
-      >
-        <X className="h-5 w-5" />
-      </button>
+    <section className="w-full overflow-hidden bg-background py-5 sm:py-7">
+      <div className="mx-auto w-full max-w-[1250px] px-4 lg:px-0">
+        <div className="mb-4 flex items-center justify-between gap-4">
+          <h2 className="flex items-center gap-2 text-lg font-black sm:text-xl">
+            <span className="text-primary">◀</span> राज्यवार खबरें
+          </h2>
+          <a href="#" className="shrink-0 text-sm font-bold text-primary">
+            और भी <span aria-hidden="true">▶</span>
+          </a>
+        </div>
 
-      <video
-        ref={videoRef}
-        src={video.src}
-        controls
-        playsInline
-        autoPlay
-        loop
-        className="h-full max-h-screen w-auto max-w-full sm:h-[92vh] sm:rounded-xl object-contain"
-        onClick={(e) => e.stopPropagation()}
-      />
-    </div>
-  );
-}
+        <nav className="flex overflow-x-auto bg-[#062b67] text-sm font-bold text-white scrollbar-none sm:text-base">
+          {STATE_TABS.map((state) => (
+            <button
+              key={state}
+              type="button"
+              onClick={() => setActiveState(state)}
+              aria-selected={activeState === state}
+              className={`shrink-0 px-5 py-2.5 transition-colors hover:bg-primary ${activeState === state ? "bg-primary" : ""}`}
+            >
+              {state}
+            </button>
+          ))}
+        </nav>
 
-/** Circular play button overlaid on a thumbnail. */
-function PlayButton({ onClick, size = "md" }: { onClick: (e: React.MouseEvent) => void; size?: "sm" | "md" }) {
-  const dims = size === "sm" ? "w-9 h-9" : "w-12 h-12";
-  const iconDims = size === "sm" ? "h-4 w-4" : "h-5 w-5";
-  return (
-    <button
-      onClick={onClick}
-      aria-label="Play video"
-      className={`absolute inset-0 m-auto ${dims} rounded-full bg-white/90 text-black flex items-center justify-center
-        shadow-lg transition-transform duration-200 hover:scale-110 active:scale-95 z-[1]`}
-    >
-      <Play className={iconDims} fill="currentColor" />
-    </button>
+        <div className="mt-5 grid gap-5 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)]">
+          <article className="group grid min-w-0 gap-4 sm:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)]">
+            <div className="relative min-h-56 overflow-hidden bg-tint sm:min-h-72">
+              <Thumb src={mohan} alt={hero.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+            </div>
+            <div className="min-w-0 self-center">
+              <Badge>{activeState}</Badge>
+              <h3 className="mt-2 text-xl leading-tight font-black sm:text-2xl">{hero.title}</h3>
+              <p className="mt-4 line-clamp-5 text-sm leading-7 text-muted-foreground">{hero.subHead}</p>
+            </div>
+          </article>
+
+          <div className="grid gap-x-5 gap-y-5 sm:grid-cols-2">
+            {cards.slice(0, 4).map((card, index) => (
+              <article key={card.title} className="group grid min-w-0 grid-cols-[minmax(0,1fr)_minmax(0,1.25fr)] gap-3">
+                <div className="h-24 overflow-hidden bg-tint sm:h-28">
+                  <Thumb src={images[index]} alt={card.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                </div>
+                <div className="min-w-0">
+                  <h3 className="line-clamp-3 text-sm leading-6 font-black">{card.title}</h3>
+                  <p className="mt-1 line-clamp-2 text-xs leading-5 text-muted-foreground">{card.subHead}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -922,41 +923,6 @@ export function VideoNews() {
     </section>
   );
 }
-
-// export function QuickReads() {
-//   const { t } = useTranslation();
-//   const topics = t("sections.quickReads.topics", { returnObjects: true }) as string[];
-
-//   return (
-//     <section className="lg:max-w-[1250px] max-w-[100vw] sm:px-4 px-4 lg:px-0 pt-6">
-//       <SectionHead
-//         title={t("sections.quickReads.title")}
-//         subtitle={t("sections.quickReads.subtitle")}
-//         action=""
-//       />
-//       <div className="flex gap-4 overflow-x-auto pb-2">
-//         {topics.map((q) => (
-//           <a key={q} href="#" className="w-16 shrink-0 text-center">
-//             <span className="img-placeholder grid h-16 w-16 place-items-center border-2 border-primary bg-ink" />
-//             <span className="mt-1.5 block text-[9px] leading-tight font-semibold">{q}</span>
-//           </a>
-//         ))}
-//       </div>
-
-//       <div className="mt-6 grid gap-4 border border-border bg-tint p-4 md:grid-cols-[minmax(0,1fr)_260px]">
-//         <div className="min-w-0">
-//           <Badge>{t("sections.sports.featured")}</Badge>
-//           <h3 className="mt-2 text-lg font-black">{t("sections.quickReads.featuredTitle")}</h3>
-//           <p className="mt-1 text-xs text-muted-foreground">{t("sections.quickReads.featuredDesc")}</p>
-//           <a href="#" className="mt-3 inline-block text-[11px] font-bold text-primary uppercase">
-//             {t("sections.quickReads.readFullStory")}
-//           </a>
-//         </div>
-//         {/* <Thumb src={parliament} alt={t("sections.quickReads.featuredTitle")} className="h-32 w-full md:h-full" /> */}
-//       </div>
-//     </section>
-//   );
-// }
 
 export function MoreNews() {
   const { t } = useTranslation();
