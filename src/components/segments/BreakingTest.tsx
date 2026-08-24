@@ -10,7 +10,7 @@ import { Badge } from "@/utils/Badge";
 import { Thumb } from "@/utils/Thumb";
 import { Stamp } from "@/utils/Stamp";
 import stall from "@/assets/images/stall.jpeg";
-import pandey from "@/assets/videos/shorts/pandey.mp4";
+import pandey from "@/assets/Videos/shorts/pandey.mp4";
 
 type CardItem = {
   city?: string;
