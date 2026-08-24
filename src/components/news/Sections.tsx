@@ -36,9 +36,8 @@ import dog from "@/assets/images/dog.jpeg";
 import school from "@/assets/images/school.jpeg";
 import medal from "@/assets/images/medal.jpeg";
 import petrol from "@/assets/images/petrol.jpeg";
-import col1 from "@/assets/images/madam.png";
-import col2 from "@/assets/images/1.png";
-import col3 from "@/assets/images/tiranga.png";
+import hospAd from "@/assets/images/hospAd.jpeg";
+import hospAdv from "@/assets/Videos/hospAd.mp4";
 import vn1 from "@/assets/Videos/vnews/madam.mp4";
 import vn2 from "@/assets/Videos/vnews/dharmendra.mp4";
 import vn3 from "@/assets/Videos/wishes/WhatsApp Video 2026-08-15 at 00.23.44.mp4";
@@ -369,6 +368,28 @@ function PlayButton({ onClick, size = "md" }: { onClick: (e: React.MouseEvent) =
       <Play className={iconDims} fill="currentColor" />
     </button>
   );
+}
+
+export function PreAds () {
+   return(
+    <div className="mx-auto max-w-[1250px] sm:px-4 px-4 lg:px-0 mt-3 border border-border">
+      <div className="p-3">
+            <Badge>Ad</Badge>
+          </div>
+      <div className="container grid gap-3 lg:grid-cols-4">
+        <div className="grid gap-3 col-span-3">
+        <article className="group relative overflow-hidden border border-border lg:h-76">
+          <video autoPlay muted playsInline controls loop src={hospAdv} />
+        </article>
+      </div>
+      <div className="col-span-1 hidden lg:block">
+        <article className="group relative overflow-hidden border border-border">
+          <img className="w-full h-full" src={hospAd} alt="" />
+        </article>
+      </div>
+      </div>
+    </div>
+   )
 }
 
 export function Live() {
@@ -724,7 +745,7 @@ export function Regional() {
 
   return (
     <section className="lg:max-w-[1250px] max-w-[100vw] sm:px-4 px-4 lg:px-0 pt-6">
-      <SectionHead title={t("sections.regional.titleREGIONAL")} subtitle={t("sections.regional.subtitle")} />
+      <SectionHead title={t("sections.regional.title")} subtitle={t("sections.regional.subtitle")} />
 
       <article className="group relative overflow-hidden">
         <Thumb src={yatra} alt={t("sections.regional.heroTitle")} className="h-64 w-full sm:h-80" />

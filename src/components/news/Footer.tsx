@@ -5,7 +5,7 @@ import { FaFacebook, FaInstagram } from "react-icons/fa";
 
 const SOCIALS = [<FaFacebook />, <FaInstagram />];
 
-const COLUMN_KEYS = ["business", "news","sports", "lifestyle", "entertainment"] as const;
+const COLUMN_KEYS = ["news","sports", "lifestyle"] as const;
 
 export function Newsletter() {
   const { t } = useTranslation();
@@ -52,7 +52,7 @@ export function Footer() {
 
   return (
     <footer className="border-t border-border bg-secondary">
-      <div className="mx-auto flex items-start justify-between max-w-[1300px] gap-8 px-4 py-12 ">
+      <div className="mx-auto flex lg:flex-row flex-col items-start justify-between max-w-[1300px] gap-8 px-4 py-12">
         <div className="flex flex-col items-start gap-2">
           <div className="flex items-center gap-2">
             <span className="grid h-9 w-9 place-items-center bg-primary font-black text-primary-foreground">
@@ -78,7 +78,7 @@ export function Footer() {
           </div>
         </div>
 
-          <div className="footer-links flex items-start gap-32 justify-end">
+          <div className="footer-links grid grid-cols-2 gap-8 justify-end lg:grid-cols-3 lg:gap-12">
             {COLUMN_KEYS.map((key) => {
           const col = t(`footer.columns.${key}`, { returnObjects: true }) as {
             title: string;

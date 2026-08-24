@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/news/Header";
 import {
+  PreAds,
   Live,
   Breaking,
   Latest,
@@ -56,6 +57,7 @@ function Index() {
         <div className="mx-auto grid max-w-[1250px] grid-cols-1 gap-2 lg:grid-cols-[minmax(0,1fr)_300px]">
           <NewsClickArea>
             {/* <Live /> */}
+            <PreAds />
             <div id="breaking">
               <BreakingTest />
             </div>
@@ -78,19 +80,19 @@ function Index() {
               <Regional />
             </div>
 
-            <div id="state" className="scroll-mt-32">
+            {/* <div id="state" className="scroll-mt-32">
               <StateNews />
-            </div>
+            </div> */}
 
             <VideoNews />
 
-            <div id="india" className="scroll-mt-32">
+            {/* <div id="india" className="scroll-mt-32">
               <India />
             </div>
 
             <div id="international" className="scroll-mt-32">
               <International />
-            </div>
+            </div> */}
             {/* <QuickReads /> */}
             {/* <Blogs /> */}
           </NewsClickArea>
