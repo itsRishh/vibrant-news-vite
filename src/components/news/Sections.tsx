@@ -258,6 +258,7 @@ function ThumbVideo({
         playsInline
         autoPlay
         muted
+        controls
         preload="metadata"
         aria-label={alt}
         className={`w-full h-full object-cover ${className}`}
@@ -379,7 +380,7 @@ export function PreAds () {
       <div className="container grid gap-3 lg:grid-cols-4">
         <div className="grid gap-3 col-span-3">
         <article className="group relative overflow-hidden border border-border lg:h-76">
-          <video autoPlay muted playsInline controls loop src={hospAdv} />
+          <video autoPlay controls loop playsInline src={hospAdv} />
         </article>
       </div>
       <div className="col-span-1 hidden lg:block">

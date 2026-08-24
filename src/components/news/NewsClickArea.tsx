@@ -38,7 +38,7 @@ export function NewsClickArea({ children }: { children: ReactNode }) {
         {children}
       </div>
 
-      <Dialog open={selectedArticle !== null} onOpenChange={(open) => !open && setSelectedArticle(null)}>
+      {/* <Dialog open={selectedArticle !== null} onOpenChange={(open) => !open && setSelectedArticle(null)}>
         <DialogContent className="max-h-[90vh] max-w-3xl overflow-y-auto p-0">
           {selectedArticle && (
             <article>
@@ -76,7 +76,7 @@ export function NewsClickArea({ children }: { children: ReactNode }) {
             </article>
           )}
         </DialogContent>
-      </Dialog>
+      </Dialog> */}
     </>
   );
 }

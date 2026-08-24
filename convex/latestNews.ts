@@ -1,38 +1,37 @@
 import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
 
-const breakingNewsArgs = {
-  title: v.string(),
-  body: v.string(),
-  category: v.string(),
-  badge: v.string(),
-  excerpt: v.string(),
-  imageId: v.id("_storage"),
-  mediaType: v.union(v.literal("image"), v.literal("video")),
-  slug: v.string(),
-  featured: v.boolean(),
-  published: v.boolean(),
-  order: v.number(),
-  position: v.number(),
-  publishedAt: v.number(),
+const latestNewsArgs = {
+    title: v.string(),
+    category: v.string(),
+    badge: v.string(),
+    excerpt: v.string(),
+    imageId: v.id("_storage"),
+    mediaType: v.union(v.literal("image"), v.literal("video")),
+    slug: v.string(),
+    featured: v.boolean(),
+    published: v.boolean(),
+    order: v.number(),
+    position: v.number(),
+    publishedAt: v.number(),
 };
 
 export const create = mutation({
-  args: breakingNewsArgs,
-  handler: async (ctx, args) => ctx.db.insert("breakingNews", args),
+  args: latestNewsArgs,
+  handler: async (ctx, args) => ctx.db.insert("latestNews", args),
 });
 
 export const move = mutation({
   args: {
-    id: v.id("breakingNews"),
+    id: v.id("latestNews"),
     position: v.number(),
   },
   handler: async (ctx, { id, position }) => {
     const article = await ctx.db.get(id);
-    if (!article) throw new Error("Breaking News article was not found.");
+    if (!article) throw new Error("latest News article was not found.");
 
     const destinationArticles = await ctx.db
-      .query("breakingNews")
+      .query("latestNews")
       .withIndex("by_published_position", (q) =>
         q.eq("published", article.published).eq("position", position),
       )
@@ -55,7 +54,7 @@ export const list = query({
   args: {},
   handler: async (ctx) => {
     const articles = await ctx.db
-      .query("breakingNews")
+      .query("latestNews")
       .withIndex("by_published_position", (q) => q.eq("published", true))
       .order("asc")
       .collect();
