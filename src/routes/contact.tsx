@@ -49,7 +49,7 @@ function ContactPage() {
                 <div>
                   <p className="font-bold">Email</p>
                   <a href="mailto:desk@zerotoleranceindia.com" className="mt-1 block opacity-75 hover:text-primary">
-                    desk@zerotoleranceindia.com
+                    contact@ztilive.com
                   </a>
                 </div>
               </div>

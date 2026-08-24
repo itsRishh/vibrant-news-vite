@@ -27,9 +27,11 @@ import racket from "@/assets/images/racket.jpeg";
 import paani from "@/assets/images/paani.jpeg";
 import redcarpet from "@/assets/images/profile.jpeg";
 import bannerAd from "@/assets/images/ads/bannerad.jpeg";
-import tirangapaint from "@/assets/images/tirangapaint.jpeg";
 import yatra from "@/assets/images/yatra.jpg";
 import raid from "@/assets/images/raid.jpeg";
+import tirangapaint from "@/assets/images/tirangapaint.jpeg";
+import mohanpooja from "@/assets/images/mohanpooja.jpg";
+import mohanflag from "@/assets/images/mohanflag.jpeg";
 import dog from "@/assets/images/dog.jpeg";
 import school from "@/assets/images/school.jpeg";
 import medal from "@/assets/images/medal.jpeg";
@@ -44,11 +46,10 @@ import s1 from "@/assets/Videos/shorts/hamla.mp4";
 import s2 from "@/assets/Videos/shorts/paani.mp4";
 import s3 from "@/assets/Videos/shorts/petrolchori.mp4";
 import s4 from "@/assets/Videos/shorts/female.mp4";
-import mohanpooja from "@/assets/images/mohanpooja.jpg";
-import mohanflag from "@/assets/images/mohanflag.jpeg";
 import stall from "@/assets/images/stall.jpeg";
 import safar2 from "@/assets/images/safar2.jpg";
 import ztinews from "@/assets/images/ZTInews.png";
+
 
 export function Badge({
   children,
@@ -257,6 +258,7 @@ function ThumbVideo({
         loop
         playsInline
         autoPlay
+        muted
         preload="metadata"
         aria-label={alt}
         className={`w-full h-full object-cover ${className}`}
@@ -344,6 +346,7 @@ function VideoLightbox({ video, onClose }: { video: NonNullable<ActiveVideo>; on
         controls
         playsInline
         autoPlay
+        muted={true}
         loop
         className="h-full max-h-screen w-auto max-w-full sm:h-[92vh] sm:rounded-xl object-contain"
         onClick={(e) => e.stopPropagation()}
@@ -391,11 +394,9 @@ export function Live() {
   );
 }
 
-
-export function IndependenceWishes() {
+// breaking
+export function Breaking() {
   const { t } = useTranslation();
-  const wish = t("sections.wishes.full", { returnObjects: true }) as { title: string; views: string }[];
-  const vidsrc = [col1, col2, col3]
   const cards = t("sections.breaking.cards", { returnObjects: true }) as CardItem[];
   const cardImages = [raid, mohanpooja, tirangapaint, mohanflag];
   return (
@@ -459,7 +460,8 @@ export function IndependenceWishes() {
 
 const STATE_TABS = ["उत्तर प्रदेश", "बिहार", "दिल्ली", "उत्तराखंड", "मध्य प्रदेश", "राजस्थान", "बंगाल", "छत्तीसगढ़", "झारखंड", "महाराष्ट्र"];
 
-export function HotRightNow() {
+// latest
+export function Latest() {
   const { t } = useTranslation();
   const hero = t("sections.hotRightNow.hero", { returnObjects: true }) as CardItem;
   const cards = t("sections.hotRightNow.cards", { returnObjects: true }) as CardItem[];
@@ -576,12 +578,42 @@ export function HotRightNow() {
   );
 }
 
-export function LatestNews() {
+// quick news below latest
+export function QuickLatest() {
+  const { t } = useTranslation();
+  const items = t("sections.regionals.items", { returnObjects: true }) as CardItem[];
+
+  return (
+    <section className="lg:max-w-[1250px] max-w-[100vw] sm:px-4 px-4 lg:px-0 pt-6 my-4">
+      <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
+        {items.map((r) => (
+          <article
+            key={r.title}
+            className="grid grid-cols-[auto_minmax(0,1fr)] gap-3 border border-border p-3 transition-colors hover:border-primary"
+          >
+            <span className="h-fit shrink-0">
+              <Badge tone="soft">{r.city}</Badge>
+            </span>
+            <div className="min-w-0">
+              <h3 className="text-xs font-bold">{r.title}</h3>
+              <div className="mt-1.5">
+                <Stamp time={r.time ?? ""} />
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+// local
+export function LocalNews() {
   const { t } = useTranslation();
   const hero = t("sections.latestNews.hero", { returnObjects: true }) as CardItem;
   const cards = t("sections.latestNews.cards", { returnObjects: true }) as CardItem[];
   const smallCards = t("sections.latestNews.smallCards", { returnObjects: true }) as CardItem[];
-  const cardImages = [safar2, tech, undefined, redcarpet];
+  const cardImages = [paani, tech, undefined, redcarpet];
 
   return (
     <section className="lg:max-w-[1250px] max-w-[100vw] sm:px-4 px-4 lg:px-0  pt-6">
@@ -616,7 +648,7 @@ export function LatestNews() {
         </article>
 
 
-        {cards.slice(4, 6).map((c, i) => (
+        {cards.slice(1, 4).map((c, i) => (
           <article key={c.title} className="group overflow-hidden border border-border">
             <div className="relative h-32 overflow-hidden">
               <Thumb
@@ -644,12 +676,12 @@ export function LatestNews() {
         ))}
 
         {/* ad */}
-        <article className="group relative overflow-hidden border border-border">
+        {/* <article className="group relative overflow-hidden border border-border">
           <div className=" from-ink to-transparent p-3">
             <Badge>Ad</Badge>
           </div>
           <Thumb src={safar2} alt={cards[3]?.title ?? ""} className="w-[100%]" />
-        </article>
+        </article> */}
 
         {/* ad */}
         <article className="group relative overflow-hidden border border-border">
@@ -665,35 +697,7 @@ export function LatestNews() {
   );
 }
 
-// quick news below latest
-export function Breaking() {
-  const { t } = useTranslation();
-  const items = t("sections.regionals.items", { returnObjects: true }) as CardItem[];
-
-  return (
-    <section className="lg:max-w-[1250px] max-w-[100vw] sm:px-4 px-4 lg:px-0 pt-6 my-4">
-      <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
-        {items.map((r) => (
-          <article
-            key={r.title}
-            className="grid grid-cols-[auto_minmax(0,1fr)] gap-3 border border-border p-3 transition-colors hover:border-primary"
-          >
-            <span className="h-fit shrink-0">
-              <Badge tone="soft">{r.city}</Badge>
-            </span>
-            <div className="min-w-0">
-              <h3 className="text-xs font-bold">{r.title}</h3>
-              <div className="mt-1.5">
-                <Stamp time={r.time ?? ""} />
-              </div>
-            </div>
-          </article>
-        ))}
-      </div>
-    </section>
-  );
-}
-
+// ad after local 
 export function BannerAd() {
   const { t } = useTranslation();
 
@@ -711,6 +715,7 @@ export function BannerAd() {
   );
 }
 
+// regional
 export function Regional() {
   const { t } = useTranslation();
   const items = t("sections.regional.items", { returnObjects: true }) as CardItem[];
@@ -719,7 +724,7 @@ export function Regional() {
 
   return (
     <section className="lg:max-w-[1250px] max-w-[100vw] sm:px-4 px-4 lg:px-0 pt-6">
-      <SectionHead title={t("sections.regional.title")} subtitle={t("sections.regional.subtitle")} />
+      <SectionHead title={t("sections.regional.titleREGIONAL")} subtitle={t("sections.regional.subtitle")} />
 
       <article className="group relative overflow-hidden">
         <Thumb src={yatra} alt={t("sections.regional.heroTitle")} className="h-64 w-full sm:h-80" />
@@ -799,16 +804,12 @@ export function StateNews() {
   return (
     <section className="w-full overflow-hidden bg-background py-5 sm:py-7">
       <div className="mx-auto w-full max-w-[1250px] px-4 lg:px-0">
-        <div className="mb-4 flex items-center justify-between gap-4">
-          <h2 className="flex items-center gap-2 text-lg font-black sm:text-xl">
-            <span className="text-primary">◀</span> राज्यवार खबरें
-          </h2>
-          <a href="#" className="shrink-0 text-sm font-bold text-primary">
-            और भी <span aria-hidden="true">▶</span>
-          </a>
-        </div>
+        <SectionHead
+          title={t("sections.stateNews.title")}
+          action={t("sections.seeAll")}
+        />
 
-        <nav className="flex overflow-x-auto bg-[#062b67] text-sm font-bold text-white scrollbar-none sm:text-base">
+        <nav className="flex overflow-x-auto bg-[#000] text-sm font-bold text-white scrollbar-none sm:text-base">
           {STATE_TABS.map((state) => (
             <button
               key={state}
@@ -898,9 +899,12 @@ export function VideoNews() {
         ))}
       </div>
 
-      <p className="mt-8 mb-3 text-[11px] font-bold tracking-wider text-primary uppercase">
-        ▸ {t("sections.video.shorts")}
-      </p>
+      <div className="mt-6">
+        <SectionHead
+          title={t("SHORTS")}
+          action={t("sections.seeAll")}
+        />
+      </div>
       <div className="flex gap-4 overflow-x-auto pb-2 w-full">
         {shorts.map((s, index) => (
           <article key={s.title} className="group shrink-0 w-38">
@@ -924,13 +928,144 @@ export function VideoNews() {
   );
 }
 
-export function MoreNews() {
+export function India() {
   const { t } = useTranslation();
-  const items = t("sections.moreNews.items", { returnObjects: true }) as CardItem[];
+  const items = t("sections.regional.items", { returnObjects: true }) as CardItem[];
+  const cards = t("sections.regional.cards", { returnObjects: true }) as CardItem[];
+  const cardImages = [medal, petrol, dog, school];
 
   return (
     <section className="lg:max-w-[1250px] max-w-[100vw] sm:px-4 px-4 lg:px-0 pt-6">
-      <SectionHead title={t("sections.moreNews.title")} subtitle={t("sections.moreNews.subtitle")} />
+      <SectionHead title={t("INDIA NEWS")} subtitle={t("sections.regional.subtitle")} />
+
+      <article className="group relative overflow-hidden">
+        <Thumb src={yatra} alt={t("sections.regional.heroTitle")} className="h-64 w-full sm:h-80" />
+        <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-ink via-ink/70 to-transparent p-5">
+          <Badge>{t("sections.regional.featured")}</Badge>
+          <h3 className="mt-2 text-lg font-black text-background sm:text-2xl">
+            {t("sections.regional.heroTitle")}
+          </h3>
+          <p className="hidden lg:block mt-1 text-[11px] text-background/70">{t("sections.regional.heroDesc")}</p>
+        </div>
+      </article>
+
+      <div className="mt-4 grid gap-3 md:grid-cols-2 lg:grid-cols-4">
+        {cards.slice(0, 4).map((c, i) => (
+            <article key={c.title} className="group overflow-hidden border border-border">
+              <div className="relative h-32 overflow-hidden">
+                <Thumb
+                  src={cardImages[i]}
+                  alt={c.title}
+                  className="h-full w-full transition-transform duration-500 group-hover:scale-105"
+                />
+                <span className="absolute top-2 left-2">
+                  <Badge>{c.category}</Badge>
+                </span>
+                {c.badge && (
+                  <span className="absolute top-2 right-2 bg-ink px-2 py-0.5 text-[9px] font-bold text-background">
+                    {c.badge}
+                  </span>
+                )}
+              </div>
+              <div className="p-3">
+                <h3 className="text-sm font-bold">{c.title}</h3>
+                <p className="mt-1 line-clamp-2 text-[11px] text-muted-foreground">{c.subHead}</p>
+                <div className="mt-2">
+                  <Stamp time={c.time ?? ""} />
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+
+      <div className="mt-4 grid gap-3 md:grid-cols-2 lg:grid-cols-3">
+        {items.map((s) => (
+          <article key={s.title} className="border border-border p-3 transition-colors hover:border-primary">
+            <Badge tone="soft">{s.tag}</Badge>
+            <h3 className="mt-1.5 text-xs font-bold">{s.title}</h3>
+            <div className="mt-2">
+              <Stamp time={s.time ?? ""} />
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+export function International() {
+  const { t } = useTranslation();
+  const items = t("sections.regional.items", { returnObjects: true }) as CardItem[];
+  const cards = t("sections.regional.cards", { returnObjects: true }) as CardItem[];
+  const cardImages = [medal, petrol, dog, school];
+
+  return (
+    <section className="lg:max-w-[1250px] max-w-[100vw] sm:px-4 px-4 lg:px-0 pt-6">
+      <SectionHead title={t("International News")} subtitle={t("sections.regional.subtitle")} />
+
+      <article className="group relative overflow-hidden">
+        <Thumb src={yatra} alt={t("sections.regional.heroTitle")} className="h-64 w-full sm:h-80" />
+        <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-ink via-ink/70 to-transparent p-5">
+          <Badge>{t("sections.regional.featured")}</Badge>
+          <h3 className="mt-2 text-lg font-black text-background sm:text-2xl">
+            {t("sections.regional.heroTitle")}
+          </h3>
+          <p className="hidden lg:block mt-1 text-[11px] text-background/70">{t("sections.regional.heroDesc")}</p>
+        </div>
+      </article>
+
+      <div className="mt-4 grid gap-3 md:grid-cols-2 lg:grid-cols-4">
+        {cards.slice(0, 4).map((c, i) => (
+            <article key={c.title} className="group overflow-hidden border border-border">
+              <div className="relative h-32 overflow-hidden">
+                <Thumb
+                  src={cardImages[i]}
+                  alt={c.title}
+                  className="h-full w-full transition-transform duration-500 group-hover:scale-105"
+                />
+                <span className="absolute top-2 left-2">
+                  <Badge>{c.category}</Badge>
+                </span>
+                {c.badge && (
+                  <span className="absolute top-2 right-2 bg-ink px-2 py-0.5 text-[9px] font-bold text-background">
+                    {c.badge}
+                  </span>
+                )}
+              </div>
+              <div className="p-3">
+                <h3 className="text-sm font-bold">{c.title}</h3>
+                <p className="mt-1 line-clamp-2 text-[11px] text-muted-foreground">{c.subHead}</p>
+                <div className="mt-2">
+                  <Stamp time={c.time ?? ""} />
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+
+      <div className="mt-4 grid gap-3 md:grid-cols-2 lg:grid-cols-3">
+        {items.map((s) => (
+          <article key={s.title} className="border border-border p-3 transition-colors hover:border-primary">
+            <Badge tone="soft">{s.tag}</Badge>
+            <h3 className="mt-1.5 text-xs font-bold">{s.title}</h3>
+            <div className="mt-2">
+              <Stamp time={s.time ?? ""} />
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+
+export function Blogs() {
+  const { t } = useTranslation();
+  const items = t("sections.blogs.items", { returnObjects: true }) as CardItem[];
+
+  return (
+    <section className="lg:max-w-[1250px] max-w-[100vw] sm:px-4 px-4 lg:px-0 pt-6">
+      <SectionHead title={t("sections.blogs.title")} subtitle={t("sections.blogs.subtitle")} />
       <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
         {items.map((m) => (
           <article key={m.title} className="border border-border p-3 transition-colors hover:border-primary">

@@ -1,17 +1,20 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/news/Header";
 import {
-  HotRightNow,
-  LatestNews,
-  Breaking,
-  Regional,
-  BannerAd,
-  VideoNews,
-  MoreNews,
-  IndependenceWishes,
   Live,
+  Breaking,
+  Latest,
+  QuickLatest,
+  LocalNews,
+  BannerAd,
+  Regional,
   StateNews,
+  VideoNews,
+  India,
+  International,
 } from "@/components/news/Sections";
+
+import BreakingTest from "@/components/segments/BreakingTest";
 import { Newsletter, Footer } from "@/components/news/Footer";
 import { NewsClickArea } from "@/components/news/NewsClickArea";
 import { QuickNewsRail } from "@/components/news/QuickNewsRail";
@@ -53,16 +56,43 @@ function Index() {
         <div className="mx-auto grid max-w-[1250px] grid-cols-1 gap-2 lg:grid-cols-[minmax(0,1fr)_300px]">
           <NewsClickArea>
             {/* <Live /> */}
-            <IndependenceWishes />
-            <HotRightNow />
-            <LatestNews />
-            <Breaking />
+            <div id="breaking">
+              <BreakingTest />
+            </div>
+
+            <div id="latest" className="scroll-mt-32">
+              <Latest />
+            </div>
+
+            <div className="scroll-mt-32">
+              <QuickLatest />
+            </div>
+
+            <div id="local" className="scroll-mt-32">
+              <LocalNews />
+            </div>
+
             <BannerAd />
-            <Regional />
-            {/* <StateNews /> */}
+
+            <div id="regional" className="scroll-mt-32">
+              <Regional />
+            </div>
+
+            <div id="state" className="scroll-mt-32">
+              <StateNews />
+            </div>
+
             <VideoNews />
+
+            <div id="india" className="scroll-mt-32">
+              <India />
+            </div>
+
+            <div id="international" className="scroll-mt-32">
+              <International />
+            </div>
             {/* <QuickReads /> */}
-            <MoreNews />
+            {/* <Blogs /> */}
           </NewsClickArea>
           <div className="hidden lg:block">
             <QuickNewsRail />

@@ -1,9 +1,11 @@
 import { useTranslation } from "react-i18next";
 import logo from "@/assets/logo/logo.png";
+import { FaFacebook, FaInstagram } from "react-icons/fa";
 
-const SOCIALS = ["FB", "X", "IG", "YT", "IN"];
 
-const COLUMN_KEYS = ["news", "sports", "entertainment", "business", "lifestyle"] as const;
+const SOCIALS = [<FaFacebook />, <FaInstagram />];
+
+const COLUMN_KEYS = ["business", "news","sports", "lifestyle", "entertainment"] as const;
 
 export function Newsletter() {
   const { t } = useTranslation();
@@ -50,8 +52,8 @@ export function Footer() {
 
   return (
     <footer className="border-t border-border bg-secondary">
-      <div className="mx-auto grid max-w-[1300px] gap-8 px-4 py-12 md:grid-cols-[1.4fr_repeat(5,1fr)]">
-        <div>
+      <div className="mx-auto flex items-start justify-between max-w-[1300px] gap-8 px-4 py-12 ">
+        <div className="flex flex-col items-start gap-2">
           <div className="flex items-center gap-2">
             <span className="grid h-9 w-9 place-items-center bg-primary font-black text-primary-foreground">
               <img src={logo} alt="Logo" className="h-full w-full" />
@@ -68,7 +70,7 @@ export function Footer() {
               <a
                 key={s}
                 href="#"
-                className="grid h-7 w-7 place-items-center bg-primary text-[10px] font-bold text-primary-foreground transition-colors hover:bg-primary-dark"
+                className="grid h-7 w-7 place-items-center bg-primary text-[18px] font-bold text-primary-foreground transition-colors hover:bg-primary-dark"
               >
                 {s}
               </a>
@@ -76,7 +78,8 @@ export function Footer() {
           </div>
         </div>
 
-        {COLUMN_KEYS.map((key) => {
+          <div className="footer-links flex items-start gap-32 justify-end">
+            {COLUMN_KEYS.map((key) => {
           const col = t(`footer.columns.${key}`, { returnObjects: true }) as {
             title: string;
             links: string[];
@@ -101,24 +104,12 @@ export function Footer() {
             </div>
           );
         })}
+          </div>
       </div>
 
       <div className="border-t border-border">
-        <div className="mx-auto grid max-w-[1200px] gap-2 px-4 py-4 text-[11px] text-muted-foreground sm:grid-cols-2">
+        <div className="mx-auto flex items-center justify-center max-w-[1200px] gap-2 px-4 py-4 text-[11px] text-muted-foreground">
           <p>{t("footer.copyright")}</p>
-          <p className="sm:text-right">
-            <a href="#" className="hover:text-primary">
-              {t("footer.privacy")}
-            </a>
-            <span className="px-2">·</span>
-            <a href="#" className="hover:text-primary">
-              {t("footer.terms")}
-            </a>
-            <span className="px-2">·</span>
-            <a href="#" className="hover:text-primary">
-              {t("footer.contact")}
-            </a>
-          </p>
         </div>
       </div>
     </footer>

@@ -9,6 +9,7 @@ import {
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 import { useTranslation } from "react-i18next";
+import Lenis from "lenis";
 
 import appCss from "../styles.css?url";
 import { LanguagePrompt } from "../components/language/LanguagePrompt";
@@ -150,6 +151,15 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+
+  useEffect(() => {
+    const lenis = new Lenis({
+      autoRaf: true,
+      smoothWheel: true,
+    });
+
+    return () => lenis.destroy();
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>

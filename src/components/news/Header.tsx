@@ -7,16 +7,15 @@ import { Link } from "@tanstack/react-router";
 
 import logo from "@/assets/logo/logo.png";
 
-const NAV: { label: string; to: string; params?: { category: string } }[] = [
-  { label: "Home", to: "/" },
-  { label: "Breaking", to: "/", params: { category: "politics" } },
-  { label: "Latest", to: "/", params: { category: "sports" } },
-  { label: "Local", to: "/", params: { category: "sports" } },
-  { label: "Regional", to: "/", params: { category: "entertainment" } },
-  { label: "India", to: "/", params: { category: "business" } },
-  { label: "International", to: "/", params: { category: "tech" } },
-  { label: "Blog", to: "/", params: { category: "world" } },
-  { label: "Contact Us", to: "/contact" },
+const NAV: { label: string; to: string; hash: string }[] = [
+  { label: "Home", to: "/", hash: "" },
+  { label: "Breaking", to: "/", hash: "breaking" },
+  { label: "Latest", to: "/", hash: "latest" },
+  { label: "Local", to: "/", hash: "local" },
+  { label: "Regional", to: "/", hash: "regional" },
+  { label: "India", to: "/", hash: "india" },
+  { label: "International", to: "/", hash: "international" },
+  { label: "Contact Us", to: "/contact", hash: "" },
 ];
 
 import { LanguageSwitcher } from "@/components/language/LanguageSwitcher";
@@ -88,8 +87,7 @@ export function Header({ breakingNews }: HeaderProps) {
             {NAV.map((item) => (
               <Link
                 key={item.label}
-                to={item.to}
-                params={item.params as never}
+                to={item.hash ? `${item.to}#${item.hash}` : item.to}
                 className="transition-colors hover:text-primary"
               >
                 {item.label}
@@ -153,8 +151,7 @@ export function Header({ breakingNews }: HeaderProps) {
                     {NAV.map((item) => (
                       <Link
                         key={item.label}
-                        to={item.to}
-                        params={item.params as never}
+                        to={item.hash ? `${item.to}#${item.hash}` : item.to}
                         onClick={() => setIsMenuOpen(false)}
                         className="py-2 text-sm font-semibold transition-colors hover:text-primary"
                       >

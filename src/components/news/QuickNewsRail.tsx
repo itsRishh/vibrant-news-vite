@@ -5,6 +5,7 @@ import redcarpet from "@/assets/redcarpet.jpg";
 import parliament from "@/assets/images/mataji.jpeg";
 import tech from "@/assets/tech.jpg";
 import safarAd from "@/assets/images/safar-ad.jpeg";
+import ZTInews from "@/assets/images/ZTInews.png";
 
 const QUICK_NEWS = [
   { title: "Cabinet Clears New Semiconductor Policy Worth ₹76,000 Crore", tag: "Politics", time: "12 min ago", src: parliament },
@@ -18,6 +19,9 @@ const QUICK_NEWS = [
 export function QuickNewsRail() {
   return (
     <aside className="w-full px-2 pt-7 lg:sticky lg:top-24 lg:self-start">
+
+      
+
       {/* live video */}
       <div className="section-rule mb-3">
         <h2 className="flex items-center gap-2 text-lg font-black tracking-tight uppercase">
@@ -55,6 +59,8 @@ export function QuickNewsRail() {
           /></a>
       </article>
 
+      
+
       {/* quick news */}
       <div className="section-rule mb-3">
         <h2 className="text-lg font-black tracking-tight uppercase">Quick News</h2>
@@ -82,6 +88,19 @@ export function QuickNewsRail() {
           </li>
         ))}
       </ul>
+
+      <article className="group relative mb-6 overflow-hidden border border-border">
+        <div className=" from-ink to-transparent p-3">
+            <Badge>Ad</Badge>
+        </div>
+        <a href="" target="_blank" rel="noopener noreferrer">
+          <img
+            src={ZTInews}
+            alt="Zero Tolerance India live newsroom stream"
+            loading="lazy"
+            className="w-full object-cover opacity-100 transition-transform duration-500 group-hover:scale-105"
+          /></a>
+      </article>
     </aside>
   );
 }

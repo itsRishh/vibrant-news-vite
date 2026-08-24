@@ -69,7 +69,8 @@
         "badge": "Exclusive",
         "title": "राहुल गांधी बोले - एफआईआर दर्ज होना न्याय की पहली सीढ़ी।",
         "subHead": "",
-        "time": "1 hours ago"
+        "time": "1 hours ago",
+        "src":"/src/assets/images/stall.jpeg"
       },
       "cards": [
         {
@@ -103,7 +104,7 @@
       ]
     },
     "hotRightNow": {
-      "title": "Hot Right Now",
+      "title": "Latest NEWS",
       "promoBadge": "Presented by Flipk",
       "promoTitle": "Titan Smart Ultra — India's Premium Smartwatch",
       "promoDesc": "Launch Price ₹4,999 · Free Delivery on Pre-Order",
@@ -218,7 +219,7 @@
     },
 
     "latestNews": {
-      "title": "Latest NEWS",
+      "title": "Local NEWS",
       "promoBadge": "",
       "promoTitle": "",
       "promoDesc": "",
@@ -230,6 +231,27 @@
         "time": "1 hours ago"
       },
       "cards": [
+        {
+          "category": "REGIONAL",
+          "badge": "EXCLUSIVE",
+          "title": "बारिश से कोटर बेहाल, घर-दुकानों में घुसा पानी नगर परिषद कार्यालय में घुटनों तक पानी, कामकाज प्रभावित ",
+          "subHead": "मैहर विधायक श्री श्रीकांत चतुर्वेदी ने मप्र के स्कूल शिक्षा मंत्री से मुलाकात कर मैहर क्षेत्र के लिए करोड़ों रुपये की सौगात दिलाई।",
+          "time": "5 hours ago"
+        },
+        {
+          "category": "REGIONAL",
+          "badge": "EXCLUSIVE",
+          "title": "बारिश से कोटर बेहाल, घर-दुकानों में घुसा पानी नगर परिषद कार्यालय में घुटनों तक पानी, कामकाज प्रभावित ",
+          "subHead": "मैहर विधायक श्री श्रीकांत चतुर्वेदी ने मप्र के स्कूल शिक्षा मंत्री से मुलाकात कर मैहर क्षेत्र के लिए करोड़ों रुपये की सौगात दिलाई।",
+          "time": "5 hours ago"
+        },
+        {
+          "category": "REGIONAL",
+          "badge": "EXCLUSIVE",
+          "title": "बारिश से कोटर बेहाल, घर-दुकानों में घुसा पानी नगर परिषद कार्यालय में घुटनों तक पानी, कामकाज प्रभावित ",
+          "subHead": "मैहर विधायक श्री श्रीकांत चतुर्वेदी ने मप्र के स्कूल शिक्षा मंत्री से मुलाकात कर मैहर क्षेत्र के लिए करोड़ों रुपये की सौगात दिलाई।",
+          "time": "5 hours ago"
+        },
         {
           "category": "REGIONAL",
           "badge": "EXCLUSIVE",
@@ -303,9 +325,15 @@
         { "tag": "", "title": "मैहर,14 अगस्त। हर घर तिरंगा अभियान अंतर्गत कलेक्टर श्रीमती बिदिशा मुखर्जी के निर्देशन में मैहर संदीपनी विद्यालय के नन्हे छात्र-छात्राओं ने नवनिर्मित विद्यालय भवन की बाउंड्री वॉल पर आकर्षक वॉल पेंटिंग कर देशभक्ति एवं राष्ट्रप्रेम का संदेश दिया।", "time": "5h ago" },
         { "tag": "", "title": "भेडाघाट - रामस्नेही महराज आश्रम भेडाघाट चौक पर श्री शिव महापुराण का आयोजन 15/8/2026 से 23/8/26 तक किया जा रहा है ", "time": "7h ago" },
         { "tag": "", "title": "गाजीपुर काली माई माता मंदिर से लगभग 60 लाख रुपए से अधिक का चांदी का सिंहासन चोरी, दो बार हुई वारदात के बाद भी पुलिस के हाथ खाली आखिर ", "time": "9h ago" },
-        { "tag": "", "title": "मैहर की देवरी पंचायत के पिपरहट-झिर्राहट में सड़क किनारे संचालित खुली खदान अब हादसे को आमंत्रण दे रही है। बरसात के चलते खदान में पानी भर गया है, जिससे यहां दुर्घटना की आशंका बढ़ गई है।", "time": "12h ago" }
+        { "tag": "", "title": "मैहर की देवरी पंचायत के पिपरहट-झिर्राहट में सड़क किनारे संचालित खुली खदान अब हादसे को आमंत्रण दे रही है। बरसात के चलते खदान में पानी भर गया है, जिससे यहां दुर्घटना की आशंका बढ़ गई है।", "time": "12h ago" },
+        { "tag": "AD", "title": "AD SPACE", "time": "" }
       ]
     },
+
+    "stateNews": {
+      "title": "State NEWS"
+    },
+
     "bollywood": {
       "title": "Bollywood & Entertainment",
       "subtitle": "Movies, celebrities & OTT",
@@ -362,8 +390,8 @@
       "featuredDesc": "Finance Minister announces major relief for middle class — New regime now mandatory with higher standard deduction and revised capital gains rules.",
       "readFullStory": "Read Full Story →"
     },
-    "moreNews": {
-      "title": "More News",
+    "blogs": {
+      "title": "Blogs",
       "subtitle": "Weather, transport, education & beyond",
       "adBadge": "Flipkart",
       "adTitle": "Big Billion Days — Electronics Starting ₹499",
@@ -389,11 +417,11 @@
     "terms": "Terms of Use",
     "contact": "Contact Us",
     "columns": {
-      "news": { "title": "News", "links": ["Politics", "National", "International", "Trends", "Education"] },
-      "sports": { "title": "Sports", "links": ["Cricket", "Football", "Tennis", "Hockey", "Badminton"] },
-      "entertainment": { "title": "Entertainment", "links": ["Bollywood", "Hollywood", "Web Series", "Music", "Reviews"] },
-      "business": { "title": "Business", "links": ["Markets", "Economy", "Startups", "Personal Finance", "Industry"] },
-      "lifestyle": { "title": "Lifestyle", "links": ["Health", "Travel", "Food", "Technology", "Auto"] }
+      "news": { "title": "News live today", "links": ["", "Breaking", "Latest", "Local", "", "Regional", "India", "International"] },
+      "business": { "title": "", "links": [""] },
+      "sports": { "title": "ZTI NEWS", "links": ["Home", "About us", "Advertise on ZTI", "Contact Us"] },
+      "entertainment": { "title": "", "links": [""] },
+      "lifestyle": { "title": "Policies", "links": ["Privacy Policies", "Terms and Conditions", "Editorial Policy", "Disclaimer", "Sitemap"] }
     }
   },
 
