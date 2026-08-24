@@ -62,16 +62,18 @@ export default function ThumbVideo({
   src,
   alt = "",
   className = "",
+  mediaType,
 }: {
   src?: string;
   alt?: string;
   className?: string;
+  mediaType?: "image" | "video";
 }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const idRef = useRef(`thumb-video-${++idCounter}`);
   const [isActive, setIsActive] = useState(false);
 
-  const isVideo = !!src && isVideoSrc(src);
+  const isVideo = !!src && (mediaType === "video" || isVideoSrc(src));
 
   // Report visibility ratio to the shared manager
   useEffect(() => {

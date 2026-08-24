@@ -22,3 +22,22 @@ cd <repository-name>
 npm i
 npm run dev
 ```
+
+### Local public and admin origins
+
+The public website and development admin panel run as separate local origins,
+matching the production boundary between `www` and `admin` domains:
+
+```sh
+npm run dev:public  # http://127.0.0.1:8081
+npm run dev:admin   # http://127.0.0.1:8082/admin/breaking-news
+```
+
+Both surfaces use the same Convex deployment from `.env.local`, but the admin
+route is disabled when the app is started in public mode. In production, build
+and deploy the public and admin modes as separate applications/domains:
+
+```sh
+npm run build:public
+npm run build:admin
+```

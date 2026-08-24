@@ -10,11 +10,13 @@ import {
 import { useEffect, type ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import Lenis from "lenis";
+import { ConvexProvider } from "convex/react";
 
 import appCss from "../styles.css?url";
 import { LanguagePrompt } from "../components/language/LanguagePrompt";
 import { LanguageProvider } from "../i18n/LanguageProvider";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { convexClient } from "../lib/convex";
 
 function NotFoundComponent() {
   const { t } = useTranslation();
@@ -162,12 +164,14 @@ function RootComponent() {
   }, []);
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <LanguageProvider>
-        {/* <LanguagePrompt /> */}
-        {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-        <Outlet />
-      </LanguageProvider>
-    </QueryClientProvider>
+    <ConvexProvider client={convexClient}>
+      <QueryClientProvider client={queryClient}>
+        <LanguageProvider>
+          {/* <LanguagePrompt /> */}
+          {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+          <Outlet />
+        </LanguageProvider>
+      </QueryClientProvider>
+    </ConvexProvider>
   );
 }
