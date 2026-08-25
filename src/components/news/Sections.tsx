@@ -22,7 +22,7 @@ import adNalanda from "@/assets/images/ad-nalanda.jpg";
 // import parliament from "@/assets/parliament.jpg";
 import pandey from "@/assets/Videos/shorts/pandey.mp4";
 import parliament from "@/assets/images/tiranga.png";
-import mohan from "@/assets/Videos/shorts/happy.mp4";
+import mohan from "@/assets/images/baad.jpeg";
 import racket from "@/assets/images/racket.jpeg";
 import paani from "@/assets/images/paani.jpeg";
 import redcarpet from "@/assets/images/profile.jpeg";
@@ -380,7 +380,7 @@ export function PreAds () {
       <div className="container grid gap-3 lg:grid-cols-4">
         <div className="grid gap-3 col-span-3">
         <article className="group relative overflow-hidden border border-border lg:h-76">
-          <video autoPlay controls src={hospAdv} />
+          <video autoPlay src={hospAdv} />
         </article>
       </div>
       <div className="col-span-1 hidden lg:block">
@@ -507,7 +507,7 @@ export function Latest() {
       {/* main news */}
 
       <div className="grid gap-4 lg:grid-cols-[2fr_1fr_1fr]"> 
-        <article className="group relative lg:min-h-[320px] min-h-[520px] overflow-hidden bg-ink lg:row-span-2">
+        <article className="group relative lg:min-h-[320px] min-h-[520px] overflow-hidden bg-ink lg:col-span-2">
           <ThumbVideo
             src={mohan}
             className="absolute inset-0 opacity-100 transition-transform duration-500"
@@ -564,14 +564,14 @@ export function Latest() {
           </div>
         </article> */}
 
-        <article className="group relative overflow-hidden border border-border">
+        <article className="group relative overflow-hidden border border-border col-span-1">
           <div className=" from-ink to-transparent p-3">
             <Badge>{cards[2]?.category}</Badge>
           </div>
           <Thumb src={adNalanda} alt={cards[3]?.title ?? ""} className="w-[100%]" />
         </article>
 
-        <article className="group relative overflow-hidden">
+        <article className="group relative overflow-hidden col-span-1">
           <Thumb src={redcarpet} alt={cards[3]?.title ?? ""} className="h-full min-h-[150px] w-full" />
           <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-ink to-transparent p-3">
             <Badge>{cards[3]?.category}</Badge>
@@ -670,7 +670,7 @@ export function LocalNews() {
         </article>
 
 
-        {cards.slice(1, 4).map((c, i) => (
+        {/* {cards.slice(1, 4).map((c, i) => (
           <article key={c.title} className="group overflow-hidden border border-border">
             <div className="relative h-32 overflow-hidden">
               <Thumb
@@ -695,7 +695,7 @@ export function LocalNews() {
               </div>
             </div>
           </article>
-        ))}
+        ))} */}
 
         {/* ad */}
         {/* <article className="group relative overflow-hidden border border-border">
