@@ -2,20 +2,16 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/news/Header";
 import {
   PreAds,
-  Live,
-  Breaking,
-  Latest,
   QuickLatest,
-  LocalNews,
   BannerAd,
-  Regional,
-  StateNews,
-  VideoNews,
-  India,
-  International,
 } from "@/components/news/Sections";
 
 import BreakingTest from "@/components/segments/BreakingTest";
+import LatestTest from "@/components/segments/LatestTest";
+import LocalTest from "@/components/segments/LocalTest";
+import IndiaTest from "@/components/segments/IndiaTest";
+import RegionalTest from "@/components/segments/RegionalTest";
+import VideoTest from "@/components/segments/VideoTest";
 import { Newsletter, Footer } from "@/components/news/Footer";
 import { NewsClickArea } from "@/components/news/NewsClickArea";
 import { QuickNewsRail } from "@/components/news/QuickNewsRail";
@@ -63,7 +59,7 @@ function Index() {
             </div>
 
             <div id="latest" className="scroll-mt-32">
-              <Latest />
+              <LatestTest />
             </div>
 
             <div className="scroll-mt-32">
@@ -71,26 +67,26 @@ function Index() {
             </div>
 
             <div id="local" className="scroll-mt-32">
-              <LocalNews />
+              <LocalTest />
             </div>
 
             <BannerAd />
 
             <div id="regional" className="scroll-mt-32">
-              <Regional />
+              <RegionalTest />
             </div>
 
             {/* <div id="state" className="scroll-mt-32">
               <StateNews />
             </div> */}
 
-            <VideoNews />
-
-            {/* <div id="india" className="scroll-mt-32">
-              <India />
+            <VideoTest />
+            <div id="india" className="scroll-mt-32">
+              <IndiaTest />
             </div>
 
-            <div id="international" className="scroll-mt-32">
+
+            {/* <div id="international" className="scroll-mt-32">
               <International />
             </div> */}
             {/* <QuickReads /> */}

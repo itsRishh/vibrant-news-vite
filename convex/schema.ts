@@ -25,11 +25,12 @@ export default defineSchema({
 
   latestNews: defineTable({
     title: v.string(),
+    body: v.optional(v.string()),
     category: v.string(),
     badge: v.string(),
     excerpt: v.string(),
-    imageId: v.id("_storage"),
-    mediaType: v.union(v.literal("image"), v.literal("video")),
+    imageId: v.optional(v.id("_storage")),
+    mediaType: v.optional(v.union(v.literal("image"), v.literal("video"))),
     slug: v.string(),
     featured: v.boolean(),
     published: v.boolean(),
@@ -41,4 +42,57 @@ export default defineSchema({
     .index("by_published", ["published"])
     .index("by_published_order", ["published", "order"])
     .index("by_published_position", ["published", "position"]),
+
+  localNews: defineTable({
+    title: v.string(),
+    body: v.optional(v.string()),
+    category: v.string(),
+    badge: v.string(),
+    excerpt: v.string(),
+    imageId: v.optional(v.id("_storage")),
+    mediaType: v.optional(v.union(v.literal("image"), v.literal("video"))),
+    slug: v.string(),
+    featured: v.boolean(),
+    published: v.boolean(),
+    order: v.number(),
+    position: v.number(),
+    publishedAt: v.number(),
+  })
+    .index("by_order", ["order"])
+    .index("by_published", ["published"])
+    .index("by_published_order", ["published", "order"])
+    .index("by_published_position", ["published", "position"]),
+
+  regionalNews: defineTable({
+    title: v.string(),
+    body: v.optional(v.string()),
+    category: v.string(),
+    badge: v.string(),
+    excerpt: v.string(),
+    imageId: v.optional(v.id("_storage")),
+    mediaType: v.optional(v.union(v.literal("image"), v.literal("video"))),
+    slug: v.string(),
+    featured: v.boolean(),
+    published: v.boolean(),
+    order: v.number(),
+    position: v.number(),
+    publishedAt: v.number(),
+  })
+    .index("by_order", ["order"])
+    .index("by_published", ["published"])
+    .index("by_published_order", ["published", "order"])
+    .index("by_published_position", ["published", "position"]),
+
+  videos: defineTable({
+    title: v.string(),
+    description: v.string(),
+    imageId: v.id("_storage"),
+    mediaType: v.literal("video"),
+    kind: v.union(v.literal("full"), v.literal("short")),
+    slot: v.optional(v.number()),
+    published: v.boolean(),
+    publishedAt: v.number(),
+  })
+    .index("by_kind", ["kind"])
+    .index("by_published", ["published"]),
 });

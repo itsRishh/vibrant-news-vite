@@ -2,65 +2,65 @@ import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
 
 const MIN_POSITION = 1;
-const MAX_POSITION = 11;
-const SHORT_NEWS_MIN_POSITION = 6;
-const SHORT_NEWS_MAX_POSITION = 11;
+const MAX_POSITION = 5;
+const AD_POSITION = 5;
 
-const isShortNewsPosition = (position: number) => position >= SHORT_NEWS_MIN_POSITION && position <= SHORT_NEWS_MAX_POSITION;
+const isAdPosition = (position: number) => position === AD_POSITION;
 
-const latestNewsArgs = {
-    title: v.string(),
-    body: v.optional(v.string()),
-    category: v.string(),
-    badge: v.string(),
-    excerpt: v.string(),
-    imageId: v.optional(v.id("_storage")),
-    mediaType: v.optional(v.union(v.literal("image"), v.literal("video"))),
-    slug: v.string(),
-    featured: v.boolean(),
-    published: v.boolean(),
-    order: v.number(),
-    position: v.number(),
-    publishedAt: v.number(),
+const localNewsArgs = {
+  title: v.string(),
+  body: v.optional(v.string()),
+  category: v.string(),
+  badge: v.string(),
+  excerpt: v.string(),
+  imageId: v.optional(v.id("_storage")),
+  mediaType: v.optional(v.union(v.literal("image"), v.literal("video"))),
+  slug: v.string(),
+  featured: v.boolean(),
+  published: v.boolean(),
+  order: v.number(),
+  position: v.number(),
+  publishedAt: v.number(),
 };
 
 export const create = mutation({
-  args: latestNewsArgs,
+  args: localNewsArgs,
   handler: async (ctx, args) => {
     if (args.position < MIN_POSITION || args.position > MAX_POSITION) {
-      throw new Error("Latest News position must be between 1 and 11.");
+      throw new Error("Local News position must be between 1 and 5.");
     }
 
-    if (!isShortNewsPosition(args.position) && (!args.imageId || !args.mediaType)) {
-      throw new Error("Image/video is required for hero and sub-hero latest news positions.");
+    if (!args.imageId || !args.mediaType) {
+      throw new Error("Local News entries require an image or video upload for every position.");
     }
 
     if (args.imageId && !args.mediaType) {
-      throw new Error("Media type is required when an uploaded file is present.");
+      throw new Error("Media type is required when a file is uploaded.");
     }
 
     if (!args.imageId && args.mediaType) {
-      throw new Error("Image/video upload is required when media type is set.");
+      throw new Error("You must upload a file when media type is present.");
     }
 
-    return ctx.db.insert("latestNews", args);
+    return ctx.db.insert("localNews", args);
   },
 });
 
 export const move = mutation({
   args: {
-    id: v.id("latestNews"),
+    id: v.id("localNews"),
     position: v.number(),
   },
   handler: async (ctx, { id, position }) => {
     if (position < MIN_POSITION || position > MAX_POSITION) {
-      throw new Error("Latest News position must be between 1 and 11.");
+      throw new Error("Local News position must be between 1 and 5.");
     }
+
     const article = await ctx.db.get(id);
-    if (!article) throw new Error("latest News article was not found.");
+    if (!article) throw new Error("Local News article was not found.");
 
     const destinationArticles = await ctx.db
-      .query("latestNews")
+      .query("localNews")
       .withIndex("by_published_position", (q) =>
         q.eq("published", article.published).eq("position", position),
       )
@@ -83,7 +83,7 @@ export const list = query({
   args: {},
   handler: async (ctx) => {
     const articles = await ctx.db
-      .query("latestNews")
+      .query("localNews")
       .withIndex("by_published_position", (q) => q.eq("published", true))
       .order("asc")
       .collect();

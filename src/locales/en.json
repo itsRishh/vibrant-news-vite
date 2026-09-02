@@ -108,7 +108,7 @@
         }
       ]
     },
-    "hotRightNow": {
+    "latestNews": {
       "title": "Latest NEWS",
       "promoBadge": "Presented by Flipk",
       "promoTitle": "Titan Smart Ultra — India's Premium Smartwatch",
@@ -222,8 +222,19 @@
         }
       ]
     },
-
-    "latestNews": {
+    "quickLatest": {
+      "title": "Breaking NEWS",
+      "subtitle": "",
+      "items": [
+        { "city": "Maharashtra", "title": "Mumbai Metro Line 3 Opens: 10 Lakh Daily Riders Expected", "time": "2h ago" },
+        { "city": "Tamil Nadu", "title": "Chennai Water Crisis: New Desalination Plant Operational", "time": "3h ago" },
+        { "city": "Delhi", "title": "Yamuna River Cleanup Project Enters Phase 3", "time": "4h ago" },
+        { "city": "Kerala", "title": "Kerala Wins Best Tourism State Award for 5th Year Running", "time": "6h ago" },
+        { "city": "Gujarat", "title": "Ahmedabad Smart City Project Receives Global Recognition", "time": "11h ago" },
+        { "city": "West Bengal", "title": "Kolkata Underground Metro Extension Complete", "time": "1d ago" }
+      ]
+    },
+    "localNews": {
       "title": "Local NEWS",
       "promoBadge": "",
       "promoTitle": "",
@@ -266,18 +277,7 @@
         }
       ]
     },
-    "regionals": {
-      "title": "Breaking NEWS",
-      "subtitle": "",
-      "items": [
-        { "city": "Maharashtra", "title": "Mumbai Metro Line 3 Opens: 10 Lakh Daily Riders Expected", "time": "2h ago" },
-        { "city": "Tamil Nadu", "title": "Chennai Water Crisis: New Desalination Plant Operational", "time": "3h ago" },
-        { "city": "Delhi", "title": "Yamuna River Cleanup Project Enters Phase 3", "time": "4h ago" },
-        { "city": "Kerala", "title": "Kerala Wins Best Tourism State Award for 5th Year Running", "time": "6h ago" },
-        { "city": "Gujarat", "title": "Ahmedabad Smart City Project Receives Global Recognition", "time": "11h ago" },
-        { "city": "West Bengal", "title": "Kolkata Underground Metro Extension Complete", "time": "1d ago" }
-      ]
-    },
+    
     "latest": {
       "title": "Latest NEWS",
       "subtitle": "",

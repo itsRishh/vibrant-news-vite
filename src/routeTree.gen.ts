@@ -10,8 +10,14 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AdminBreakingNewsRouteImport } from './routes/admin.breaking-news'
+import { Route as AdminIndiaNewsRouteImport } from './routes/admin.india-news'
+import { Route as AdminLatestNewsRouteImport } from './routes/admin.latest-news'
+import { Route as AdminLocalNewsRouteImport } from './routes/admin.local-news'
+import { Route as AdminRegionalNewsRouteImport } from './routes/admin.regional-news'
+import { Route as AdminVideoNewsRouteImport } from './routes/admin.video-news'
 import { Route as CategoryCategoryRouteImport } from './routes/category.$category'
 import { Route as NewsSlugRouteImport } from './routes/news.$slug'
 import { Route as NewsSectionSlugRouteImport } from './routes/news.$section.$slug'
@@ -21,15 +27,45 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminBreakingNewsRoute = AdminBreakingNewsRouteImport.update({
-  id: '/admin/breaking-news',
-  path: '/admin/breaking-news',
-  getParentRoute: () => rootRouteImport,
+  id: '/breaking-news',
+  path: '/breaking-news',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminIndiaNewsRoute = AdminIndiaNewsRouteImport.update({
+  id: '/india-news',
+  path: '/india-news',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminLatestNewsRoute = AdminLatestNewsRouteImport.update({
+  id: '/latest-news',
+  path: '/latest-news',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminLocalNewsRoute = AdminLocalNewsRouteImport.update({
+  id: '/local-news',
+  path: '/local-news',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminRegionalNewsRoute = AdminRegionalNewsRouteImport.update({
+  id: '/regional-news',
+  path: '/regional-news',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminVideoNewsRoute = AdminVideoNewsRouteImport.update({
+  id: '/video-news',
+  path: '/video-news',
+  getParentRoute: () => AdminRoute,
 } as any)
 const CategoryCategoryRoute = CategoryCategoryRouteImport.update({
   id: '/category/$category',
@@ -49,16 +85,28 @@ const NewsSectionSlugRoute = NewsSectionSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
   '/contact': typeof ContactRoute
   '/admin/breaking-news': typeof AdminBreakingNewsRoute
+  '/admin/india-news': typeof AdminIndiaNewsRoute
+  '/admin/latest-news': typeof AdminLatestNewsRoute
+  '/admin/local-news': typeof AdminLocalNewsRoute
+  '/admin/regional-news': typeof AdminRegionalNewsRoute
+  '/admin/video-news': typeof AdminVideoNewsRoute
   '/category/$category': typeof CategoryCategoryRoute
   '/news/$slug': typeof NewsSlugRoute
   '/news/$section/$slug': typeof NewsSectionSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
   '/contact': typeof ContactRoute
   '/admin/breaking-news': typeof AdminBreakingNewsRoute
+  '/admin/india-news': typeof AdminIndiaNewsRoute
+  '/admin/latest-news': typeof AdminLatestNewsRoute
+  '/admin/local-news': typeof AdminLocalNewsRoute
+  '/admin/regional-news': typeof AdminRegionalNewsRoute
+  '/admin/video-news': typeof AdminVideoNewsRoute
   '/category/$category': typeof CategoryCategoryRoute
   '/news/$slug': typeof NewsSlugRoute
   '/news/$section/$slug': typeof NewsSectionSlugRoute
@@ -66,8 +114,14 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
   '/contact': typeof ContactRoute
   '/admin/breaking-news': typeof AdminBreakingNewsRoute
+  '/admin/india-news': typeof AdminIndiaNewsRoute
+  '/admin/latest-news': typeof AdminLatestNewsRoute
+  '/admin/local-news': typeof AdminLocalNewsRoute
+  '/admin/regional-news': typeof AdminRegionalNewsRoute
+  '/admin/video-news': typeof AdminVideoNewsRoute
   '/category/$category': typeof CategoryCategoryRoute
   '/news/$slug': typeof NewsSlugRoute
   '/news/$section/$slug': typeof NewsSectionSlugRoute
@@ -76,24 +130,42 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/admin'
     | '/contact'
     | '/admin/breaking-news'
+    | '/admin/india-news'
+    | '/admin/latest-news'
+    | '/admin/local-news'
+    | '/admin/regional-news'
+    | '/admin/video-news'
     | '/category/$category'
     | '/news/$slug'
     | '/news/$section/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/admin'
     | '/contact'
     | '/admin/breaking-news'
+    | '/admin/india-news'
+    | '/admin/latest-news'
+    | '/admin/local-news'
+    | '/admin/regional-news'
+    | '/admin/video-news'
     | '/category/$category'
     | '/news/$slug'
     | '/news/$section/$slug'
   id:
     | '__root__'
     | '/'
+    | '/admin'
     | '/contact'
     | '/admin/breaking-news'
+    | '/admin/india-news'
+    | '/admin/latest-news'
+    | '/admin/local-news'
+    | '/admin/regional-news'
+    | '/admin/video-news'
     | '/category/$category'
     | '/news/$slug'
     | '/news/$section/$slug'
@@ -101,8 +173,8 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRouteWithChildren
   ContactRoute: typeof ContactRoute
-  AdminBreakingNewsRoute: typeof AdminBreakingNewsRoute
   CategoryCategoryRoute: typeof CategoryCategoryRoute
   NewsSlugRoute: typeof NewsSlugRoute
   NewsSectionSlugRoute: typeof NewsSectionSlugRoute
@@ -117,6 +189,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/contact': {
       id: '/contact'
       path: '/contact'
@@ -126,10 +205,45 @@ declare module '@tanstack/react-router' {
     }
     '/admin/breaking-news': {
       id: '/admin/breaking-news'
-      path: '/admin/breaking-news'
+      path: '/breaking-news'
       fullPath: '/admin/breaking-news'
       preLoaderRoute: typeof AdminBreakingNewsRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/india-news': {
+      id: '/admin/india-news'
+      path: '/india-news'
+      fullPath: '/admin/india-news'
+      preLoaderRoute: typeof AdminIndiaNewsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/latest-news': {
+      id: '/admin/latest-news'
+      path: '/latest-news'
+      fullPath: '/admin/latest-news'
+      preLoaderRoute: typeof AdminLatestNewsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/local-news': {
+      id: '/admin/local-news'
+      path: '/local-news'
+      fullPath: '/admin/local-news'
+      preLoaderRoute: typeof AdminLocalNewsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/regional-news': {
+      id: '/admin/regional-news'
+      path: '/regional-news'
+      fullPath: '/admin/regional-news'
+      preLoaderRoute: typeof AdminRegionalNewsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/video-news': {
+      id: '/admin/video-news'
+      path: '/video-news'
+      fullPath: '/admin/video-news'
+      preLoaderRoute: typeof AdminVideoNewsRouteImport
+      parentRoute: typeof AdminRoute
     }
     '/category/$category': {
       id: '/category/$category'
@@ -155,10 +269,30 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface AdminRouteChildren {
+  AdminBreakingNewsRoute: typeof AdminBreakingNewsRoute
+  AdminIndiaNewsRoute: typeof AdminIndiaNewsRoute
+  AdminLatestNewsRoute: typeof AdminLatestNewsRoute
+  AdminLocalNewsRoute: typeof AdminLocalNewsRoute
+  AdminRegionalNewsRoute: typeof AdminRegionalNewsRoute
+  AdminVideoNewsRoute: typeof AdminVideoNewsRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminBreakingNewsRoute: AdminBreakingNewsRoute,
+  AdminIndiaNewsRoute: AdminIndiaNewsRoute,
+  AdminLatestNewsRoute: AdminLatestNewsRoute,
+  AdminLocalNewsRoute: AdminLocalNewsRoute,
+  AdminRegionalNewsRoute: AdminRegionalNewsRoute,
+  AdminVideoNewsRoute: AdminVideoNewsRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRouteWithChildren,
   ContactRoute: ContactRoute,
-  AdminBreakingNewsRoute: AdminBreakingNewsRoute,
   CategoryCategoryRoute: CategoryCategoryRoute,
   NewsSlugRoute: NewsSlugRoute,
   NewsSectionSlugRoute: NewsSectionSlugRoute,
