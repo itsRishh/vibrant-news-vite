@@ -16,12 +16,7 @@ const POSITION_OPTIONS = [
 ] as const;
 
 export const Route = createFileRoute("/admin/breaking-news")({
-    beforeLoad: () => {
-        if (import.meta.env["VITE_APP_SURFACE"] !== "admin") {
-            throw notFound();
-        }
-    },
-    component: AdminBreakingNews,
+
 });
 
 function AdminBreakingNews() {

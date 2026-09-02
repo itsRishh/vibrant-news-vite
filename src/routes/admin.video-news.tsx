@@ -9,9 +9,6 @@ const MAX_MEDIA_SIZE = 100 * 1024 * 1024;
 const FULL_SLOTS = [1, 2, 3] as const;
 
 export const Route = createFileRoute("/admin/video-news")({
-    beforeLoad: () => {
-        if (import.meta.env["VITE_APP_SURFACE"] !== "admin") throw notFound();
-    },
     component: AdminVideoNews,
 });
 

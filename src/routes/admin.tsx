@@ -76,11 +76,6 @@ function setAdminAuthenticated(value: boolean) {
 }
 
 export const Route = createFileRoute("/admin")({
-    beforeLoad: () => {
-        if (import.meta.env["VITE_APP_SURFACE"] !== "admin") {
-            throw notFound();
-        }
-    },
     component: AdminDashboard,
 });
 

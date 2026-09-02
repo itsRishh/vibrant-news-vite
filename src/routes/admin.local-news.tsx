@@ -15,11 +15,6 @@ const POSITION_OPTIONS = [
 ] as const;
 
 export const Route = createFileRoute("/admin/local-news")({
-  beforeLoad: () => {
-    if (import.meta.env["VITE_APP_SURFACE"] !== "admin") {
-      throw notFound();
-    }
-  },
   component: AdminLocalNews,
 });
 

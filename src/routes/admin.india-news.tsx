@@ -21,11 +21,6 @@ const POSITION_OPTIONS = [
 const requiresMediaForPosition = (position: number) => position === 1;
 
 export const Route = createFileRoute("/admin/india-news")({
-  beforeLoad: () => {
-    if (import.meta.env["VITE_APP_SURFACE"] !== "admin") {
-      throw notFound();
-    }
-  },
   component: AdminIndiaNews,
 });
 

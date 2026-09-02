@@ -24,11 +24,6 @@ const requiresMediaForPosition = (position: number) =>
   position === 1 || position === 2 || position === 3 || position === 4 || position === 5 || position === 6;
 
 export const Route = createFileRoute("/admin/regional-news")({
-  beforeLoad: () => {
-    if (import.meta.env["VITE_APP_SURFACE"] !== "admin") {
-      throw notFound();
-    }
-  },
   component: AdminRegionalNews,
 });
 
