@@ -26,7 +26,7 @@ const POSITION_OPTIONS = [
 ] as const;
 
 export const Route = createFileRoute("/admin/latest-news")({
-
+    component: AdminLatestNews,
 });
 
 function AdminLatestNews() {

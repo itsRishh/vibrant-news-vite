@@ -1,5 +1,5 @@
 import { createFileRoute, Link, Outlet, notFound, useRouterState } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const ADMIN_AUTH_KEY = "vibrant-news-admin-auth";
 const ADMIN_PASSWORD = (import.meta.env["VITE_ADMIN_PASSWORD"] ?? "vibrant-admin-2026").trim();
@@ -82,9 +82,13 @@ export const Route = createFileRoute("/admin")({
 function AdminDashboard() {
     const pathname = useRouterState({ select: (state) => state.location.pathname });
     const isDashboardRoute = pathname === "/admin" || pathname === "/admin/";
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
-    const isAuthenticated = isAdminAuthenticated();
+
+    useEffect(() => {
+        setIsAuthenticated(isAdminAuthenticated());
+    }, []);
 
     if (!isAuthenticated) {
         const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -92,6 +96,7 @@ function AdminDashboard() {
 
             if (password === ADMIN_PASSWORD) {
                 setAdminAuthenticated(true);
+                setIsAuthenticated(true);
                 window.location.assign("/admin");
                 return;
             }
