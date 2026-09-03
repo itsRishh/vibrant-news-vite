@@ -55,6 +55,32 @@ export const create = mutation({
   },
 });
 
+export const update = mutation({
+  args: {
+    id: v.id("regionalNews"),
+    ...regionalNewsArgs,
+  },
+  handler: async (ctx, { id, imageId, mediaType, ...args }) => {
+    if (args.position < MIN_POSITION || args.position > MAX_POSITION) {
+      throw new Error("Regional News position must be between 1 and 11.");
+    }
+    const article = await ctx.db.get(id);
+    if (!article) throw new Error("Regional News article was not found.");
+    const finalImageId = imageId ?? article.imageId;
+    const finalMediaType = mediaType ?? article.mediaType;
+    if (requiresMediaForPosition(args.position) && (!finalImageId || !finalMediaType)) {
+      throw new Error("Hero, sub-hero, and ad regional news positions require an image or video upload.");
+    }
+    if (finalImageId && !finalMediaType) throw new Error("Media type is required when an uploaded file is present.");
+    if (!finalImageId && finalMediaType) throw new Error("Image/video upload is required when media type is set.");
+    await ctx.db.patch(id, {
+      ...args,
+      ...(imageId ? { imageId } : {}),
+      ...(mediaType ? { mediaType } : {}),
+    });
+  },
+});
+
 export const move = mutation({
   args: {
     id: v.id("regionalNews"),

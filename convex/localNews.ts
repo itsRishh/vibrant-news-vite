@@ -46,6 +46,30 @@ export const create = mutation({
   },
 });
 
+export const update = mutation({
+  args: {
+    id: v.id("localNews"),
+    ...localNewsArgs,
+  },
+  handler: async (ctx, { id, imageId, mediaType, ...args }) => {
+    if (args.position < MIN_POSITION || args.position > MAX_POSITION) {
+      throw new Error("Local News position must be between 1 and 5.");
+    }
+    const article = await ctx.db.get(id);
+    if (!article) throw new Error("Local News article was not found.");
+    const finalImageId = imageId ?? article.imageId;
+    const finalMediaType = mediaType ?? article.mediaType;
+    if (!finalImageId || !finalMediaType) throw new Error("Local News entries require an image or video upload for every position.");
+    if (finalImageId && !finalMediaType) throw new Error("Media type is required when a file is uploaded.");
+    if (!finalImageId && finalMediaType) throw new Error("You must upload a file when media type is present.");
+    await ctx.db.patch(id, {
+      ...args,
+      ...(imageId ? { imageId } : {}),
+      ...(mediaType ? { mediaType } : {}),
+    });
+  },
+});
+
 export const move = mutation({
   args: {
     id: v.id("localNews"),

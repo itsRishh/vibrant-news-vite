@@ -30,8 +30,8 @@ export default function RegionalTest() {
     <section className="lg:max-w-[1250px] max-w-[100vw] sm:px-4 px-4 lg:px-0 pt-6">
       <SectionHead title="Regional News" subtitle="District and regional leads from across the state." />
 
-      <div className="mt-4 grid gap-4 lg:grid-cols-[2fr_1fr_1fr_1fr_1fr]">
-        <article className="group relative min-h-[330px] overflow-hidden bg-ink lg:col-span-2">
+      <div className="mt-4 grid gap-4 lg:grid-cols-[2fr_1fr_1fr]">
+        <article className="group relative min-h-[330px] overflow-hidden bg-ink lg:row-span-2">
           {hero ? (
             <>
               <ThumbVideo

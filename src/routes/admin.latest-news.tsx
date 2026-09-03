@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from "convex/react";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Pencil } from "lucide-react";
 import { api } from "../../convex/_generated/api";
 import type { Id } from "../../convex/_generated/dataModel";
 
@@ -32,6 +32,7 @@ export const Route = createFileRoute("/admin/latest-news")({
 function AdminLatestNews() {
     const generateUploadUrl = useMutation(api.files.generateUploadUrl);
     const createLatestNews = useMutation(api.latestNews.create);
+    const updateLatestNews = useMutation(api.latestNews.update);
     const moveLatestNews = useMutation(api.latestNews.move);
     const publishedArticles = useQuery(api.latestNews.list);
 
@@ -49,6 +50,7 @@ function AdminLatestNews() {
     const [error, setError] = useState("");
     const [positionMessage, setPositionMessage] = useState("");
     const [movingArticleId, setMovingArticleId] = useState<string | null>(null);
+    const [editingArticleId, setEditingArticleId] = useState<Id<"latestNews"> | null>(null);
 
     useEffect(() => {
         if (!media) {
@@ -104,10 +106,22 @@ function AdminLatestNews() {
         }
     }
 
+    function startEditing(article: NonNullable<typeof publishedArticles>[number]) {
+        setEditingArticleId(article._id); setTitle(article.title); setBody(article.body ?? "");
+        setCategory(article.category); setBadge(article.badge); setExcerpt(article.excerpt);
+        setPosition(article.position); setFeatured(article.featured); setPublished(article.published);
+        setMedia(null); setStatus("idle"); setError("");
+    }
+
+    function cancelEditing() {
+        setEditingArticleId(null); setTitle(""); setBody(""); setExcerpt(""); setPosition(1);
+        setMedia(null); setFeatured(true); setPublished(true); setStatus("idle"); setError("");
+    }
+
     async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
 
-        if (!title.trim() || !category || !excerpt.trim() || (requiresMediaForPosition && !media)) {
+        if (!title.trim() || !category || !excerpt.trim() || (requiresMediaForPosition && !media && !editingArticleId)) {
             setError(
                 requiresMediaForPosition
                     ? "Headline, category, excerpt, and media file are required."
@@ -139,7 +153,7 @@ function AdminLatestNews() {
             }
 
             setStatus("publishing");
-            await createLatestNews({
+            const articleArgs = {
                 title: title.trim(),
                 body: body.trim(),
                 category,
@@ -153,9 +167,12 @@ function AdminLatestNews() {
                 order: position,
                 position,
                 publishedAt: Date.now(),
-            });
+            };
+            if (editingArticleId) await updateLatestNews({ id: editingArticleId, ...articleArgs });
+            else await createLatestNews(articleArgs);
 
             setStatus("success");
+            setEditingArticleId(null);
             setTitle("");
             setBody("");
             setExcerpt("");
@@ -165,7 +182,7 @@ function AdminLatestNews() {
             setPublished(true);
         } catch (submissionError) {
             console.error(submissionError);
-            setError("Could not publish this article. Please try again.");
+            setError(editingArticleId ? "Could not update this article. Please try again." : "Could not publish this article. Please try again.");
             setStatus("idle");
         }
     }
@@ -302,7 +319,7 @@ function AdminLatestNews() {
                     {error && <p className="border border-primary/30 bg-tint px-3 py-2 text-sm text-primary">{error}</p>}
                     {status === "success" && (
                         <p className="border border-green-600/30 bg-green-50 px-3 py-2 text-sm text-green-700">
-                            Article published successfully.
+                            Article saved successfully.
                         </p>
                     )}
 
@@ -320,6 +337,7 @@ function AdminLatestNews() {
                                     onChange={(event) => onMediaChange(event.target.files?.[0])}
                                     className="mt-2 block w-full border border-border px-3 py-2 text-sm font-normal"
                                 />
+                                {editingArticleId && <span className="mt-1 block text-xs font-normal text-muted-foreground">Leave empty to keep the current media.</span>}
                             </label>
                         )}
 
@@ -344,6 +362,7 @@ function AdminLatestNews() {
                                                 <p className="text-[10px] font-bold uppercase tracking-wide text-muted-foreground">{option.group}</p>
                                                 <p className="font-bold">{option.label}</p>
                                                 <p className="mt-1 truncate text-muted-foreground">{article?.title ?? "Available"}</p>
+                                                {article && <button type="button" onClick={() => startEditing(article)} className="mt-2 inline-flex items-center gap-1 font-bold text-primary hover:underline"><Pencil className="h-3 w-3" aria-hidden="true" />Edit</button>}
                                             </div>
 
                                             {article ? (
@@ -390,8 +409,9 @@ function AdminLatestNews() {
                         disabled={isSubmitting}
                         className="w-full bg-primary px-5 py-3 text-sm font-bold text-primary-foreground disabled:cursor-not-allowed disabled:opacity-60"
                     >
-                        {status === "uploading" ? "Uploading media..." : status === "publishing" ? "Publishing..." : "Publish article"}
+                        {status === "uploading" ? "Uploading media..." : status === "publishing" ? "Saving..." : editingArticleId ? "Save changes" : "Publish article"}
                     </button>
+                    {editingArticleId && <button type="button" onClick={cancelEditing} disabled={isSubmitting} className="mt-2 w-full border border-border px-5 py-3 text-sm font-bold disabled:opacity-60">Cancel</button>}
                 </div>
             </form>
         </main>

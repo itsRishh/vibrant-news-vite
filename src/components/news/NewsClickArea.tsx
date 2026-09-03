@@ -86,7 +86,6 @@ export function NewsClickArea({ children }: { children: ReactNode }) {
                 </DialogHeader>
 
                 <div className="mt-5 flex flex-wrap gap-x-4 gap-y-1 border-y border-border py-3 text-[11px] text-muted-foreground">
-                  <span className="font-bold text-foreground">{selectedArticle.slug}</span>
                   <span>{new Date(selectedArticle.publishedAt).toLocaleString()}</span>
                 </div>
 

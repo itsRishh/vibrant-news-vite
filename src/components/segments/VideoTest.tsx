@@ -48,7 +48,7 @@ export default function VideoTest() {
                                 <span className="absolute bottom-2 right-2 flex items-center gap-1 bg-ink px-1.5 py-0.5 text-[9px] font-bold text-background"><Play className="h-3 w-3" /> Play</span>
                             </div>
                             <h3 className="mt-2 text-xs font-bold">{video.title}</h3>
-                            <p className="mt-1 flex items-center gap-1 text-[10px] text-muted-foreground"><Eye className="h-3 w-3" />{"description" in video ? video.description : video.views}</p>
+                            <p className="mt-1 flex items-center gap-1 text-[10px] text-muted-foreground">{"description" in video ? video.description : video.views}</p>
                         </article>
                     );
                 })}
