@@ -29,7 +29,7 @@ function AdminIndiaNews() {
   const createLatestNews = useMutation(api.latestNews.create);
   const updateLatestNews = useMutation(api.latestNews.update);
   const moveLatestNews = useMutation(api.latestNews.move);
-  const publishedArticles = useQuery(api.latestNews.list);
+  const publishedArticles = useQuery(api.latestNews.adminList);
 
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
@@ -151,8 +151,8 @@ function AdminIndiaNews() {
         category,
         badge,
         excerpt: excerpt.trim(),
-        imageId: storageId,
-        mediaType: storageId && media ? (media.type.startsWith("video/") ? "video" : "image") : undefined,
+        ...(storageId ? { imageId: storageId } : {}),
+        ...(storageId && media ? { mediaType: media.type.startsWith("video/") ? ("video" as const) : ("image" as const) } : {}),
         slug: `${title.trim().toLowerCase().replace(/[^a-z0-9]+/g, "-")}-${Date.now()}`,
         featured,
         published,

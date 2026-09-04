@@ -86,14 +86,24 @@ export const update = mutation({
 export const list = query({
   args: {},
   handler: async (ctx) => {
-    const videos = await ctx.db.query("videos").order("desc").collect();
-    return Promise.all(
-      videos.map(async ({ _id, _creationTime, imageId, ...video }) => ({
-        ...video,
-        _id,
-        imageId,
-        imageUrl: await ctx.storage.getUrl(imageId),
-      })),
-    );
+    const videos = await ctx.db
+      .query("videos")
+      .withIndex("by_published", (q) => q.eq("published", true))
+      .order("desc")
+      .collect();
+    return Promise.all(videos.map(async (video) => ({
+      _id: video._id,
+      title: video.title,
+      description: video.description,
+      imageUrl: await ctx.storage.getUrl(video.imageId),
+      mediaType: video.mediaType,
+      kind: video.kind,
+      slot: video.slot,
+    })));
   },
+});
+
+export const adminList = query({
+  args: {},
+  handler: async (ctx) => ctx.db.query("videos").order("desc").collect(),
 });

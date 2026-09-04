@@ -82,27 +82,53 @@ export const move = mutation({
 export const list = query({
   args: {},
   handler: async (ctx) => {
-    const articles = await ctx.db
-      .query("breakingNews")
-      .withIndex("by_published_position", (q) => q.eq("published", true))
-      .order("asc")
-      .collect();
+    const articlesByPosition = new Map<number, (typeof breakingNewsArgs extends never ? never : Awaited<ReturnType<typeof ctx.db.query<"breakingNews">["collect"]>>[number])>();
+    const positions = [1, 2, 3, 4, 5, 6];
+    const articlesAtPositions = await Promise.all(positions.map((position) =>
+      ctx.db.query("breakingNews").withIndex("by_published_position", (q) =>
+        q.eq("published", true).eq("position", position),
+      ).collect(),
+    ));
+    articlesAtPositions.forEach((articles) => {
+      const article = articles.reduce((latest, candidate) =>
+        !latest || candidate._creationTime > latest._creationTime ? candidate : latest,
+      undefined as (typeof articles)[number] | undefined);
+      if (article) articlesByPosition.set(article.position, article);
+    });
 
-    const articlesByPosition = new Map<number, (typeof articles)[number]>();
-    for (const article of articles) {
-      const current = articlesByPosition.get(article.position);
-      if (!current || article._creationTime > current._creationTime) {
-        articlesByPosition.set(article.position, article);
-      }
-    }
+    return Promise.all([...articlesByPosition.values()].map(async (article) => ({
+      _id: article._id,
+      title: article.title,
+      category: article.category,
+      badge: article.badge,
+      excerpt: article.excerpt,
+      imageUrl: await ctx.storage.getUrl(article.imageId),
+      mediaType: article.mediaType,
+      slug: article.slug,
+      publishedAt: article.publishedAt,
+      position: article.position,
+    })));
+  },
+});
 
-    return Promise.all(
-      [...articlesByPosition.values()].map(async ({ _id, _creationTime, imageId, ...article }) => ({
-        ...article,
-        _id,
-        imageId,
-        imageUrl: await ctx.storage.getUrl(imageId),
-      })),
-    );
+export const adminList = query({
+  args: {},
+  handler: async (ctx) => ctx.db.query("breakingNews").order("desc").collect(),
+});
+
+export const get = query({
+  args: { id: v.id("breakingNews") },
+  handler: async (ctx, { id }) => {
+    const article = await ctx.db.get(id);
+    if (!article || !article.published) return null;
+    return {
+      _id: article._id,
+      title: article.title,
+      body: article.body,
+      category: article.category,
+      excerpt: article.excerpt,
+      imageUrl: await ctx.storage.getUrl(article.imageId),
+      publishedAt: article.publishedAt,
+    };
   },
 });

@@ -1,21 +1,16 @@
 import {
   ChevronRight,
   Clock,
-  Play,
   Flame,
   Eye,
   X,
   ShoppingBag,
   Ticket,
   Tag,
-  Pause,
-  Volume2,
-  VolumeX,
-  Maximize,
 } from "lucide-react";
 import ShortsGrid, { Short } from "./ShortsGrid";
 import { useTranslation } from "react-i18next";
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 // import cricket from "@/assets/cricket.jpg";
@@ -139,58 +134,6 @@ function isVideoSrc(src: string) {
   return /\.(mp4|webm|ogg|mov|m4v)(\?.*)?$/i.test(src);
 }
 
-/**
- * Shared singleton that tracks all in-view ThumbVideo instances and decides
- * which single one should have audio enabled (the most visible one).
- */
-type Listener = (activeId: string | null) => void;
-
-const activeVideoManager = (() => {
-  const ratios = new Map<string, number>(); // id -> intersection ratio
-  const listeners = new Set<Listener>();
-  let activeId: string | null = null;
-
-  function recompute() {
-    let winner: string | null = null;
-    let best = 0;
-    for (const [id, ratio] of ratios) {
-      if (ratio > best) {
-        best = ratio;
-        winner = id;
-      }
-    }
-    // Require a minimum visibility before granting audio to anyone
-    if (best < 0.6) winner = null;
-
-    if (winner !== activeId) {
-      activeId = winner;
-      listeners.forEach((l) => l(activeId));
-    }
-  }
-
-  return {
-    report(id: string, ratio: number) {
-      if (ratio <= 0) {
-        ratios.delete(id);
-      } else {
-        ratios.set(id, ratio);
-      }
-      recompute();
-    },
-    unregister(id: string) {
-      ratios.delete(id);
-      recompute();
-    },
-    subscribe(listener: Listener) {
-      listeners.add(listener);
-      listener(activeId); // sync immediately on subscribe
-      return () => listeners.delete(listener);
-    },
-  };
-})();
-
-let idCounter = 0;
-
 function ThumbVideo({
   src,
   alt = "",
@@ -201,53 +144,8 @@ function ThumbVideo({
   className?: string;
 }) {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const idRef = useRef(`thumb-video-${++idCounter}`);
-  const [isActive, setIsActive] = useState(false);
 
   const isVideo = !!src && isVideoSrc(src);
-
-  // Report visibility ratio to the shared manager
-  useEffect(() => {
-    if (!isVideo || !videoRef.current) return;
-    const el = videoRef.current;
-    const id = idRef.current;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => activeVideoManager.report(id, entry.intersectionRatio),
-      { threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1] }
-    );
-
-    observer.observe(el);
-    return () => {
-      observer.disconnect();
-      activeVideoManager.unregister(id);
-    };
-  }, [isVideo]);
-
-  // Subscribe to "who is the active video" changes
-  useEffect(() => {
-    if (!isVideo) return;
-    const id = idRef.current;
-    return activeVideoManager.subscribe((activeId) => {
-      setIsActive(activeId === id);
-    });
-  }, [isVideo]);
-
-  // Apply mute/unmute + play based on active state
-  useEffect(() => {
-    const el = videoRef.current;
-    if (!el || !isVideo) return;
-
-    if (isActive) {
-      el.muted = false;
-      el.play().catch(() => {
-        el.muted = true;
-        el.play().catch(() => {});
-      });
-    } else {
-      el.muted = true;
-    }
-  }, [isActive, isVideo]);
 
   if (!src) return <div className={`img-placeholder ${className}`} aria-hidden />;
 
@@ -258,8 +156,6 @@ function ThumbVideo({
         src={src}
         loop
         playsInline
-        autoPlay
-        muted
         controls
         preload="metadata"
         aria-label={alt}
@@ -288,91 +184,6 @@ type CardItem = {
   time?: string;
 };
 
-type ActiveVideo = { src: string; title: string } | null;
-
-/** Fullscreen overlay player — opened when a thumbnail's play button is clicked. */
-function VideoLightbox({ video, onClose }: { video: NonNullable<ActiveVideo>; onClose: () => void }) {
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  // Genuine user click opened this, so unmuted autoplay is allowed.
-  useEffect(() => {
-    const el = videoRef.current;
-    if (!el) return;
-    el.play().catch(() => {
-      el.muted = true;
-      el.play().catch(() => {});
-    });
-  }, [video.src]);
-
-  // Close on Escape
-  useEffect(() => {
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
-  }, [onClose]);
-
-  // Lock body scroll while open
-  useEffect(() => {
-    const prevOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = prevOverflow;
-    };
-  }, []);
-
-  return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 px-4"
-      role="dialog"
-      aria-modal="true"
-      aria-label={video.title}
-      onClick={onClose} // backdrop click closes
-    >
-      <button
-        onClick={(e) => {
-          e.stopPropagation();
-          onClose();
-        }}
-        aria-label="Close video"
-        className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20
-          text-white flex items-center justify-center transition-colors"
-      >
-        <X className="h-5 w-5" />
-      </button>
-
-      <video
-        ref={videoRef}
-        src={video.src}
-        controls
-        playsInline
-        autoPlay
-        muted={true}
-        loop
-        className="h-full max-h-screen w-auto max-w-full sm:h-[92vh] sm:rounded-xl object-contain"
-        onClick={(e) => e.stopPropagation()}
-      />
-    </div>
-  );
-}
-
-/** Circular play button overlaid on a thumbnail. */
-function PlayButton({ onClick, size = "md" }: { onClick: (e: React.MouseEvent) => void; size?: "sm" | "md" }) {
-  const dims = size === "sm" ? "w-9 h-9" : "w-12 h-12";
-  const iconDims = size === "sm" ? "h-4 w-4" : "h-5 w-5";
-  return (
-    <button
-      onClick={onClick}
-      aria-label="Play video"
-      className={`absolute inset-0 m-auto ${dims} rounded-full bg-white/90 text-black flex items-center justify-center
-        shadow-lg transition-transform duration-200 hover:scale-110 active:scale-95 z-[1]`}
-    >
-      <Play className={iconDims} fill="currentColor" />
-    </button>
-  );
-}
-
 export function PreAds () {
    return(
     <div className="mx-auto max-w-[1250px] sm:px-4 px-4 lg:px-0 mt-3 border border-border">
@@ -382,7 +193,7 @@ export function PreAds () {
       <div className="container grid gap-3 lg:grid-cols-4">
         <div className="grid gap-3 col-span-3">
         <article className="group relative overflow-hidden border border-border lg:h-76">
-          <video autoPlay src={hospAdv} />
+          <video controls playsInline src={hospAdv} />
         </article>
       </div>
       <div className="col-span-1 hidden lg:block">
@@ -618,11 +429,6 @@ export function VideoNews() {
   const vidsrc = [vn1, vn2, vn3];
   const vshorts = [s1, s2, s3, s4];
 
-  const [activeVideo, setActiveVideo] = useState<ActiveVideo>(null);
-
-  const openVideo = useCallback((src: string, title: string) => setActiveVideo({ src, title }), []);
-  const closeVideo = useCallback(() => setActiveVideo(null), []);
-
   return (
     <section className="lg:max-w-[1250px] max-w-[100vw] sm:px-4 px-4 lg:px-0 pt-6 overflow-hidden">
       <SectionHead
@@ -640,10 +446,11 @@ export function VideoNews() {
             <div className="img-placeholder relative grid h-48 place-items-center">
               <video
                 src={vidsrc[index]}
-                alt={v.title}
+                controls
+                playsInline
+                aria-label={v.title}
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
-              <PlayButton onClick={() => openVideo(vidsrc[index], v.title)} />
               <span className="absolute right-2 bottom-2 bg-ink px-1.5 py-0.5 text-[9px] font-bold text-background">
                 08:24
               </span>
@@ -668,9 +475,11 @@ export function VideoNews() {
             <div className="img-placeholder relative grid aspect-[9/16] place-items-center">
               <video
                 src={vshorts[index]}
+                controls
+                playsInline
+                aria-label={s.title}
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
-              <PlayButton onClick={() => openVideo(vshorts[index], s.title)} size="sm" />
             </div>
             <h3 className="mt-2 text-[11px] font-bold line-clamp-2">{s.title}</h3>
             <p className="text-[10px] text-muted-foreground">
@@ -680,7 +489,6 @@ export function VideoNews() {
         ))}
       </div>
 
-      {activeVideo && <VideoLightbox video={activeVideo} onClose={closeVideo} />}
     </section>
   );
 }

@@ -32,7 +32,7 @@ function AdminRegionalNews() {
   const createRegionalNews = useMutation(api.regionalNews.create);
   const updateRegionalNews = useMutation(api.regionalNews.update);
   const moveRegionalNews = useMutation(api.regionalNews.move);
-  const publishedArticles = useQuery(api.regionalNews.list);
+  const publishedArticles = useQuery(api.regionalNews.adminList);
 
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");

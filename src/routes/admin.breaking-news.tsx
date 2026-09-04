@@ -24,7 +24,7 @@ function AdminBreakingNews() {
     const createBreakingNews = useMutation(api.breakingNews.create);
     const updateBreakingNews = useMutation(api.breakingNews.update);
     const moveBreakingNews = useMutation(api.breakingNews.move);
-    const publishedArticles = useQuery(api.breakingNews.list);
+    const publishedArticles = useQuery(api.breakingNews.adminList);
     const [title, setTitle] = useState("");
     const [body, setBody] = useState("");
     const [category, setCategory] = useState("BREAKING");
@@ -236,8 +236,10 @@ function AdminBreakingNews() {
             </section>
             </div>
 
-            <form onSubmit={onSubmit} className="space-y-5 flex items-start justify-center gap-4">
-                <div className="col-1 w-[50%] flex flex-col gap-5 items-center justify-start">
+            <form onSubmit={onSubmit} className="space-y-5 w-full flex flex-col items-start justify-center gap-4">
+                
+                <div className="wrapper w-full flex items-start justify-center gap-4">
+                    <div className="col-1 w-full flex flex-col gap-5 items-center justify-start">
                     <label className="block text-sm font-bold w-full">
                         Headline
                         <input value={title} onChange={(event) => setTitle(event.target.value)} className="mt-2 w-full border border-border px-3 py-2 font-normal" placeholder="Test News From Admin Panel" />
@@ -265,6 +267,23 @@ function AdminBreakingNews() {
                         <textarea value={excerpt} onChange={(event) => setExcerpt(event.target.value)} className="mt-2 min-h-28 w-full border border-border px-3 py-2 font-normal" placeholder="A short summary for the breaking news card." />
                     </label>
 
+
+                    <div className="flex flex-wrap gap-5 text-sm w-full">
+                        <label className="flex items-center gap-2"><input type="checkbox" checked={featured} onChange={(event) => setFeatured(event.target.checked)} /> Featured</label>
+                        <label className="flex items-center gap-2"><input type="checkbox" checked={published} onChange={(event) => setPublished(event.target.checked)} /> Published</label>
+                    </div>
+                </div>
+
+                <div className="col-2 w-full flex flex-col gap-5 items-center justify-start">
+                    <label className="block text-sm font-bold w-full">
+                        Display position
+                        <select value={position} onChange={(event) => setPosition(Number(event.target.value))} className="mt-2 w-full border border-border bg-background px-3 py-2 font-normal">
+                            {POSITION_OPTIONS.map((option) => (
+                                <option key={option.value} value={option.value}>{option.label}</option>
+                            ))}
+                        </select>
+                        <span className="mt-1 block text-xs font-normal text-muted-foreground">Choose which of the two hero or four sub-news slots should show this article.</span>
+                    </label>
                     <label className="block text-sm font-bold w-full">
                         Article body
                         <textarea value={body} onChange={(event) => setBody(event.target.value)} className="mt-2 min-h-36 w-full border border-border px-3 py-2 font-normal" placeholder="Full article content for the story popup." />
@@ -280,30 +299,16 @@ function AdminBreakingNews() {
                     ) : previewUrl ? (
                         <img src={previewUrl} alt="Selected article preview" className="max-h-72 w-full object-cover" />
                     ) : null}
+                </div>
+                </div>
 
-                    <div className="flex flex-wrap gap-5 text-sm w-full">
-                        <label className="flex items-center gap-2"><input type="checkbox" checked={featured} onChange={(event) => setFeatured(event.target.checked)} /> Featured</label>
-                        <label className="flex items-center gap-2"><input type="checkbox" checked={published} onChange={(event) => setPublished(event.target.checked)} /> Published</label>
-                    </div>
-
+                <div className="buttons w-full flex flex-col gap-3 justify-start">
                     {error && <p className="border border-primary/30 bg-tint px-3 py-2 text-sm text-primary">{error}</p>}
                     {status === "success" && <p className="border border-green-600/30 bg-green-50 px-3 py-2 text-sm text-green-700">Article {editingArticleId ? "updated" : "published"} successfully.</p>}
                     <button type="submit" disabled={isSubmitting} className="w-full bg-primary px-5 py-3 text-sm font-bold text-primary-foreground disabled:cursor-not-allowed disabled:opacity-60">
                         {status === "uploading" ? "Uploading image..." : status === "publishing" ? "Saving..." : editingArticleId ? "Save changes" : "Publish article"}
                     </button>
                     {editingArticleId && <button type="button" onClick={cancelEditing} disabled={isSubmitting} className="w-full border border-border px-5 py-3 text-sm font-bold disabled:opacity-60">Cancel</button>}
-                </div>
-
-                <div className="col-2 w-[50%] flex flex-col gap-5 items-center justify-start">
-                    <label className="block text-sm font-bold w-full">
-                        Display position
-                        <select value={position} onChange={(event) => setPosition(Number(event.target.value))} className="mt-2 w-full border border-border bg-background px-3 py-2 font-normal">
-                            {POSITION_OPTIONS.map((option) => (
-                                <option key={option.value} value={option.value}>{option.label}</option>
-                            ))}
-                        </select>
-                        <span className="mt-1 block text-xs font-normal text-muted-foreground">Choose which of the two hero or four sub-news slots should show this article.</span>
-                    </label>
                 </div>
             </form>
         </main>

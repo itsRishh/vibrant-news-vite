@@ -17,7 +17,7 @@ function AdminVideoNews() {
     const createVideo = useMutation(api.videos.create);
     const updateVideo = useMutation(api.videos.update);
     const moveVideo = useMutation(api.videos.move);
-    const videos = useQuery(api.videos.list);
+    const videos = useQuery(api.videos.adminList);
     const [editingVideoId, setEditingVideoId] = useState<Id<"videos"> | null>(null);
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");

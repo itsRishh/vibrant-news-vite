@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { useQuery } from "convex/react";
 import { Badge } from "@/components/news/Sections";
 import {
@@ -9,6 +9,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { api } from "../../../convex/_generated/api";
+import type { Id } from "../../../convex/_generated/dataModel";
 
 type DatabaseArticle = {
   title: string;
@@ -27,7 +28,23 @@ type DatabaseArticle = {
 export function NewsClickArea({ children }: { children: ReactNode }) {
   const breakingArticles = useQuery(api.breakingNews.list);
   const latestArticles = useQuery(api.latestNews.list);
+  const [selectedRef, setSelectedRef] = useState<{ source: "breaking" | "latest"; id: string } | null>(null);
+  const breakingDetail = useQuery(
+    api.breakingNews.get,
+    selectedRef?.source === "breaking" ? { id: selectedRef.id as Id<"breakingNews"> } : "skip",
+  );
+  const latestDetail = useQuery(
+    api.latestNews.get,
+    selectedRef?.source === "latest" ? { id: selectedRef.id as Id<"latestNews"> } : "skip",
+  );
   const [selectedArticle, setSelectedArticle] = useState<DatabaseArticle | null>(null);
+
+  useEffect(() => {
+    const detail = selectedRef?.source === "breaking" ? breakingDetail : latestDetail;
+    if (detail) {
+      setSelectedArticle({ ...detail, imageUrl: detail.imageUrl });
+    }
+  }, [breakingDetail, latestDetail, selectedRef]);
 
   return (
     <>
@@ -53,9 +70,12 @@ export function NewsClickArea({ children }: { children: ReactNode }) {
             slug: article.slug,
             category: article.category,
             excerpt: article.excerpt,
-            body: "body" in article ? article.body : undefined,
             imageUrl: article.imageUrl,
             publishedAt: article.publishedAt,
+          });
+          setSelectedRef({
+            source: breakingArticles?.some((item) => item._id === article._id) ? "breaking" : "latest",
+            id: article._id,
           });
         }}
         className="flex flex-col items-center justify-center [&_article]:cursor-pointer [&_li]:cursor-pointer"
@@ -63,7 +83,12 @@ export function NewsClickArea({ children }: { children: ReactNode }) {
         {children}
       </div>
 
-      <Dialog open={selectedArticle !== null} onOpenChange={(open) => !open && setSelectedArticle(null)}>
+      <Dialog open={selectedArticle !== null} onOpenChange={(open) => {
+        if (!open) {
+          setSelectedArticle(null);
+          setSelectedRef(null);
+        }
+      }}>
         <DialogContent data-lenis-prevent className="max-h-[90vh] max-w-3xl overflow-y-auto p-0">
           {selectedArticle && (
             <article>

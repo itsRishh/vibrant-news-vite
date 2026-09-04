@@ -23,7 +23,7 @@ function AdminLocalNews() {
   const createLocalNews = useMutation(api.localNews.create);
   const updateLocalNews = useMutation(api.localNews.update);
   const moveLocalNews = useMutation(api.localNews.move);
-  const publishedArticles = useQuery(api.localNews.list);
+  const publishedArticles = useQuery(api.localNews.adminList);
 
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
@@ -179,13 +179,64 @@ function AdminLocalNews() {
   return (
     <main className="mx-auto min-h-screen max-w-[1250px] bg-background px-4 py-10 text-foreground sm:px-6">
       <div className="mb-8 border-b border-border pb-5">
-        <Link to="/admin" className="mb-5 inline-flex items-center gap-2 text-sm font-bold text-primary hover:underline">
+        <Link to="/admin" className="mb-5 inline-flex items-center gap-2 text-xs font-bold text-white bg-primary px-3 py-2 hover:underline">
           <ArrowLeft className="h-4 w-4" aria-hidden="true" />
           Back to admin
         </Link>
         <p className="text-xs font-bold tracking-widest text-primary uppercase">Development admin</p>
         <h1 className="mt-2 text-3xl font-black tracking-tight">Publish Local News</h1>
         <p className="mt-2 text-sm text-muted-foreground">Manage the local hero, three sub-hero cards, and the ad slot for the local news section.</p>
+      </div>
+
+      <div className="wrapper border-b border-border pb-10 mb-5">
+        <section className="w-full border border-border bg-muted/30 p-4" aria-labelledby="local-position-status-heading">
+                <div className="flex items-baseline justify-between gap-4">
+                <h2 id="local-position-status-heading" className="text-sm font-black uppercase">Published positions</h2>
+                <span className="text-xs text-muted-foreground">Live status</span>
+                </div>
+
+                <div className="mt-3 grid gap-2 sm:grid-cols-2">
+                {POSITION_OPTIONS.map((option) => {
+                    const article = articlesByPosition.get(option.value);
+
+                    return (
+                    <div key={option.value} className="flex min-w-0 items-start justify-between gap-3 border border-border bg-background px-3 py-2 text-xs">
+                        <div className="min-w-0">
+                        <p className="font-bold">{option.label}</p>
+                        <p className="mt-1 truncate text-muted-foreground">{article?.title ?? "Available"}</p>
+                        {article && <button type="button" onClick={() => startEditing(article)} className="mt-2 inline-flex items-center gap-1 font-bold text-primary hover:underline"><Pencil className="h-3 w-3" aria-hidden="true" />Edit</button>}
+                        </div>
+
+                        {article ? (
+                        <div className="flex shrink-0 items-center gap-1">
+                            <span className="h-2.5 w-2.5 rounded-full bg-green-600" aria-label="Updated" title="Updated" />
+                            <select
+                            aria-label={`Move ${article.title}`}
+                            value={article.position}
+                            disabled={movingArticleId === article._id}
+                            onChange={(event) => onPositionChange(article._id, Number(event.target.value))}
+                            className="w-28 border border-border bg-background px-1 py-1 text-[10px] font-bold disabled:opacity-60"
+                            >
+                            {POSITION_OPTIONS.map((positionOption) => (
+                                <option key={positionOption.value} value={positionOption.value}>
+                                {positionOption.label}
+                                </option>
+                            ))}
+                            </select>
+                        </div>
+                        ) : (
+                        <span className="flex shrink-0 items-center gap-1 font-bold text-red-700">
+                            <span className="h-2.5 w-2.5 rounded-full bg-red-600" aria-label="Available" title="Available" />
+                            Free
+                        </span>
+                        )}
+                    </div>
+                    );
+                })}
+                </div>
+
+                {positionMessage && <p className="mt-3 text-xs font-bold text-green-700">{positionMessage}</p>}
+            </section>
       </div>
 
       <form onSubmit={onSubmit} className="flex flex-col items-start justify-center gap-4">
@@ -273,58 +324,11 @@ function AdminLocalNews() {
                 </>
 
 
-            <section className="w-full border border-border bg-muted/30 p-4" aria-labelledby="local-position-status-heading">
-                <div className="flex items-baseline justify-between gap-4">
-                <h2 id="local-position-status-heading" className="text-sm font-black uppercase">Published positions</h2>
-                <span className="text-xs text-muted-foreground">Live status</span>
-                </div>
-
-                <div className="mt-3 grid gap-2 sm:grid-cols-2">
-                {POSITION_OPTIONS.map((option) => {
-                    const article = articlesByPosition.get(option.value);
-
-                    return (
-                    <div key={option.value} className="flex min-w-0 items-start justify-between gap-3 border border-border bg-background px-3 py-2 text-xs">
-                        <div className="min-w-0">
-                        <p className="font-bold">{option.label}</p>
-                        <p className="mt-1 truncate text-muted-foreground">{article?.title ?? "Available"}</p>
-                        {article && <button type="button" onClick={() => startEditing(article)} className="mt-2 inline-flex items-center gap-1 font-bold text-primary hover:underline"><Pencil className="h-3 w-3" aria-hidden="true" />Edit</button>}
-                        </div>
-
-                        {article ? (
-                        <div className="flex shrink-0 items-center gap-1">
-                            <span className="h-2.5 w-2.5 rounded-full bg-green-600" aria-label="Updated" title="Updated" />
-                            <select
-                            aria-label={`Move ${article.title}`}
-                            value={article.position}
-                            disabled={movingArticleId === article._id}
-                            onChange={(event) => onPositionChange(article._id, Number(event.target.value))}
-                            className="w-28 border border-border bg-background px-1 py-1 text-[10px] font-bold disabled:opacity-60"
-                            >
-                            {POSITION_OPTIONS.map((positionOption) => (
-                                <option key={positionOption.value} value={positionOption.value}>
-                                {positionOption.label}
-                                </option>
-                            ))}
-                            </select>
-                        </div>
-                        ) : (
-                        <span className="flex shrink-0 items-center gap-1 font-bold text-red-700">
-                            <span className="h-2.5 w-2.5 rounded-full bg-red-600" aria-label="Available" title="Available" />
-                            Free
-                        </span>
-                        )}
-                    </div>
-                    );
-                })}
-                </div>
-
-                {positionMessage && <p className="mt-3 text-xs font-bold text-green-700">{positionMessage}</p>}
-            </section>
+            
             </div>
         </div>
 
-        <div className="buttons flex w-full flex-col items-center justify-center gap-5">
+        <div className="buttons flex w-full flex-col justify-center gap-5">
             <div className="flex w-full flex-wrap gap-5 text-sm">
                 <label className="flex items-center gap-2"><input type="checkbox" checked={featured} onChange={(event) => setFeatured(event.target.checked)} /> Featured</label>
                 <label className="flex items-center gap-2"><input type="checkbox" checked={published} onChange={(event) => setPublished(event.target.checked)} /> Published</label>
