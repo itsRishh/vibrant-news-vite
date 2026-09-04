@@ -1,4 +1,5 @@
 import { useState, type ReactNode } from "react";
+import { useQuery } from "convex/react";
 import { Badge } from "@/components/news/Sections";
 import {
   Dialog,
@@ -7,15 +8,26 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { getArticle, getArticleByTitle } from "@/data/news";
-import type { Article } from "@/data/news";
+import { api } from "../../../convex/_generated/api";
+
+type DatabaseArticle = {
+  title: string;
+  slug: string;
+  category: string;
+  excerpt: string;
+  body?: string;
+  imageUrl: string | null;
+  publishedAt: number;
+};
 
 /**
  * Makes every news block on the homepage clickable without duplicating link
  * markup in each card. Clicking a card opens its story in an on-page dialog.
  */
 export function NewsClickArea({ children }: { children: ReactNode }) {
-  const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
+  const breakingArticles = useQuery(api.breakingNews.list);
+  const latestArticles = useQuery(api.latestNews.list);
+  const [selectedArticle, setSelectedArticle] = useState<DatabaseArticle | null>(null);
 
   return (
     <>
@@ -27,11 +39,24 @@ export function NewsClickArea({ children }: { children: ReactNode }) {
           const block = target.closest("article, li");
           if (!block) return;
 
+          const slug = block.getAttribute("data-article-slug");
           const title = block.querySelector("h3, h2, h1")?.textContent?.trim();
-          if (!title) return;
+          if (!slug && !title) return;
 
-          const lookup = getArticleByTitle(title);
-          setSelectedArticle(getArticle(lookup?.section ?? "general", lookup?.slug ?? title));
+          const article = [...(breakingArticles ?? []), ...(latestArticles ?? [])].find(
+            (item) => item.slug === slug || item.title === title,
+          );
+          if (!article) return;
+
+          setSelectedArticle({
+            title: article.title,
+            slug: article.slug,
+            category: article.category,
+            excerpt: article.excerpt,
+            body: "body" in article ? article.body : undefined,
+            imageUrl: article.imageUrl,
+            publishedAt: article.publishedAt,
+          });
         }}
         className="flex flex-col items-center justify-center [&_article]:cursor-pointer [&_li]:cursor-pointer"
       >
@@ -39,12 +64,12 @@ export function NewsClickArea({ children }: { children: ReactNode }) {
       </div>
 
       <Dialog open={selectedArticle !== null} onOpenChange={(open) => !open && setSelectedArticle(null)}>
-        <DialogContent className="max-h-[90vh] max-w-3xl overflow-y-auto p-0">
+        <DialogContent data-lenis-prevent className="max-h-[90vh] max-w-3xl overflow-y-auto p-0">
           {selectedArticle && (
             <article>
-              {selectedArticle.image && (
+              {selectedArticle.imageUrl && (
                 <img
-                  src={selectedArticle.image}
+                  src={selectedArticle.imageUrl}
                   alt={selectedArticle.title}
                   className="h-48 w-full object-cover sm:h-72"
                 />
@@ -56,19 +81,17 @@ export function NewsClickArea({ children }: { children: ReactNode }) {
                     {selectedArticle.title}
                   </DialogTitle>
                   <DialogDescription className="mt-3 text-sm leading-6">
-                    {selectedArticle.subHead}
+                    {selectedArticle.excerpt}
                   </DialogDescription>
                 </DialogHeader>
 
                 <div className="mt-5 flex flex-wrap gap-x-4 gap-y-1 border-y border-border py-3 text-[11px] text-muted-foreground">
-                  <span className="font-bold text-foreground">{selectedArticle.author}</span>
-                  <span>{selectedArticle.location}</span>
-                  <span>{selectedArticle.published}</span>
-                  <span>{selectedArticle.readTime}</span>
+                  <span className="font-bold text-foreground">{selectedArticle.slug}</span>
+                  <span>{new Date(selectedArticle.publishedAt).toLocaleString()}</span>
                 </div>
 
                 <div className="mt-5 space-y-4 text-sm leading-7 sm:text-[15px]">
-                  {selectedArticle.body.map((paragraph) => (
+                  {(selectedArticle.body ? [selectedArticle.body] : [selectedArticle.excerpt]).map((paragraph) => (
                     <p key={paragraph}>{paragraph}</p>
                   ))}
                 </div>

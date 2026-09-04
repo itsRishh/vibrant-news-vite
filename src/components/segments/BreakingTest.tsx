@@ -33,7 +33,7 @@ export default function BreakingTest() {
       <SectionHead title={t("sections.breaking.title")} />
 
       <div className="flex w-full grid gap-4 lg:grid-cols-[1fr_1fr_1fr_1fr]">
-        <article className="group relative w-full overflow-hidden lg:col-span-2 bg-ink lg:h-full h-80">
+          <article data-article-slug={heroOne?.slug} className="group relative w-full overflow-hidden lg:col-span-2 bg-ink lg:h-full h-80">
           <ThumbVideo src={heroOne?.imageUrl ?? ""} {...(heroOne?.mediaType ? { mediaType: heroOne.mediaType } : {})} alt={heroOne?.title ?? ""} className="absolute top-0 left-0 w-full sm:h-80 lg:h-80 object-cover" />
           <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-ink via-ink/40 to-transparent p-5">
             <Badge>{heroOne?.category ?? "BREAKING"}</Badge>
@@ -44,7 +44,7 @@ export default function BreakingTest() {
           </div>
         </article>
 
-        <article className="group relative w-full overflow-hidden bg-ink lg:col-span-2">
+          <article data-article-slug={heroTwo?.slug} className="group relative w-full overflow-hidden bg-ink lg:col-span-2">
             <ThumbVideo src={heroTwo?.imageUrl ?? ""} {...(heroTwo?.mediaType ? { mediaType: heroTwo.mediaType } : {})} alt={heroTwo?.title ?? ""} className="h-70 w-full sm:h-80 lg:h-100" />
           <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-ink via-ink/40 to-transparent p-5">
             <h3 className="mt-2 text-sm font-black text-background sm:text-2xl">{heroTwo?.title ?? "Hero 2 is empty"}</h3>
@@ -53,7 +53,7 @@ export default function BreakingTest() {
         </article>
 
         {cards.map((card) => (
-        <article key={card._id} className="group overflow-hidden border border-border">
+          <article data-article-slug={card.slug} key={card._id} className="group overflow-hidden border border-border">
             <div className="relative lg:h-24 h-48 overflow-hidden">
               <ThumbVideo
                 src={card.imageUrl ?? ""}

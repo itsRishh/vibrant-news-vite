@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from "convex/react";
-import { createFileRoute, notFound } from "@tanstack/react-router";
+import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import { ArrowLeft } from "lucide-react";
 import { api } from "../../convex/_generated/api";
 import type { Id } from "../../convex/_generated/dataModel";
 
@@ -15,11 +16,6 @@ const POSITION_OPTIONS = [
 ] as const;
 
 export const Route = createFileRoute("/admin/breaking-news")({
-    beforeLoad: () => {
-        if (import.meta.env["VITE_APP_SURFACE"] !== "admin") {
-            throw notFound();
-        }
-    },
     component: AdminBreakingNews,
 });
 
@@ -29,6 +25,7 @@ function AdminBreakingNews() {
     const moveBreakingNews = useMutation(api.breakingNews.move);
     const publishedArticles = useQuery(api.breakingNews.list);
     const [title, setTitle] = useState("");
+    const [body, setBody] = useState("");
     const [category, setCategory] = useState("BREAKING");
     const [badge, setBadge] = useState("BREAKING");
     const [excerpt, setExcerpt] = useState("");
@@ -111,6 +108,7 @@ function AdminBreakingNews() {
             setStatus("publishing");
             await createBreakingNews({
                 title: title.trim(),
+                body: body.trim(),
                 category,
                 badge,
                 excerpt: excerpt.trim(),
@@ -125,6 +123,7 @@ function AdminBreakingNews() {
             });
             setStatus("success");
             setTitle("");
+            setBody("");
             setExcerpt("");
             setPosition(1);
             setMedia(null);
@@ -144,6 +143,10 @@ function AdminBreakingNews() {
     return (
         <main className="mx-auto min-h-screen max-w-[1250px] bg-background px-4 py-10 text-foreground sm:px-6">
             <div className="mb-8 border-b border-border pb-5">
+                <Link to="/admin" className="mb-5 inline-flex items-center gap-2 text-sm font-bold text-primary hover:underline">
+                    <ArrowLeft className="h-4 w-4" aria-hidden="true" />
+                    Back to admin
+                </Link>
                 <p className="text-xs font-bold tracking-widest text-primary uppercase">Development admin</p>
                 <h1 className="mt-2 text-3xl font-black tracking-tight">Publish Breaking News</h1>
                 <p className="mt-2 text-sm text-muted-foreground">Upload an image to Convex Storage and publish one Breaking News test article.</p>
@@ -176,6 +179,11 @@ function AdminBreakingNews() {
                     <label className="block text-sm font-bold w-full">
                         Excerpt
                         <textarea value={excerpt} onChange={(event) => setExcerpt(event.target.value)} className="mt-2 min-h-28 w-full border border-border px-3 py-2 font-normal" placeholder="A short summary for the breaking news card." />
+                    </label>
+
+                    <label className="block text-sm font-bold w-full">
+                        Article body
+                        <textarea value={body} onChange={(event) => setBody(event.target.value)} className="mt-2 min-h-36 w-full border border-border px-3 py-2 font-normal" placeholder="Full article content for the story popup." />
                     </label>
 
                     <label className="block text-sm font-bold w-full">

@@ -16,13 +16,15 @@ import {
 import ShortsGrid, { Short } from "./ShortsGrid";
 import { useTranslation } from "react-i18next";
 import { useState, useRef, useEffect, useCallback } from "react";
+import { useQuery } from "convex/react";
+import { api } from "../../../convex/_generated/api";
 // import cricket from "@/assets/cricket.jpg";
 import tech from "@/assets/images/ajgar.jpeg";
 import adNalanda from "@/assets/images/ad-nalanda.jpg";
 // import parliament from "@/assets/parliament.jpg";
 import pandey from "@/assets/Videos/shorts/pandey.mp4";
 import parliament from "@/assets/images/tiranga.png";
-import mohan from "@/assets/Videos/shorts/happy.mp4";
+import mohan from "@/assets/images/baad.jpeg";
 import racket from "@/assets/images/racket.jpeg";
 import paani from "@/assets/images/paani.jpeg";
 import redcarpet from "@/assets/images/profile.jpeg";
@@ -36,9 +38,8 @@ import dog from "@/assets/images/dog.jpeg";
 import school from "@/assets/images/school.jpeg";
 import medal from "@/assets/images/medal.jpeg";
 import petrol from "@/assets/images/petrol.jpeg";
-import col1 from "@/assets/images/madam.png";
-import col2 from "@/assets/images/1.png";
-import col3 from "@/assets/images/tiranga.png";
+import hospAd from "@/assets/images/hospAd.jpeg";
+import hospAdv from "@/assets/Videos/hospAd.mp4";
 import vn1 from "@/assets/Videos/vnews/madam.mp4";
 import vn2 from "@/assets/Videos/vnews/dharmendra.mp4";
 import vn3 from "@/assets/Videos/wishes/WhatsApp Video 2026-08-15 at 00.23.44.mp4";
@@ -259,6 +260,7 @@ function ThumbVideo({
         playsInline
         autoPlay
         muted
+        controls
         preload="metadata"
         aria-label={alt}
         className={`w-full h-full object-cover ${className}`}
@@ -371,6 +373,28 @@ function PlayButton({ onClick, size = "md" }: { onClick: (e: React.MouseEvent) =
   );
 }
 
+export function PreAds () {
+   return(
+    <div className="mx-auto max-w-[1250px] sm:px-4 px-4 lg:px-0 mt-3 border border-border">
+      <div className="p-3">
+            <Badge>Ad</Badge>
+          </div>
+      <div className="container grid gap-3 lg:grid-cols-4">
+        <div className="grid gap-3 col-span-3">
+        <article className="group relative overflow-hidden border border-border lg:h-76">
+          <video autoPlay src={hospAdv} />
+        </article>
+      </div>
+      <div className="col-span-1 hidden lg:block">
+        <article className="group relative overflow-hidden border border-border">
+          <img className="w-full h-full" src={hospAd} alt="" />
+        </article>
+      </div>
+      </div>
+    </div>
+   )
+}
+
 export function Live() {
   const { t } = useTranslation();
 
@@ -394,194 +418,15 @@ export function Live() {
   );
 }
 
-// breaking
-export function Breaking() {
-  const { t } = useTranslation();
-  const cards = t("sections.breaking.cards", { returnObjects: true }) as CardItem[];
-  const cardImages = [raid, mohanpooja, tirangapaint, mohanflag];
-  return (
-    <section className="lg:max-w-[1250px] max-w-[100vw] sm:px-4 px-4 lg:px-0 pt-6">
-      <SectionHead
-        title={t("sections.wishes.title")}
-      />
-
-      <div className="flex w-full grid gap-4 lg:grid-cols-[1fr_1fr_1fr_1fr]">
-        <article className="group relative w-full overflow-hidden lg:col-span-2 bg-ink lg:h-full h-80">
-          <Thumb src={stall} alt={t("ZTI-NEWS")} className="absolute top-0 left-0 w-full sm:h-80 lg:h-80 object-cover" />
-          <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-ink via-ink/40 to-transparent p-5">
-            <Badge>{t("sections.breaking.hero.category")}</Badge>
-            <h3 className="mt-2 text-sm font-black text-background sm:text-2xl">
-              {t("sections.breaking.hero.title")}
-            </h3>
-            <p className="mt-1 text-[11px] text-background/70">{t("sections.breaking.hero.subHead")}</p>
-          </div>
-        </article>
-
-        <article className="group relative w-full overflow-hidden bg-ink lg:col-span-2">
-          <ThumbVideo src={pandey} alt={t("ZTI-NEWS")} className="h-70 w-full sm:h-80 lg:h-100" />
-          <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-ink via-ink/40 to-transparent p-5">
-            <h3 className="mt-2 text-sm font-black text-background sm:text-2xl">
-              
-            </h3>
-            <Badge>{t("sections.breaking.hero.category")}</Badge>
-          </div>
-        </article>
-
-        {cards.slice(0, 4).map((c, i) => (
-        <article key={c.title} className="group overflow-hidden border border-border">
-            <div className="relative lg:h-24 h-48 overflow-hidden">
-              <Thumb
-                src={cardImages[i]}
-                alt={c.title}
-                className="h-32 transition-transform duration-500 group-hover:scale-105"
-              />
-              <span className="absolute top-2 left-2">
-                <Badge>{c.category}</Badge>
-              </span>
-              {c.badge && (
-                <span className="absolute top-2 right-2 bg-ink px-2 py-0.5 text-[9px] font-bold text-background">
-                  {c.badge}
-                </span>
-              )}
-            </div>
-            <div className="p-3">
-              <h3 className="text-sm font-bold">{c.title}</h3>
-              <p className="mt-1 line-clamp-2 text-[11px] text-muted-foreground">{c.subHead}</p>
-              <div className="mt-2">
-                <Stamp time={c.time ?? ""} />
-              </div>
-            </div>
-          </article>
-        ))}
-      </div>
-    </section>
-  );
-}
-
 const STATE_TABS = ["उत्तर प्रदेश", "बिहार", "दिल्ली", "उत्तराखंड", "मध्य प्रदेश", "राजस्थान", "बंगाल", "छत्तीसगढ़", "झारखंड", "महाराष्ट्र"];
 
 // latest
-export function Latest() {
-  const { t } = useTranslation();
-  const hero = t("sections.hotRightNow.hero", { returnObjects: true }) as CardItem;
-  const cards = t("sections.hotRightNow.cards", { returnObjects: true }) as CardItem[];
-  const smallCards = t("sections.hotRightNow.smallCards", { returnObjects: true }) as CardItem[];
-  const cardImages = [paani, racket, undefined, redcarpet];
 
-  return (
-    <section className="lg:max-w-[1250px] max-w-[100vw] sm:px-4 px-4 lg:px-0  pt-6">
-      {/* title */}
-      <div className="mb-3 flex items-center justify-between">
-        <div className="section-rule">
-          <h2 className="text-lg font-black tracking-tight uppercase">
-            {t("sections.hotRightNow.title")}
-          </h2>
-        </div>
-        <span className="flex items-center gap-1 bg-primary px-2 py-0.5 text-[9px] font-bold text-primary-foreground uppercase">
-          <Flame className="h-3 w-3" /> {t("sections.live")}
-        </span>
-      </div>
-
-      {/* main news */}
-
-      <div className="grid gap-4 lg:grid-cols-[2fr_1fr_1fr]"> 
-        <article className="group relative lg:min-h-[320px] min-h-[520px] overflow-hidden bg-ink lg:row-span-2">
-          <ThumbVideo
-            src={mohan}
-            className="absolute inset-0 opacity-100 transition-transform duration-500"
-          />
-          <div className="absolute top-3 left-3 flex gap-2">
-            <Badge>{hero.category}</Badge>
-            <Badge tone="ink">{hero.badge}</Badge>
-          </div>
-          <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-ink via-ink/80 to-transparent p-5">
-            <h3 className="text-md font-black text-background sm:text-2xl">{hero.title}</h3>
-            <p className="mt-2 line-clamp-2 text-xs text-background/75">{hero.subHead}</p>
-            <div className="mt-3 flex items-center gap-1 text-[10px] text-background/60">
-            </div>
-          </div>
-        </article>
-
-        {cards.slice(0, 2).map((c, i) => (
-          <article key={c.title} className="group overflow-hidden border border-border">
-            <div className="relative lg:h-32 h-48 overflow-hidden">
-              <Thumb
-                src={cardImages[i]}
-                alt={c.title}
-                className="transition-transform duration-500 group-hover:scale-105"
-              />
-              <span className="absolute top-2 left-2">
-                <Badge>{c.category}</Badge>
-              </span>
-              {c.badge && (
-                <span className="absolute top-2 right-2 bg-ink px-2 py-0.5 text-[9px] font-bold text-background">
-                  {c.badge}
-                </span>
-              )}
-            </div>
-            <div className="p-3">
-              <h3 className="text-sm font-bold">{c.title}</h3>
-              <p className="mt-1 line-clamp-2 text-[11px] text-muted-foreground">{c.subHead}</p>
-              <div className="mt-2">
-                <Stamp time={c.time ?? ""} />
-              </div>
-            </div>
-          </article>
-        ))}
-
-        {/* <article className="border border-border bg-tint p-4">
-          <Thumb
-            src={cardImages[2]}
-            className="h-full w-full transition-transform duration-500 group-hover:scale-105"
-          />
-          <Badge>{cards[2]?.category}</Badge>
-          <h3 className="mt-2 text-sm font-bold">{cards[2]?.title}</h3>
-          <p className="mt-1 line-clamp-3 text-[11px] text-muted-foreground">{cards[2]?.subHead}</p>
-          <div className="mt-3">
-            <Stamp time={cards[2]?.time ?? ""} />
-          </div>
-        </article> */}
-
-        <article className="group relative overflow-hidden border border-border">
-          <div className=" from-ink to-transparent p-3">
-            <Badge>{cards[2]?.category}</Badge>
-          </div>
-          <Thumb src={adNalanda} alt={cards[3]?.title ?? ""} className="w-[100%]" />
-        </article>
-
-        <article className="group relative overflow-hidden">
-          <Thumb src={redcarpet} alt={cards[3]?.title ?? ""} className="h-full min-h-[150px] w-full" />
-          <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-ink to-transparent p-3">
-            <Badge>{cards[3]?.category}</Badge>
-            <h3 className="mt-1 text-sm font-bold text-background">{cards[3]?.title}</h3>
-            <p className="line-clamp-2 text-[10px] text-background/70">{cards[3]?.subHead}</p>
-          </div>
-        </article>
-      </div>
-
-
-        {/* no image news */}
-      <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:grid-rows-2">
-        {smallCards.map((c) => (
-          <article key={c.title} className="group overflow-hidden border border-border">
-            <div className="px-2 py-1">
-              <Badge tone="soft">{c.tag}</Badge>
-              <h3 className="mt-1.5 text-xs font-bold group-hover:text-primary">{c.title}</h3>
-              <div className="mt-2">
-                <Stamp time={c.time ?? ""} />
-              </div>
-            </div>
-          </article>
-        ))}
-      </div>
-    </section>
-  );
-}
 
 // quick news below latest
 export function QuickLatest() {
   const { t } = useTranslation();
-  const items = t("sections.regionals.items", { returnObjects: true }) as CardItem[];
+  const items = t("sections.quickLatest.items", { returnObjects: true }) as CardItem[];
 
   return (
     <section className="lg:max-w-[1250px] max-w-[100vw] sm:px-4 px-4 lg:px-0 pt-6 my-4">
@@ -608,94 +453,6 @@ export function QuickLatest() {
 }
 
 // local
-export function LocalNews() {
-  const { t } = useTranslation();
-  const hero = t("sections.latestNews.hero", { returnObjects: true }) as CardItem;
-  const cards = t("sections.latestNews.cards", { returnObjects: true }) as CardItem[];
-  const smallCards = t("sections.latestNews.smallCards", { returnObjects: true }) as CardItem[];
-  const cardImages = [paani, tech, undefined, redcarpet];
-
-  return (
-    <section className="lg:max-w-[1250px] max-w-[100vw] sm:px-4 px-4 lg:px-0  pt-6">
-      <div className="mb-3 flex items-center justify-between">
-        <div className="section-rule">
-          <h2 className="text-lg font-black tracking-tight uppercase">
-            {t("sections.latestNews.title")}
-          </h2>
-        </div>
-        <span className="flex items-center gap-1 bg-primary px-2 py-0.5 text-[9px] font-bold text-primary-foreground uppercase">
-          <Flame className="h-3 w-3" /> {t("sections.live")}
-        </span>
-      </div>
-
-      <div className="w-full grid gap-4 lg:grid-cols-[2fr_1fr_1fr]">
-        <article className="group relative min-h-[320px] w-full overflow-hidden bg-ink lg:row-span-2">
-          <ThumbVideo
-            src={parliament}
-            className="absolute inset-0 h-full w-full object-cover opacity-100 transition-transform duration-500"
-          />
-          <div className="absolute top-3 left-3 flex gap-2">
-            <Badge>{hero.category}</Badge>
-            <Badge tone="ink">{hero.badge}</Badge>
-          </div>
-          <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-ink via-ink/80 to-transparent p-5">
-            <h3 className="text-xl font-black text-background sm:text-2xl">मैहर में हर घर तिरंगा अभियान के तहत भव्य तिरंगा यात्रा निकाली गई। सुबह 11 बजे खेल मैदान से शुरू हुई यात्रा</h3>
-            <p className="mt-2 line-clamp-2 text-xs text-background/75">देशभक्ति नारों और गीतों के साथ अलाउद्दीन तिराहे होते हुए घंटाघर पहुंची, जहां इसका समापन हुआ। यात्रा में विधायक श्रीकांत चतुर्वेदी, कलेक्टर बिदिशा मुखर्जी, एसपी अवधेश प्रताप सिंह सहित अधिकारी, छात्र-छात्राएं और गणमान्य नागरिक शामिल हुए।</p>
-            <div className="mt-3 flex items-center gap-1 text-[10px] text-background/60">
-              <Clock className="h-3 w-3" /> {hero.time}
-            </div>
-          </div>
-        </article>
-
-
-        {cards.slice(1, 4).map((c, i) => (
-          <article key={c.title} className="group overflow-hidden border border-border">
-            <div className="relative h-32 overflow-hidden">
-              <Thumb
-                src={cardImages[i]}
-                alt={c.title}
-                className="h-full w-full transition-transform duration-500 group-hover:scale-105"
-              />
-              <span className="absolute top-2 left-2">
-                <Badge>{c.category}</Badge>
-              </span>
-              {c.badge && (
-                <span className="absolute top-2 right-2 bg-ink px-2 py-0.5 text-[9px] font-bold text-background">
-                  {c.badge}
-                </span>
-              )}
-            </div>
-            <div className="p-3">
-              <h3 className="text-sm font-bold">{c.title}</h3>
-              <p className="mt-1 line-clamp-2 text-[11px] text-muted-foreground">{c.subHead}</p>
-              <div className="mt-2">
-                <Stamp time={c.time ?? ""} />
-              </div>
-            </div>
-          </article>
-        ))}
-
-        {/* ad */}
-        {/* <article className="group relative overflow-hidden border border-border">
-          <div className=" from-ink to-transparent p-3">
-            <Badge>Ad</Badge>
-          </div>
-          <Thumb src={safar2} alt={cards[3]?.title ?? ""} className="w-[100%]" />
-        </article> */}
-
-        {/* ad */}
-        <article className="group relative overflow-hidden border border-border">
-          <div className=" from-ink to-transparent p-3">
-            <Badge>Ad</Badge>
-          </div>
-          <Thumb src={ztinews} alt={cards[3]?.title ?? ""} className="w-[100%] h-[80%] object-contain pb-3" />
-        </article>
-
-        
-      </div>
-    </section>
-  );
-}
 
 // ad after local 
 export function BannerAd() {
@@ -724,7 +481,7 @@ export function Regional() {
 
   return (
     <section className="lg:max-w-[1250px] max-w-[100vw] sm:px-4 px-4 lg:px-0 pt-6">
-      <SectionHead title={t("sections.regional.titleREGIONAL")} subtitle={t("sections.regional.subtitle")} />
+      <SectionHead title={t("sections.regional.title")} subtitle={t("sections.regional.subtitle")} />
 
       <article className="group relative overflow-hidden">
         <Thumb src={yatra} alt={t("sections.regional.heroTitle")} className="h-64 w-full sm:h-80" />
@@ -930,22 +687,22 @@ export function VideoNews() {
 
 export function India() {
   const { t } = useTranslation();
-  const items = t("sections.regional.items", { returnObjects: true }) as CardItem[];
-  const cards = t("sections.regional.cards", { returnObjects: true }) as CardItem[];
+  const items = t("sections.indiaNews.items", { returnObjects: true }) as CardItem[];
+  const cards = t("sections.indiaNews.cards", { returnObjects: true }) as CardItem[];
   const cardImages = [medal, petrol, dog, school];
 
   return (
     <section className="lg:max-w-[1250px] max-w-[100vw] sm:px-4 px-4 lg:px-0 pt-6">
-      <SectionHead title={t("INDIA NEWS")} subtitle={t("sections.regional.subtitle")} />
+      <SectionHead title={t("INDIA NEWS")} subtitle={t("sections.indiaNews.subtitle")} />
 
       <article className="group relative overflow-hidden">
-        <Thumb src={yatra} alt={t("sections.regional.heroTitle")} className="h-64 w-full sm:h-80" />
+        <Thumb src={yatra} alt={t("sections.indiaNews.heroTitle")} className="h-64 w-full sm:h-80" />
         <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-ink via-ink/70 to-transparent p-5">
-          <Badge>{t("sections.regional.featured")}</Badge>
+          <Badge>{t("sections.indiaNews.featured")}</Badge>
           <h3 className="mt-2 text-lg font-black text-background sm:text-2xl">
-            {t("sections.regional.heroTitle")}
+            {t("sections.indiaNews.heroTitle")}
           </h3>
-          <p className="hidden lg:block mt-1 text-[11px] text-background/70">{t("sections.regional.heroDesc")}</p>
+          <p className="hidden lg:block mt-1 text-[11px] text-background/70">{t("sections.indiaNews.heroDesc")}</p>
         </div>
       </article>
 
@@ -995,22 +752,22 @@ export function India() {
 
 export function International() {
   const { t } = useTranslation();
-  const items = t("sections.regional.items", { returnObjects: true }) as CardItem[];
-  const cards = t("sections.regional.cards", { returnObjects: true }) as CardItem[];
+  const items = t("sections.international.items", { returnObjects: true }) as CardItem[];
+  const cards = t("sections.international.cards", { returnObjects: true }) as CardItem[];
   const cardImages = [medal, petrol, dog, school];
 
   return (
     <section className="lg:max-w-[1250px] max-w-[100vw] sm:px-4 px-4 lg:px-0 pt-6">
-      <SectionHead title={t("International News")} subtitle={t("sections.regional.subtitle")} />
+      <SectionHead title={t("International News")} subtitle={t("sections.international.subtitle")} />
 
       <article className="group relative overflow-hidden">
-        <Thumb src={yatra} alt={t("sections.regional.heroTitle")} className="h-64 w-full sm:h-80" />
+        <Thumb src={yatra} alt={t("sections.international.heroTitle")} className="h-64 w-full sm:h-80" />
         <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-ink via-ink/70 to-transparent p-5">
-          <Badge>{t("sections.regional.featured")}</Badge>
+          <Badge>{t("sections.international.featured")}</Badge>
           <h3 className="mt-2 text-lg font-black text-background sm:text-2xl">
-            {t("sections.regional.heroTitle")}
+            {t("sections.international.heroTitle")}
           </h3>
-          <p className="hidden lg:block mt-1 text-[11px] text-background/70">{t("sections.regional.heroDesc")}</p>
+          <p className="hidden lg:block mt-1 text-[11px] text-background/70">{t("sections.international.heroDesc")}</p>
         </div>
       </article>
 

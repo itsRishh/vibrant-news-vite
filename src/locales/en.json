@@ -108,7 +108,7 @@
         }
       ]
     },
-    "hotRightNow": {
+    "latestNews": {
       "title": "Latest NEWS",
       "promoBadge": "Presented by Flipk",
       "promoTitle": "Titan Smart Ultra — India's Premium Smartwatch",
@@ -117,8 +117,8 @@
       "hero": {
         "category": "LATEST",
         "badge": "Exclusive",
-        "title": "लाड़ली बहनों को उपहार, बच्चों पर मुख्यमंत्री का दुलार सेल्फी में दिखा CM मोहन यादव का अपनापन।",
-        "subHead": "",
+        "title": "बाणसागर बांध का जलस्तर 340.64 मीटर पहुंचा, आज रात खुलेंगे 3 गेट",
+        "subHead": "बाणसागर जलाशय का जलस्तर पूर्ण भराव क्षमता (341.64 मीटर) से महज 1 मीटर दूर 340.64 मीटर पर पहुंच गया है। लगातार पानी की आवक (2076 क्यूमेक्स) को देखते हुए जल संसाधन विभाग ने आज रात 8 बजे तीन रेडियल गेट 0.50 मीटर खोलने का निर्णय लिया है।",
         "time": "1 hours ago",
         "image": "/src/assets/images/mohan-yadav.jpeg",
         "body": "मुख्यमंत्री डॉ. मोहन यादव ने भोपाल स्थित शौर्य स्मारक में भारत माता की प्रतिमा पर पुष्प अर्पित कर नमन किया।"
@@ -222,8 +222,19 @@
         }
       ]
     },
-
-    "latestNews": {
+    "quickLatest": {
+      "title": "Breaking NEWS",
+      "subtitle": "",
+      "items": [
+        { "city": "Maharashtra", "title": "Mumbai Metro Line 3 Opens: 10 Lakh Daily Riders Expected", "time": "2h ago" },
+        { "city": "Tamil Nadu", "title": "Chennai Water Crisis: New Desalination Plant Operational", "time": "3h ago" },
+        { "city": "Delhi", "title": "Yamuna River Cleanup Project Enters Phase 3", "time": "4h ago" },
+        { "city": "Kerala", "title": "Kerala Wins Best Tourism State Award for 5th Year Running", "time": "6h ago" },
+        { "city": "Gujarat", "title": "Ahmedabad Smart City Project Receives Global Recognition", "time": "11h ago" },
+        { "city": "West Bengal", "title": "Kolkata Underground Metro Extension Complete", "time": "1d ago" }
+      ]
+    },
+    "localNews": {
       "title": "Local NEWS",
       "promoBadge": "",
       "promoTitle": "",
@@ -266,18 +277,7 @@
         }
       ]
     },
-    "regionals": {
-      "title": "Breaking NEWS",
-      "subtitle": "",
-      "items": [
-        { "city": "Maharashtra", "title": "Mumbai Metro Line 3 Opens: 10 Lakh Daily Riders Expected", "time": "2h ago" },
-        { "city": "Tamil Nadu", "title": "Chennai Water Crisis: New Desalination Plant Operational", "time": "3h ago" },
-        { "city": "Delhi", "title": "Yamuna River Cleanup Project Enters Phase 3", "time": "4h ago" },
-        { "city": "Kerala", "title": "Kerala Wins Best Tourism State Award for 5th Year Running", "time": "6h ago" },
-        { "city": "Gujarat", "title": "Ahmedabad Smart City Project Receives Global Recognition", "time": "11h ago" },
-        { "city": "West Bengal", "title": "Kolkata Underground Metro Extension Complete", "time": "1d ago" }
-      ]
-    },
+    
     "latest": {
       "title": "Latest NEWS",
       "subtitle": "",

@@ -4,9 +4,9 @@
   "sideEffects": false,
   "type": "module",
   "scripts": {
-    "dev": "vite dev --mode public --host 127.0.0.1 --port 8081",
+    "dev": "vite dev --mode public --host 0.0.0.0 --port 8081",
     "dev:public": "vite dev --mode public --host 127.0.0.1 --port 8081",
-    "dev:admin": "vite dev --mode admin --host 127.0.0.1 --port 8082",
+    "dev:admin": "vite dev --mode admin --host 0.0.0.0 --port 8082",
     "build": "vite build",
     "build:public": "vite build --mode public",
     "build:admin": "vite build --mode admin",

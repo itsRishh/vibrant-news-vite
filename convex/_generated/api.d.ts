@@ -10,6 +10,10 @@
 
 import type * as breakingNews from "../breakingNews.js";
 import type * as files from "../files.js";
+import type * as latestNews from "../latestNews.js";
+import type * as localNews from "../localNews.js";
+import type * as regionalNews from "../regionalNews.js";
+import type * as videos from "../videos.js";
 
 import type {
   ApiFromModules,
@@ -20,6 +24,10 @@ import type {
 declare const fullApi: ApiFromModules<{
   breakingNews: typeof breakingNews;
   files: typeof files;
+  latestNews: typeof latestNews;
+  localNews: typeof localNews;
+  regionalNews: typeof regionalNews;
+  videos: typeof videos;
 }>;
 
 /**

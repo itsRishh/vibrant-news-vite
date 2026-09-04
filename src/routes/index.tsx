@@ -1,20 +1,17 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/news/Header";
 import {
-  Live,
-  Breaking,
-  Latest,
+  PreAds,
   QuickLatest,
-  LocalNews,
   BannerAd,
-  Regional,
-  StateNews,
-  VideoNews,
-  India,
-  International,
 } from "@/components/news/Sections";
 
 import BreakingTest from "@/components/segments/BreakingTest";
+import LatestTest from "@/components/segments/LatestTest";
+import LocalTest from "@/components/segments/LocalTest";
+import IndiaTest from "@/components/segments/IndiaTest";
+import RegionalTest from "@/components/segments/RegionalTest";
+import VideoTest from "@/components/segments/VideoTest";
 import { Newsletter, Footer } from "@/components/news/Footer";
 import { NewsClickArea } from "@/components/news/NewsClickArea";
 import { QuickNewsRail } from "@/components/news/QuickNewsRail";
@@ -56,12 +53,13 @@ function Index() {
         <div className="mx-auto grid max-w-[1250px] grid-cols-1 gap-2 lg:grid-cols-[minmax(0,1fr)_300px]">
           <NewsClickArea>
             {/* <Live /> */}
+            <PreAds />
             <div id="breaking">
               <BreakingTest />
             </div>
 
             <div id="latest" className="scroll-mt-32">
-              <Latest />
+              <LatestTest />
             </div>
 
             <div className="scroll-mt-32">
@@ -69,28 +67,28 @@ function Index() {
             </div>
 
             <div id="local" className="scroll-mt-32">
-              <LocalNews />
+              <LocalTest />
             </div>
 
             <BannerAd />
 
             <div id="regional" className="scroll-mt-32">
-              <Regional />
+              <RegionalTest />
             </div>
 
-            <div id="state" className="scroll-mt-32">
+            {/* <div id="state" className="scroll-mt-32">
               <StateNews />
-            </div>
+            </div> */}
 
-            <VideoNews />
-
+            <VideoTest />
             <div id="india" className="scroll-mt-32">
-              <India />
+              <IndiaTest />
             </div>
 
-            <div id="international" className="scroll-mt-32">
+
+            {/* <div id="international" className="scroll-mt-32">
               <International />
-            </div>
+            </div> */}
             {/* <QuickReads /> */}
             {/* <Blogs /> */}
           </NewsClickArea>
