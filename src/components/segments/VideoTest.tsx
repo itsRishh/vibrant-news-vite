@@ -10,6 +10,7 @@ import s1 from "@/assets/Videos/shorts/hamla.mp4";
 import s2 from "@/assets/Videos/shorts/paani.mp4";
 import s3 from "@/assets/Videos/shorts/petrolchori.mp4";
 import s4 from "@/assets/Videos/shorts/female.mp4";
+import MediaThemeNotflix from 'player.style/notflix/react';
 
 const fallbackFull = [vn1, vn2, vn3];
 const fallbackShorts = [s1, s2, s3, s4];
@@ -41,15 +42,16 @@ export default function VideoTest() {
                     const isUploaded = "imageUrl" in video;
                     const src = isUploaded ? video.imageUrl : video.src;
                     return (
-                        <article key={isUploaded ? video._id : video.title} className="group">
+                        <div key={isUploaded ? video._id : video.title} className="group">
                             <div className="relative h-48 overflow-hidden bg-ink">
-                                <video src={src ?? undefined} controls muted playsInline className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
-                                <span className="absolute top-2 left-2"><Badge>{isUploaded ? "VIDEO" : "LATEST"}</Badge></span>
-                                <span className="absolute bottom-2 right-2 flex items-center gap-1 bg-ink px-1.5 py-0.5 text-[9px] font-bold text-background"><Play className="h-3 w-3" /> Play</span>
+                                <video slot="media" src={src ?? undefined} autoPlay controls playsInline crossOrigin="anonymous" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                                <span className="absolute top-2 left-2">
+                                    <Badge>{isUploaded ? "VIDEO" : "LATEST"}</Badge>
+                                </span>
                             </div>
                             <h3 className="mt-2 text-xs font-bold">{video.title}</h3>
-                            <p className="mt-1 flex items-center gap-1 text-[10px] text-muted-foreground"><Eye className="h-3 w-3" />{"description" in video ? video.description : video.views}</p>
-                        </article>
+                            <p className="mt-1 flex items-center gap-1 text-[10px] text-muted-foreground">{"description" in video ? video.description : video.views}</p>
+                        </div>
                     );
                 })}
             </div>
@@ -61,14 +63,14 @@ export default function VideoTest() {
                 {(shorts?.length ? shorts : shortFallback.map((video, index) => ({ ...video, src: fallbackShorts[index] }))).map((video) => {
                     const isUploaded = "imageUrl" in video;
                     return (
-                        <article key={isUploaded ? video._id : video.title} className="group w-38 shrink-0">
+                        <div key={isUploaded ? video._id : video.title} className="group w-38 shrink-0">
                             <div className="relative aspect-[9/16] overflow-hidden bg-ink">
-                                <video src={isUploaded ? video.imageUrl ?? undefined : video.src} controls muted playsInline className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                                <video src={isUploaded ? video.imageUrl ?? undefined : video.src} autoPlay controls playsInline className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
                                 <span className="absolute top-2 left-2"><Badge tone="ink">SHORT</Badge></span>
                             </div>
                             <h3 className="mt-2 line-clamp-2 text-[11px] font-bold">{video.title}</h3>
                             <p className="text-[10px] text-muted-foreground">{"description" in video ? video.description : video.views}</p>
-                        </article>
+                        </div>
                     );
                 })}
             </div>

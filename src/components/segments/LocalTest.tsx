@@ -7,6 +7,7 @@ import { Flame } from "lucide-react";
 
 export default function LocalTest() {
   const articles = useQuery(api.localNews.list);
+  console.log("LocalTest articles:", articles);
 
   if (!articles) {
     return <section className="px-4 py-6 text-sm text-muted-foreground">Loading local news...</section>;

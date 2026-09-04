@@ -81,6 +81,7 @@ function Index() {
             </div> */}
 
             <VideoTest />
+            
             <div id="india" className="scroll-mt-32">
               <IndiaTest />
             </div>

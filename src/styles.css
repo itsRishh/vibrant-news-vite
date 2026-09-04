@@ -357,15 +357,73 @@
 video {
   width: 100%;
   height: 100%;
-  background-color: #000;
   display: block;
 }
 
 /* Hide default controls */
-video::-webkit-media-controls {
-  display: none !important;
+video::-webkit-media-controls-panel {
+  height: 100%;
+  width: 100%;
+  border: 1px solid red
 }
 
-video::-moz-media-controls {
-  display: none !important;
+video::-webkit-media-controls-play-button {
+}
+
+/* Entire native controls container */
+video::-webkit-media-controls {
+}
+
+/* Current time */
+video::-webkit-media-controls-current-time-display {
+  display: none;
+}
+
+/* Remaining time */
+video::-webkit-media-controls-time-remaining-display {
+  display: none;
+}
+
+/* Timeline / progress bar */
+video::-webkit-media-controls-timeline {
+}
+
+/* Volume slider */
+video::-webkit-media-controls-volume-slider {
+}
+
+/* Mute button */
+video::-webkit-media-controls-mute-button {
+}
+
+/* Fullscreen button */
+video::-webkit-media-controls-fullscreen-button {
+}
+
+/* Seek back button */
+video::-webkit-media-controls-seek-back-button {
+}
+
+/* Seek forward button */
+video::-webkit-media-controls-seek-forward-button {
+}
+
+/* Picture-in-picture button */
+video::-webkit-media-controls-picture-in-picture-button {
+}
+
+/* Overlay when media is loading */
+video::-webkit-media-controls-overlay-enclosure {
+}
+
+/* Enclosure around controls */
+video::-webkit-media-controls-enclosure {
+}
+
+/* Download button, where supported */
+video::-webkit-media-controls-download-button {
+}
+
+/* Closed captions button */
+video::-webkit-media-controls-toggle-closed-captions-button {
 }
